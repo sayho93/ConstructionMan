@@ -25,6 +25,185 @@ import java.util.Set;
 
 public class UserSVC extends BaseService {
 
+    public DataMap turnOnPush(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.turnOnPush(id);
+            sqlSession.commit();
+
+            final DataMap map = getUserByKey(id);
+            DataMapUtil.mask(map, "password");
+            return map;
+        }
+    }
+
+    public DataMap turnOffPush(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.turnOffPush(id);
+            sqlSession.commit();
+
+            final DataMap map = getUserByKey(id);
+            DataMapUtil.mask(map, "password");
+            return map;
+        }
+    }
+
+    public DataMap checkAccount(String account){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            final DataMap accountInfo = userMapper.getUserByAccount(account);
+
+            return accountInfo;
+        }
+    }
+
+    public int joinUser(DataMap map){
+        final String password = RestUtil.getMessageDigest(map.getString("password"));
+        final String phone = map.getString("phone").replaceAll("-", "");
+        final String type = map.getString("type");
+        int lastId = 0;
+
+        map.put("password", password);
+
+        if(ValidationUtil.validate(phone, ValidationUtil.ValidationType.Phone)){
+            try(SqlSession sqlSession = super.getSession()){
+                UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+                final DataMap preProcessUser = userMapper.getUserByPhone(phone);
+                if(preProcessUser != null) return ResponseConst.CODE_ALREADY_EXIST;
+                userMapper.registerUserBasic(map);
+                sqlSession.commit();
+                lastId = map.getInt("id");
+            }
+            if(type.equals("M")){
+                final int[] region = map.getStringToIntArr("region", ",");
+                final int[] work = map.getStringToIntArr("work", ",");
+                final int[] career = map.getStringToIntArr("career", ",");
+                final String welderType = map.getString("welderType");
+
+                joinMan(lastId, region, work, career, welderType);
+            }
+            else if(type.equals("G")){
+                final int[] region = map.getStringToIntArr("region", ",");
+                final int gearId = map.getInt("gearId");
+                final String attachment = map.getString("attachment");
+
+                joinGear(lastId, region, gearId, attachment);
+            }
+
+
+            return ResponseConst.CODE_SUCCESS;
+        }
+        return ResponseConst.CODE_FAILURE;
+    }
+
+
+    private void joinMan(int userId, int[] region, int[] work, int[] career, String welderType){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            for(int i=0; i<region.length; i++)
+                userMapper.setUserRegion(userId, region[i]);
+
+            for(int i=0; i<work.length; i++){
+                if(work[i] == 16)
+                    userMapper.setUserWork(userId, work[i], career[i], welderType);
+                else
+                    userMapper.setUserWork(userId, work[i], career[i], null);
+            }
+            sqlSession.commit();
+        }
+    }
+
+    private void joinGear(int userId, int[] region, int gearId, String attachment){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            for(int i=0; i<region.length; i++)
+                userMapper.setUserRegion(userId, region[i]);
+
+            userMapper.setUserGear(userId, gearId, attachment);
+            sqlSession.commit();
+        }
+    }
+
+    public int registerSearch(int userId, DataMap map){
+        final String type = map.getString("type");
+        int lastId = 0;
+
+        map.put("userId", userId);
+
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.registerSearchBasic(map);
+            sqlSession.commit();
+            lastId = map.getInt("id");
+        }
+
+        if(type.equals("M")){
+            final int[] work = map.getStringToIntArr("work", ",");
+            final int[] career = map.getStringToIntArr("career", ",");
+            final String welderType = map.getString("welderType");
+
+            searchMan(lastId, work, career, welderType);
+        }
+        else if(type.equals("G")){
+            final int gearId = map.getInt("gearId");
+            final String attachment = map.getString("attachment");
+
+            searchGear(lastId, gearId, attachment);
+        }
+
+        return ResponseConst.CODE_SUCCESS;
+    }
+
+    private void searchMan(int searchId, int[] work, int[] career, String welderType){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            for(int i=0; i<work.length; i++){
+                if(work[i] == 16)   //용접공 선택시 welderType 사용
+                    userMapper.setSearchWork(searchId, work[i], career[i], welderType);
+                else
+                    userMapper.setSearchWork(searchId, work[i], career[i], null);
+            }
+            sqlSession.commit();
+        }
+    }
+
+    private void searchGear(int searchId, int gearId, String attachment){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            userMapper.setSearchGear(searchId, gearId, attachment);
+            sqlSession.commit();
+        }
+    }
+
+
+
+//    public DataMap getUserInfo(int userId){
+//
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public DataMap checkPassword(String id, String pw){
         pw = RestUtil.getMessageDigest(pw);
         try(SqlSession sqlSession = super.getSession()){
@@ -203,30 +382,6 @@ public class UserSVC extends BaseService {
         }
     }
 
-    public DataMap turnOnPush(int id){
-        try(SqlSession sqlSession = super.getSession()){
-            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            userMapper.turnOnPush(id);
-            sqlSession.commit();
-
-            final DataMap map = getUserByKey(id);
-            DataMapUtil.mask(map, "password");
-            return map;
-        }
-    }
-
-    public DataMap turnOffPush(int id){
-        try(SqlSession sqlSession = super.getSession()){
-            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            userMapper.turnOffPush(id);
-            sqlSession.commit();
-
-            final DataMap map = getUserByKey(id);
-            DataMapUtil.mask(map, "password");
-            return map;
-        }
-    }
-
     public  DataMap turnOnAlarm(int id){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -251,30 +406,6 @@ public class UserSVC extends BaseService {
         }
     }
 
-    public DataMap turnOnGesture(int id){
-        try(SqlSession sqlSession = super.getSession()){
-            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            userMapper.turnOnGesture(id);
-            sqlSession.commit();
-
-            final DataMap map = getUserByKey(id);
-            DataMapUtil.mask(map, "password");
-            return map;
-        }
-    }
-
-    public DataMap turnOffGesture(int id){
-        try(SqlSession sqlSession = super.getSession()){
-            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            userMapper.turnOffGesture(id);
-            sqlSession.commit();
-
-            final DataMap map = getUserByKey(id);
-            DataMapUtil.mask(map, "password");
-            return map;
-        }
-    }
-    
     public boolean findPassword(DataMap params){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -286,31 +417,6 @@ public class UserSVC extends BaseService {
             sqlSession.commit();
             return true;
         }
-    }
-
-    public int joinWeb(DataMap map, String currentHost){
-        final String email = map.getString("email");
-        final String password = RestUtil.getMessageDigest(map.getString("password"));
-        final String phone = map.getString("phone").replaceAll("-", "");
-        final String approvalCode = RandomStringUtils.random(32, RestUtil.RANDOM_STRING_SET);
-
-        map.put("password", password);
-        map.put("approvalCode", approvalCode);
-
-        if(ValidationUtil.validate(email, ValidationUtil.ValidationType.Email) && ValidationUtil.validate(phone, ValidationUtil.ValidationType.Phone)){
-            try(SqlSession sqlSession = super.getSession()){
-                UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-                final DataMap preProcessUser = userMapper.getUserById(email);
-                if(preProcessUser != null) return ResponseConst.CODE_ALREADY_EXIST;
-                userMapper.joinUserMember(map);
-                sqlSession.commit();
-
-                MailSender.getInstance().sendAnEmail(email, "OTION 가입 인증 메일입니다.", "다음 링크를 클릭하여 회원가입을 진행해주시기 바랍니다.\nhttp://" + currentHost + "/approval/" + approvalCode);
-            }
-            return ResponseConst.CODE_SUCCESS;
-        }
-
-        return ResponseConst.CODE_FAILURE;
     }
 
     public List<DataMap> getWorkplaces(int id){

@@ -23,6 +23,7 @@ public class DataMap extends HashMap<String, Object>
         super();
     }
 
+
     public DataMap(HashMap<String, Object> data)
     {
         super();
@@ -80,6 +81,7 @@ public class DataMap extends HashMap<String, Object>
     }
 
     /**
+     *
      * 데이터 맵으로 변경해서 전달
      *
      * @param key

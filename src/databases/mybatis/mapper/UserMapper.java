@@ -11,6 +11,33 @@ public interface UserMapper {
 
     void turnOffPush(@Param("id") int id);
 
+    DataMap getUserByPhone(@Param("phone") String phone);
+
+    void registerUserBasic(DataMap map);
+
+    DataMap getUserByAccount(@Param("account") String account);
+
+    void setUserRegion(@Param("userId") int userId, @Param("gugunId") int gugunId);
+
+    void setUserWork(@Param("userId") int userId, @Param("workId") int workId, @Param("career") int career, @Param("welderType") String welderType);
+
+    void setUserGear(@Param("userId") int userId, @Param("gearId") int gearId, @Param("attachment") String attachment);
+
+    void registerSearchBasic(DataMap map);
+
+    void setSearchWork(@Param("searchId") int searchId, @Param("workId") int workId, @Param("career") int career, @Param("welderType") String welderType);
+
+    void setSearchGear(@Param("searchId") int searchId, @Param("gearId") int gearId, @Param("attachment") String attachment);
+
+
+
+
+
+
+
+
+
+
     void turnOnAlarm(@Param("id") int id);
 
     void turnOffAlarm(@Param("id") int id);

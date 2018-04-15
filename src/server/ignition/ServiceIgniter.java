@@ -5,6 +5,7 @@ import server.comm.DataMap;
 import server.comm.RestProcessor;
 import server.response.Response;
 import server.response.ResponseConst;
+import server.rest.DataMapUtil;
 import server.rest.RestConstant;
 import server.rest.RestUtil;
 import services.CommonSVC;
@@ -14,6 +15,7 @@ import utils.Log;
 import utils.MailSender;
 
 import javax.servlet.MultipartConfigElement;
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -100,6 +102,64 @@ public class ServiceIgniter extends BaseIgniter{
             List<DataMap> retVal = commonSVC.getGugunList(sidoID);
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
         }, "시/군/구 목록을 취득하기 위한 API입니다.", "sidoID[REST]");
+
+        super.post(service, "/web/user/push/on/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            DataMap map = userSVC.turnOnPush(id);
+            if(map == null) return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
+        }, "사용사 설정 - 푸시 수신 여부(수신)를 설정하기 위한 API", "id[REST]");
+
+        super.post(service, "/web/user/push/off/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            DataMap map = userSVC.turnOffPush(id);
+            if(map == null) return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
+        }, "사용사 설정 - 푸시 수신 여부(미수신)를 설정하기 위한 API", "id[REST]");
+
+        super.post(service, "/web/user/join", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            if(DataMapUtil.isValid(map, "name", "account", "password", "phone", "age", "type", "pushKey")){
+                final int retCode = userSVC.joinUser(map);
+
+                if(retCode == ResponseConst.CODE_SUCCESS) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
+                else if(retCode == ResponseConst.CODE_ALREADY_EXIST) return new Response(ResponseConst.CODE_ALREADY_EXIST, ResponseConst.MSG_ALREADY_EXIST);
+                else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+            }else{
+                return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
+            }
+        }, "APP 회원가입을 위한 API", "name", "account", "password", "phone", "age", "type",
+                "pushKey", "region[ARR]", "work[ARR]", "career[ARR]", "welderType", "gearId", "attachment");
+
+        super.get(service, "/web/user/checkAccountDuplication/:account", (req, res) -> {
+            final String account = req.params(":account");
+            DataMap map = userSVC.checkAccount(account);
+
+            if(map == null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
+            else return new Response(ResponseConst.CODE_ALREADY_EXIST, ResponseConst.MSG_ALREADY_EXIST);
+        }, "회원가입시 아이디 중복 체크를 위한 API", "account[REST]");
+
+//        super.get(service, "web/user/info/:id", (req, res) -> {
+//            final int id = Integer.parseInt(req.params(":id"));
+//            DataMap map = userSVC.getUserInfo(id);
+//
+//            if(map == null) return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+//            else return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
+//        }, "유저 정보 취득을 위한 API", "id[REST]");
+
+        super.post(service, "/web/register/search/:id", (req, res) -> {
+            final int userId = Integer.parseInt(req.params(":id"));
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+
+            if(DataMapUtil.isValid(map, "sidoId", "gugunId", "startDate", "endDate")){
+                final int retCode = userSVC.registerSearch(userId, map);
+
+                if(retCode == ResponseConst.CODE_SUCCESS) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
+                else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+            } else
+                return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
+        },"인력찾기/장비찾기를 위한 API", "id[REST]", "type", "work[ARR]", "career[ARR]", "welderType", "sidoId",
+                "gugunId", "name", "startDate", "endDate", "lodging", "price", "gearId", "attachment");
 
     }
 

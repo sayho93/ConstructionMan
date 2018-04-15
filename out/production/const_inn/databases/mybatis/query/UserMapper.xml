@@ -2,6 +2,153 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="databases.mybatis.mapper.UserMapper">
 
+    <update id="turnOnPush">
+        UPDATE tblUser SET `pushFlag`=1 WHERE `id`=#{id}
+    </update>
+
+    <update id="turnOffPush">
+        UPDATE tblUser SET `pushFlag`=0 WHERE `id`=#{id}
+    </update>
+
+    <select id="getUserByPhone" resultType="DataMap">
+        SELECT * FROM tblUser WHERE `phone` = #{phone} AND `status` = 1 LIMIT 1
+    </select>
+
+    <insert id="registerUserBasic">
+        INSERT INTO tblUser(`name`, `account`, `password`, `phone`, `age`, `type`, `pushKey`, `pushFlag`, `regDate`, `status`)
+        VALUES (
+          #{name},
+          #{account},
+          #{password},
+          #{phone},
+          #{age},
+          #{type},
+          #{pushKey},
+          1,
+          NOW(),
+          1
+        )
+        <selectKey keyProperty="id" resultType="Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <select id="getUserByAccount" resultType="DataMap">
+        SELECT * FROM tblUser WHERE `account` = #{account} AND `status` = 1 LIMIT 1
+    </select>
+
+    <insert id="setUserRegion">
+        INSERT INTO tblUserRegion(`userId`, `sidoId`, `gugunId`, `regDate`)
+        VALUES(
+          #{userId},
+          (SELECT sidoID FROM tblZipGugun WHERE gugunID = #{gugunId}),
+          #{gugunId},
+          NOW()
+        )
+    </insert>
+
+    <insert id="setUserWork">
+        INSERT INTO tblUserWork(`userId`, `workId`, `career`, `regDate`, `welderType`)
+        VALUES (
+          #{userId},
+          #{workId},
+          #{career},
+          NOW(),
+          #{welderType}
+        )
+    </insert>
+
+    <insert id="setUserGear">
+        INSERT INTO tblUserGear(`userId`, `gearId`, `attachment`)
+        VALUES(#{userId},#{gearId},#{attachment})
+    </insert>
+
+    <insert id="registerSearchBasic">
+        INSERT INTO tblSearch(
+          `userId`,
+          `type`,
+          `sidoId`,
+          `gugunId`,
+          `name`,
+          `startDate`,
+          `endDate`,
+          `lodging`,
+          `price`,
+          `regDate`
+        )
+        VALUES(
+          #{userId},
+          #{type},
+          #{sidoId},
+          #{gugunId},
+          #{name},
+          #{startDate},
+          #{endDate},
+          #{lodging},
+          #{price},
+          NOW()
+        )
+        <selectKey keyProperty="id" resultType="Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="setSearchWork">
+        INSERT INTO tblSearchWork(`searchId`. `workId`, `career`, `welderType`, `regDate`)
+        VALUES(
+          #{searchId},
+          #{workId},
+          #{career},
+          #{welderType},
+          NOW()
+        )
+    </insert>
+
+    <insert id="setSearchGear">
+        INSERT INTO tblSearchGear(`searchId`, `gearId`, `attachment`, `regDate`)
+        VALUES(
+          #{searchId},
+          #{gearId},
+          #{attachment},
+          NOW()
+        )
+    </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <insert id="joinUserMember">
+        INSERT INTO tblMember(`name`, `email`, `password`, `phone`, `deviceType`, `regKey`, `status`, `lastIp`, `uptDate`, `regDate`, `approvalCode`)
+        VALUES(#{name}, #{email}, #{password}, #{phone}, #{deviceType}, #{regKey}, 0, #{lastIp}, NOW(), NOW(), #{approvalCode})
+    </insert>
+
     <select id="getUser" resultType="DataMap">
         SELECT * FROM tblMember WHERE `email`=#{id} AND `password`=#{pw} AND `status`=1 LIMIT 1
     </select>
@@ -46,11 +193,6 @@
         UPDATE tblMember SET `approvalCode` = '' WHERE `id` = #{id}
     </update>
 
-    <insert id="joinUserMember">
-        INSERT INTO tblMember(`name`, `email`, `password`, `phone`, `deviceType`, `regKey`, `status`, `lastIp`, `uptDate`, `regDate`, `approvalCode`)
-        VALUES(#{name}, #{email}, #{password}, #{phone}, #{deviceType}, #{regKey}, 0, #{lastIp}, NOW(), NOW(), #{approvalCode})
-    </insert>
-
     <update id="changeName">
         UPDATE tblMember SET `name`=#{name} WHERE `id`=#{id}
     </update>
@@ -61,14 +203,6 @@
 
     <update id="changePassword">
         UPDATE tblMember SET `password`=#{pw} WHERE `id`=#{id}
-    </update>
-
-    <update id="turnOnPush">
-        UPDATE tblMember SET `flagPush`=0 WHERE `id`=#{id}
-    </update>
-
-    <update id="turnOffPush">
-        UPDATE tblMember SET `flagPush`=1 WHERE `id`=#{id}
     </update>
 
     <update id="turnOnAlarm">
