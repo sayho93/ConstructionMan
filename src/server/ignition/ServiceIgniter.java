@@ -1,6 +1,9 @@
 package server.ignition;
 
+import configs.Constants;
 import delayed.managers.PushManager;
+import server.cafe24.Cafe24SMS;
+import server.cafe24.Cafe24SMSManager;
 import server.comm.DataMap;
 import server.comm.RestProcessor;
 import server.response.Response;
@@ -8,14 +11,15 @@ import server.response.ResponseConst;
 import server.rest.DataMapUtil;
 import server.rest.RestConstant;
 import server.rest.RestUtil;
+import server.temporaries.SMSAuth;
 import services.CommonSVC;
 import services.UserSVC;
 import spark.Service;
+import utils.FileUploader;
 import utils.Log;
 import utils.MailSender;
 
 import javax.servlet.MultipartConfigElement;
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -44,11 +48,22 @@ public class ServiceIgniter extends BaseIgniter{
      * 별도로 인스턴스 취득자를 구성하였다.
      */
     {
+        Cafe24SMS inst = Cafe24SMS.getInstance(
+                "huneps71",
+                "e6ac61f053b7abf60ee934857d2955c7",
+                "02",
+                "555",
+                "5555");
+        Cafe24SMSManager.initialize(inst);
+
         commonSVC = new CommonSVC();
         userSVC = new UserSVC();
+
         try {
             MailSender.start("euijin.ham@richware.co.kr", "gpswpf12!", 20);
             PushManager.start("AAAAWeDYee8:APA91bF8xbiIZMJdMyTuF9CciacPhwEAzn7qFN3jGPKvKoRr1y_rlXthzZTT8MzHCG3l3LFti5lo-H3Rt6n7VcpddPr69N8sCSkEvTiARHvhl4f5zVqn5Yq9CVWN8vDW2UiC-5dFx_0C");
+            Cafe24SMSManager.getInstanceIfExisting().start(100);
+            SMSAuth.getInstance().consume(5, 3);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -69,7 +84,7 @@ public class ServiceIgniter extends BaseIgniter{
         setDebugMode(true);
 
         service = Service.ignite().port(RestConstant.REST_SERVICE);
-        final File img_path = activateExternalDirectory(service, "img_upload");
+        final File img_path = activateExternalDirectory(service, Constants.FILE_CONST.UPLOAD_DIR);
 
         service.before((req, res) -> {
             DataMap map = RestProcessor.makeProcessData(req.raw());
@@ -78,6 +93,11 @@ public class ServiceIgniter extends BaseIgniter{
         });
 
         super.get(service, "/system", (req, res) -> new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, System.getenv()), "서버 시스템 환경을 확인하기 위한 API 입니다.");
+
+        super.get(service, "/smstest", (req, res) -> {
+            Cafe24SMSManager.getInstanceIfExisting().send("010-2948-4648", "test");
+            return new Response(0, "", "");
+        });
 
         super.post(service, "/imgUpload", (req, res) -> {
             try {
@@ -116,6 +136,24 @@ public class ServiceIgniter extends BaseIgniter{
             if(map == null) return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
         }, "사용사 설정 - 푸시 수신 여부(미수신)를 설정하기 위한 API", "id[REST]");
+
+        super.get(service, "/web/user/auth/:phone", (req, res) -> {
+            final String phone = req.params(":phone");
+
+            if(phone == null || phone.trim().equals("")) return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
+            userSVC.userSMSAuth(phone);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
+        }, "SMS 인증문자 발송을 위한 API", "phone[REST]");
+
+        super.get(service, "/web/user/verify/:phone", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            final String phone = req.params(":phone");
+
+            boolean isValid = SMSAuth.getInstance().isValid(phone, map.getString("code"), 3);
+            SMSAuth.getInstance().removeAuth(phone);
+            if(isValid) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
+            else return new Response(ResponseConst.CODE_UNAUTHORIZED, ResponseConst.MSG_UNAUTHORIZED);
+        }, "SMS 코드 인증을 위한 API", "phone[REST]");
 
         super.post(service, "/web/user/join", (req, res) -> {
             DataMap map = RestProcessor.makeProcessData(req.raw());

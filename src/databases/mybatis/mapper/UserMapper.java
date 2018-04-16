@@ -29,7 +29,7 @@ public interface UserMapper {
 
     void setSearchGear(@Param("searchId") int searchId, @Param("gearId") int gearId, @Param("attachment") String attachment);
 
-
+    DataMap findManMatch(@Param())
 
 
 

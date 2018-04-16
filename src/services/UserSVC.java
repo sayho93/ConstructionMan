@@ -10,12 +10,14 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
+import server.cafe24.Cafe24SMSManager;
 import server.comm.DataMap;
 import server.response.Response;
 import server.response.ResponseConst;
 import server.rest.DataMapUtil;
 import server.rest.RestUtil;
 import server.rest.ValidationUtil;
+import server.temporaries.SMSAuth;
 import utils.Log;
 import utils.MailSender;
 
@@ -47,6 +49,12 @@ public class UserSVC extends BaseService {
             DataMapUtil.mask(map, "password");
             return map;
         }
+    }
+
+    public void userSMSAuth(String phone){
+        final String code = SMSAuth.getInstance().addAuthAndGetCode(phone, 6);
+        Log.i("SMS Code Generated", phone + " : " + code);
+        Cafe24SMSManager.getInstanceIfExisting().send(phone, code);
     }
 
     public DataMap checkAccount(String account){
@@ -168,6 +176,9 @@ public class UserSVC extends BaseService {
                     userMapper.setSearchWork(searchId, work[i], career[i], null);
             }
             sqlSession.commit();
+            // TODO
+
+            userMapper.findManMatch(searchId);
         }
     }
 
@@ -177,6 +188,7 @@ public class UserSVC extends BaseService {
 
             userMapper.setSearchGear(searchId, gearId, attachment);
             sqlSession.commit();
+            // TODO
         }
     }
 
