@@ -41,7 +41,14 @@
         INSERT INTO tblUserRegion(`userId`, `sidoId`, `gugunId`, `regDate`)
         VALUES(
           #{userId},
-          (SELECT sidoID FROM tblZipGugun WHERE gugunID = #{gugunId}),
+          <choose>
+              <when test="gugunId != 0">
+                  (SELECT sidoID FROM tblZipGugun WHERE gugunID = #{gugunId}),
+              </when>
+              <when test="gugunId == 0">
+                  0,
+              </when>
+          </choose>
           #{gugunId},
           NOW()
         )
@@ -113,6 +120,8 @@
           NOW()
         )
     </insert>
+
+    
 
 
 

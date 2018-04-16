@@ -41,7 +41,14 @@
         INSERT INTO tblUserRegion(`userId`, `sidoId`, `gugunId`, `regDate`)
         VALUES(
           #{userId},
-          (SELECT sidoID FROM tblZipGugun WHERE gugunID = #{gugunId}),
+          <choose>
+              <when test="gugunId != 0">
+                  (SELECT sidoID FROM tblZipGugun WHERE gugunID = #{gugunId}),
+              </when>
+              <when test="gugunId == 0">
+                  0,
+              </when>
+          </choose>
           #{gugunId},
           NOW()
         )
@@ -113,10 +120,20 @@
           NOW()
         )
     </insert>
-    
-    <select id=""
-    
 
+    <select id="getUserIdByAccount" resultType="Integer">
+        SELECT id FROM tblUser WHERE account = #{account} AND password = #{password}
+    </select>
+
+    <update id="updatePushKey">
+        UPDATE tblUser
+        SET pushKey = #{pushKey}
+        WHERE id = #{userId}
+    </update>
+
+    <select id="getUserById" resultType="DataMap">
+        SELECT * FROM tblUser WHERE `id`=#{id} LIMIT 1
+    </select>
 
 
 
@@ -154,10 +171,6 @@
 
     <select id="getUser" resultType="DataMap">
         SELECT * FROM tblMember WHERE `email`=#{id} AND `password`=#{pw} AND `status`=1 LIMIT 1
-    </select>
-
-    <select id="getUserById" resultType="DataMap">
-        SELECT * FROM tblMember WHERE `email`=#{id} LIMIT 1
     </select>
 
     <select id="getUserByKey" resultType="DataMap">

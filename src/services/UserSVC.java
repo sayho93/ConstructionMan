@@ -21,6 +21,7 @@ import server.temporaries.SMSAuth;
 import utils.Log;
 import utils.MailSender;
 
+import javax.xml.crypto.Data;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -178,7 +179,7 @@ public class UserSVC extends BaseService {
             sqlSession.commit();
             // TODO
 
-            userMapper.findManMatch(searchId);
+//            userMapper.findManMatch(searchId);
         }
     }
 
@@ -192,11 +193,27 @@ public class UserSVC extends BaseService {
         }
     }
 
+    public DataMap userLogin(DataMap map){
+        final String account = map.getString("account");
+        final String password = RestUtil.getMessageDigest(map.getString("password"));
+        final String pushKey = map.getString("pushKey");
+
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            int id = userMapper.getUserIdByAccount(account, password);
+            userMapper.updatePushKey(id, pushKey);
+
+            DataMap userInfo = userMapper.getUserById(id);
+            DataMapUtil.mask(userInfo, "password");
+            return userInfo;
+        }
+    }
 
 
-//    public DataMap getUserInfo(int userId){
-//
-//    }
+
+
+
+
 
 
 

@@ -29,7 +29,15 @@ public interface UserMapper {
 
     void setSearchGear(@Param("searchId") int searchId, @Param("gearId") int gearId, @Param("attachment") String attachment);
 
-    DataMap findManMatch(@Param())
+    DataMap findManMatch(@Param("searchId") int searchId);
+
+    int getUserIdByAccount(@Param("account") String account, @Param("password") String password);
+
+    void updatePushKey(@Param("userId") int userId, @Param("pushKey") String pushKey);
+
+    DataMap getUserById(@Param("id") int id);
+
+
 
 
 
@@ -48,7 +56,7 @@ public interface UserMapper {
 
     DataMap getUser(@Param("id") String id, @Param("pw") String pw);
 
-    DataMap getUserById(@Param("id") String id);
+
 
     DataMap getUserByApprovalCode(@Param("code") String code);
 

@@ -177,14 +177,6 @@ public class ServiceIgniter extends BaseIgniter{
             else return new Response(ResponseConst.CODE_ALREADY_EXIST, ResponseConst.MSG_ALREADY_EXIST);
         }, "회원가입시 아이디 중복 체크를 위한 API", "account[REST]");
 
-//        super.get(service, "web/user/info/:id", (req, res) -> {
-//            final int id = Integer.parseInt(req.params(":id"));
-//            DataMap map = userSVC.getUserInfo(id);
-//
-//            if(map == null) return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
-//            else return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
-//        }, "유저 정보 취득을 위한 API", "id[REST]");
-
         super.post(service, "/web/register/search/:id", (req, res) -> {
             final int userId = Integer.parseInt(req.params(":id"));
             DataMap map = RestProcessor.makeProcessData(req.raw());
@@ -198,6 +190,26 @@ public class ServiceIgniter extends BaseIgniter{
                 return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
         },"인력찾기/장비찾기를 위한 API", "id[REST]", "type", "work[ARR]", "career[ARR]", "welderType", "sidoId",
                 "gugunId", "name", "startDate", "endDate", "lodging", "price", "gearId", "attachment");
+
+        super.post(service, "/web/user/login", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+
+            if(DataMapUtil.isValid(map, "account", "password", "pushKey")){
+                DataMap userInfo = userSVC.userLogin(map);
+                if(userInfo != null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, userInfo);
+                else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+            } else{
+                return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
+            }
+        }, "유저 로그인을 위한 API", "account", "password", "pushKey");
+
+//        super.get(service, "web/user/info/:id", (req, res) -> {
+//            final int id = Integer.parseInt(req.params(":id"));
+//            DataMap map = userSVC.getUserInfo(id);
+//
+//            if(map == null) return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+//            else return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
+//        }, "유저 장비/인력 정보 취득을 위한 API", "id[REST]");
 
     }
 
