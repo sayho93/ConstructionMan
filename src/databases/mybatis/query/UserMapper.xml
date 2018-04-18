@@ -146,7 +146,8 @@
     </select>
 
     <select id="findManMatch" resultType="DataMap">
-        SELECT userId
+        SELECT userId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
+        FROM
         (
             SELECT userId, gugunId
             FROM tblUserRegion
@@ -154,9 +155,9 @@
             (
               SELECT userId FROM tblUserWork UW
               WHERE (UW.workId, UW.career, UW.welderType) IN
-              SELECT workId, career, welderType FROM tblSearchWork WHERE searchId = #{searchId}
+              (SELECT workId, career, welderType FROM tblSearchWork WHERE searchId = #{searchId})
             )
-        )
+        ) tmp
         WHERE gugunId = #{gugunId}
         <if test="allType == 1">
             OR gugunId = 0
@@ -168,6 +169,33 @@
         SET pushKey = #{pushKey}
         WHERE id = #{id}
     </update>
+
+    <select id="getSearchBasicInfo">
+        SELECT *, (SELECT description FROM tblZipGugun WHERE gugunID = gugunId) as gugunText
+        from tblSearch WHERE id = #{searchId}
+    </select>
+
+    <select id="getSearchManInfo">
+        SELECT *, (SELECT `name` FROM tblWork W WHERE W.id = workId)
+        from tblSearchWork
+        WHERE searchId = #{searchId}
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

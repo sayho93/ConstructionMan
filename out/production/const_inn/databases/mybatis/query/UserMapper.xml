@@ -169,6 +169,33 @@
         WHERE id = #{id}
     </update>
 
+    <select id="getSearchBasicInfo">
+        SELECT *, (SELECT description FROM tblZipGugun WHERE gugunID = gugunId) as gugunText
+        from tblSearch WHERE id = #{searchId}
+    </select>
+
+    <select id="getSearchManInfo">
+        SELECT *, (SELECT `name` FROM tblWork W WHERE W.id = workId)
+        from tblSearchWork
+        WHERE searchId = #{searchId}
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -61,7 +61,7 @@ public class ServiceIgniter extends BaseIgniter{
 
         try {
             MailSender.start("euijin.ham@richware.co.kr", "gpswpf12!", 20);
-            PushManager.start("AAAAWeDYee8:APA91bF8xbiIZMJdMyTuF9CciacPhwEAzn7qFN3jGPKvKoRr1y_rlXthzZTT8MzHCG3l3LFti5lo-H3Rt6n7VcpddPr69N8sCSkEvTiARHvhl4f5zVqn5Yq9CVWN8vDW2UiC-5dFx_0C");
+            PushManager.start("AAAALAuy9Ms:APA91bHvU-eINQYL59NviY_imyPrhNc76o_Kgb1J9GFv6LhYBl545-yfpHK6iShVUCsOrXNNcZdPznFzR4p5NBrFOnubcWD93DzxzyNG0yv3j5jNGg_X1fjT_jNYmTq8Bcr_IVv6fp3A");
             Cafe24SMSManager.getInstanceIfExisting().start(100);
             SMSAuth.getInstance().consume(5, 3);
         }catch (Exception e){

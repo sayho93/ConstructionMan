@@ -2,6 +2,7 @@ package databases.mybatis.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import server.comm.DataMap;
+import sun.util.resources.cldr.en.CalendarData_en_MP;
 
 import java.util.List;
 
@@ -42,6 +43,30 @@ public interface UserMapper {
     DataMap getUserGear(@Param("userId") int userId);
 
     List<DataMap> getUserWork(@Param("userId") int userId);
+
+    DataMap getSearchBasicInfo(@Param("searchId") int searchId);
+
+    List<DataMap> getSearchManInfo(@Param("searchId") int searchId);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

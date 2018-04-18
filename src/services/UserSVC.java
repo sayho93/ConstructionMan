@@ -6,6 +6,7 @@ import databases.mybatis.mapper.CommMapper;
 import databases.mybatis.mapper.UserMapper;
 import databases.paginator.ListBox;
 import databases.paginator.PageInfo;
+import delayed.managers.PushManager;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.ibatis.annotations.Select;
@@ -24,10 +25,7 @@ import utils.MailSender;
 
 import javax.xml.crypto.Data;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class UserSVC extends BaseService {
 
@@ -198,7 +196,50 @@ public class UserSVC extends BaseService {
             sqlSession.commit();
             // TODO
 
-            userMapper.findManMatch(searchId, allType, gugunId);
+            List<DataMap> userList = userMapper.findManMatch(searchId, allType, gugunId);
+
+            final String title = "인력";
+            String message = "";
+
+            DataMap searchBasicInfo = userMapper.getSearchBasicInfo(searchId);
+
+            message = "위치 " + searchBasicInfo.getString("gugunText") + "/ " + searchBasicInfo.getString("name") + "현장/ ";
+
+            List<DataMap> workList = userMapper.getSearchManInfo(searchId);
+            final Iterator<DataMap> iterator = workList.iterator();
+            while(iterator.hasNext()){
+                final DataMap map = iterator.next();
+                message += map.getString("name") + "/ 숙련도";
+                final int tmpCareer = map.getInt("career");
+                switch(tmpCareer){
+                    case 1: message += "(하)/ ";
+                        break;
+                    case 2: message += "(중)/ ";
+                        break;
+                    case 3: message += "(상)/ ";
+                        break;
+                }
+            }
+
+            if(searchBasicInfo.getInt("lodging") == 1)
+                message += "숙식제공/ ";
+
+            message += "공사기간 " + searchBasicInfo.getString("startDate") + "~" + searchBasicInfo.getString("endDate") + "/ ";
+            message += "단가 " + searchBasicInfo.getInt("price");
+
+
+
+            final Iterator<DataMap> iter = userList.iterator();
+            List<String> pushKeyList = new ArrayList<String>();
+
+            while(iter.hasNext()){
+                final DataMap map = iter.next();
+                final int userId = map.getInt("userId");
+                pushKeyList.add(map.getString("pushKey"));
+                Log.i("userList :: pushKey", map.getInt("userId") + "::" + map.getString("pushKey"));
+            }
+
+//            PushManager.getInstance().send(pushKeyList, title, message);
         }
     }
 
@@ -256,12 +297,28 @@ public class UserSVC extends BaseService {
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             userMapper.updatePushKey(id, pushKey);
+            sqlSession.commit();
+
             DataMap userInfo = userMapper.getUserById(id);;
             DataMapUtil.mask(userInfo, "password");
 
             return userInfo;
         }
     }
+
+
+    public static void main(String ... args){
+        List<String> regKeys = new ArrayList<String>();
+        regKeys.add("fmgs31uYE_Q:APA91bH-g2Pv7zgKhnjtKHkE9KEjdu2C0IzgH5HhoTnmUF-TA1Tdz-iqttohxkOLIoeB08zdh5qvmReACFzsS9Q3BHKVyT9w_6aje0sRZ8gTAxn277d7PAC6NAiXChrF3brFnnVo2-9u");
+        PushManager.start("AAAALAuy9Ms:APA91bHvU-eINQYL59NviY_imyPrhNc76o_Kgb1J9GFv6LhYBl545-yfpHK6iShVUCsOrXNNcZdPznFzR4p5NBrFOnubcWD93DzxzyNG0yv3j5jNGg_X1fjT_jNYmTq8Bcr_IVv6fp3A");
+        PushManager.getInstance().send(regKeys, "test", "testtesttest", null);
+    }
+
+
+
+
+
+
 
 
 
