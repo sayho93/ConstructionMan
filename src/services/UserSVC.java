@@ -1,6 +1,7 @@
 package services;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import databases.mybatis.mapper.CommMapper;
 import databases.mybatis.mapper.UserMapper;
 import databases.paginator.ListBox;
@@ -22,6 +23,8 @@ import utils.Log;
 import utils.MailSender;
 
 import javax.xml.crypto.Data;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -139,6 +142,7 @@ public class UserSVC extends BaseService {
     public int registerSearch(int userId, DataMap map){
         final String type = map.getString("type");
         int lastId = 0;
+        final int gugunId = map.getInt("gugunId");
 
         map.put("userId", userId);
 
@@ -154,7 +158,22 @@ public class UserSVC extends BaseService {
             final int[] career = map.getStringToIntArr("career", ",");
             final String welderType = map.getString("welderType");
 
-            searchMan(lastId, work, career, welderType);
+            int allType = 0;
+            final int lodging = map.getInt("lodging");
+            try{
+                final Date startDate = map.getDate("startDate");
+                final Date endDate = map.getDate("endDate");
+
+                final long diffTime = endDate.getTime() - startDate.getTime();
+                final long diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+                if(diffDays >= 60 || lodging == 1) allType = 1;
+            }
+            catch(ParseException e){
+                e.printStackTrace();
+            }
+
+            searchMan(lastId, work, career, welderType, allType, gugunId);
         }
         else if(type.equals("G")){
             final int gearId = map.getInt("gearId");
@@ -166,7 +185,7 @@ public class UserSVC extends BaseService {
         return ResponseConst.CODE_SUCCESS;
     }
 
-    private void searchMan(int searchId, int[] work, int[] career, String welderType){
+    private void searchMan(int searchId, int[] work, int[] career, String welderType, int allType, int gugunId){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
@@ -179,7 +198,7 @@ public class UserSVC extends BaseService {
             sqlSession.commit();
             // TODO
 
-//            userMapper.findManMatch(searchId);
+            userMapper.findManMatch(searchId, allType, gugunId);
         }
     }
 
@@ -208,6 +227,47 @@ public class UserSVC extends BaseService {
             return userInfo;
         }
     }
+
+    public DataMap getUserInfo(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            DataMap userBasic = userMapper.getUserById(id);
+            List<DataMap> userRegion = userMapper.getUserRegion(id);
+
+            final String type = userBasic.getString("type");
+
+            if(type.equals("M")){
+                List<DataMap> workInfo = userMapper.getUserWork(id);
+                userBasic.put("workInfo", workInfo);
+            }
+            else if(type.equals("G")){
+                DataMap gearInfo = userMapper.getUserGear(id);
+                userBasic.put("gearInfo", gearInfo);
+            }
+
+            userBasic.put("userRegion", userRegion);
+            return userBasic;
+        }
+    }
+
+    public DataMap updatePushKey(int id, String pushKey){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            userMapper.updatePushKey(id, pushKey);
+            DataMap userInfo = userMapper.getUserById(id);;
+            DataMapUtil.mask(userInfo, "password");
+
+            return userInfo;
+        }
+    }
+
+
+
+
+
+
 
 
 

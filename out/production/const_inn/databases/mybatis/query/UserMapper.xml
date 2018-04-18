@@ -121,14 +121,53 @@
         )
     </insert>
 
-    
+    <select id="getUserIdByAccount" resultType="Integer">
+        SELECT id FROM tblUser WHERE account = #{account} AND password = #{password}
+    </select>
 
+    <select id="getUserById" resultType="DataMap">
+        SELECT * FROM tblUser WHERE `id`=#{id} LIMIT 1
+    </select>
 
+    <select id="getUserRegion" resultType="DataMap">
+        SELECT * FROM tblUserRegion WHERE `userId` = #{userId}
+    </select>
 
+    <select id="getUserGear" resultType="DataMap">
+        SELECT * FROM tblUserGear WHERE `userId` = #{userId}
+    </select>
 
+    <select id="getUserWork" resultType="DataMap">
+        SELECT *
+        FROM tblUserWork UW
+        JOIN tblWork W
+        ON UW.workId = W.id
+        WHERE `userId` = ${userId}
+    </select>
 
+    <select id="findManMatch" resultType="DataMap">
+        SELECT userId
+        (
+            SELECT userId, gugunId
+            FROM tblUserRegion
+            WHERE userId IN
+            (
+              SELECT userId FROM tblUserWork UW
+              WHERE (UW.workId, UW.career, UW.welderType) IN
+              SELECT workId, career, welderType FROM tblSearchWork WHERE searchId = #{searchId}
+            )
+        )
+        WHERE gugunId = #{gugunId}
+        <if test="allType == 1">
+            OR gugunId = 0
+        </if>
+    </select>
 
-
+    <update id="updatePushKey">
+        UPDATE tblUser
+        SET pushKey = #{pushKey}
+        WHERE id = #{id}
+    </update>
 
 
 
@@ -160,10 +199,6 @@
 
     <select id="getUser" resultType="DataMap">
         SELECT * FROM tblMember WHERE `email`=#{id} AND `password`=#{pw} AND `status`=1 LIMIT 1
-    </select>
-
-    <select id="getUserById" resultType="DataMap">
-        SELECT * FROM tblMember WHERE `email`=#{id} LIMIT 1
     </select>
 
     <select id="getUserByKey" resultType="DataMap">

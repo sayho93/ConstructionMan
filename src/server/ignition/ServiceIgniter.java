@@ -203,13 +203,25 @@ public class ServiceIgniter extends BaseIgniter{
             }
         }, "유저 로그인을 위한 API", "account", "password", "pushKey");
 
-//        super.get(service, "web/user/info/:id", (req, res) -> {
-//            final int id = Integer.parseInt(req.params(":id"));
-//            DataMap map = userSVC.getUserInfo(id);
-//
-//            if(map == null) return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
-//            else return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
-//        }, "유저 장비/인력 정보 취득을 위한 API", "id[REST]");
+        super.get(service, "web/user/info/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            DataMap map = userSVC.getUserInfo(id);
+
+            if(map == null) return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+            else return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
+        }, "마이페이지 유저 장비/인력 정보 취득을 위한 API", "id[REST]");
+
+        super.get(service, "web/user/update/pushKey/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            final String pushKey = map.getString("pushKey");
+
+            DataMap userInfo = userSVC.updatePushKey(id, pushKey);
+
+            if(userInfo != null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, userInfo);
+            else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+        }, "유저 푸시키 업데이트를 위한 API", "id[REST]", "pushKey");
+
 
     }
 
