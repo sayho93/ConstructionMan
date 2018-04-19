@@ -32,6 +32,8 @@ public interface UserMapper {
 
     List<DataMap> findManMatch(@Param("searchId") int searchId, @Param("allType") int allType, @Param("gugunId") int gugunId);
 
+    List<DataMap> findGearMatch(@Param("gearId") int gearId, @Param("attachment") String attachment);
+
     int getUserIdByAccount(@Param("account") String account, @Param("password") String password);
 
     void updatePushKey(@Param("id") int id, @Param("pushKey") String pushKey);
@@ -48,6 +50,7 @@ public interface UserMapper {
 
     List<DataMap> getSearchManInfo(@Param("searchId") int searchId);
 
+    DataMap getSearchGearInfo(@Param("searchId") int searchId);
 
 
 

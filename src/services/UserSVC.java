@@ -1,7 +1,6 @@
 package services;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import databases.mybatis.mapper.CommMapper;
 import databases.mybatis.mapper.UserMapper;
 import databases.paginator.ListBox;
@@ -194,7 +193,6 @@ public class UserSVC extends BaseService {
                     userMapper.setSearchWork(searchId, work[i], career[i], null);
             }
             sqlSession.commit();
-            // TODO
 
             List<DataMap> userList = userMapper.findManMatch(searchId, allType, gugunId);
 
@@ -227,8 +225,6 @@ public class UserSVC extends BaseService {
             message += "공사기간 " + searchBasicInfo.getString("startDate") + "~" + searchBasicInfo.getString("endDate") + "/ ";
             message += "단가 " + searchBasicInfo.getInt("price");
 
-
-
             final Iterator<DataMap> iter = userList.iterator();
             List<String> pushKeyList = new ArrayList<String>();
 
@@ -238,7 +234,7 @@ public class UserSVC extends BaseService {
                 pushKeyList.add(map.getString("pushKey"));
                 Log.i("userList :: pushKey", map.getInt("userId") + "::" + map.getString("pushKey"));
             }
-
+            //TODO sendPush
 //            PushManager.getInstance().send(pushKeyList, title, message);
         }
     }
@@ -249,7 +245,31 @@ public class UserSVC extends BaseService {
 
             userMapper.setSearchGear(searchId, gearId, attachment);
             sqlSession.commit();
-            // TODO
+
+            List<DataMap> userList = userMapper.findGearMatch(gearId, attachment);
+            final String title = "장비";
+            String message = "";
+
+            DataMap searchBasicInfo = userMapper.getSearchBasicInfo(searchId);
+            message = "위치 " + searchBasicInfo.getString("gugunText") + "/ ";
+
+            DataMap gearInfo = userMapper.getSearchGearInfo(searchId);
+            message += gearInfo.getString("name") + "/ ";
+            message += "작업기간 " + searchBasicInfo.getString("startDate") + " ~ " + searchBasicInfo.getString("endDate");
+
+            final Iterator<DataMap> iterator = userList.iterator();
+            List<String> pushKeyList = new ArrayList<>();
+
+            while(iterator.hasNext()){
+                final DataMap map = iterator.next();
+                final int userId = map.getInt("userId");
+                pushKeyList.add(map.getString("pushKey"));
+                Log.i("userId :: pushKey", userId + " :: " + map.getString("pushKey"));
+            }
+            //TODO sendPush
+
+
+//            PushManager.getInstance().send(pushKeyList, title, message);
         }
     }
 
