@@ -11,6 +11,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
+import org.eclipse.jetty.server.Authentication;
 import server.cafe24.Cafe24SMSManager;
 import server.comm.DataMap;
 import server.response.Response;
@@ -326,6 +327,46 @@ public class UserSVC extends BaseService {
         }
     }
 
+    public DataMap updateUserInfo(int id, DataMap map){
+        final String type = map.getString("type");
+
+        if(type.equals("M")){
+            final int[] region = map.getStringToIntArr("region", ",");
+            final int[] work = map.getStringToIntArr("work", ",");
+            final int[] career = map.getStringToIntArr("career", ",");
+            final String welderType = map.getString("welderType");
+
+            try(SqlSession sqlSession = super.getSession()){
+                UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+                userMapper.deleteUserRegion(id);
+                userMapper.deleteUserWork(id);
+            }
+            joinMan(id, region, work, career, welderType);
+        }
+        else if(type.equals("G")){
+            final int[] region = map.getStringToIntArr("region", ",");
+            final int gearId = map.getInt("gearId");
+            final String attachment = map.getString("attachment");
+
+            try(SqlSession sqlSession = super.getSession()){
+                UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+                userMapper.deleteUserGear(id);
+            }
+            joinGear(id, region, gearId, attachment);
+        }
+
+        return getUserInfo(id);
+    }
+
+    public void applySearch(int userId, int searchId){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            userMapper.applySearch(userId, searchId);
+        }
+    }
 
     public static void main(String ... args){
         List<String> regKeys = new ArrayList<String>();
@@ -333,6 +374,8 @@ public class UserSVC extends BaseService {
         PushManager.start("AAAALAuy9Ms:APA91bHvU-eINQYL59NviY_imyPrhNc76o_Kgb1J9GFv6LhYBl545-yfpHK6iShVUCsOrXNNcZdPznFzR4p5NBrFOnubcWD93DzxzyNG0yv3j5jNGg_X1fjT_jNYmTq8Bcr_IVv6fp3A");
         PushManager.getInstance().send(regKeys, "test", "testtesttest", null);
     }
+
+
 
 
 

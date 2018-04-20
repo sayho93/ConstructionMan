@@ -1,6 +1,7 @@
 package server.ignition;
 
 import configs.Constants;
+import databases.paginator.ListBox;
 import delayed.managers.PushManager;
 import server.cafe24.Cafe24SMS;
 import server.cafe24.Cafe24SMSManager;
@@ -12,6 +13,7 @@ import server.rest.DataMapUtil;
 import server.rest.RestConstant;
 import server.rest.RestUtil;
 import server.temporaries.SMSAuth;
+import services.AdminSVC;
 import services.CommonSVC;
 import services.UserSVC;
 import spark.Service;
@@ -41,6 +43,7 @@ public class ServiceIgniter extends BaseIgniter{
 
     private CommonSVC commonSVC;
     private UserSVC userSVC;
+    private AdminSVC adminSVC;
 
     /**
      * 서버 실행에 필요한 전처리 작업을 위한 init 파트
@@ -222,6 +225,57 @@ public class ServiceIgniter extends BaseIgniter{
             else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
         }, "유저 푸시키 업데이트를 위한 API", "id[REST]", "pushKey");
 
+        super.post(service, "web/user/update/info/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+
+            if(DataMapUtil.isValid(map, "type", "region")){
+                DataMap userInfo = userSVC.updateUserInfo(id, map);
+                if(userInfo != null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
+                else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+            }else{
+                return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
+            }
+
+        }, "마이페이지 유저 정보 변경을 위한 API", "id[REST]", "type", "region[ARR]", "work[ARR]",
+                "career[ARR]", "welderType", "gearId", "attachment");
+
+        super.post(service, "web/user/apply/:id", (req, res) -> {
+            final int userId = Integer.parseInt(req.params(":id"));
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+
+            if(DataMapUtil.isValid(map, "searchId")){
+                userSVC.applySearch(userId, map.getInt("searchId"));
+                return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
+            }else{
+                return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
+            }
+        }, "공고 지원을 위한 API", "id[REST]", "searchId");
+
+        super.post(service, "/admin/login", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+
+            if(DataMapUtil.isValid(map, "account", "password")){
+                DataMap adminInfo = adminSVC.adminLogin(map);
+                if(adminInfo != null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, adminInfo);
+                else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+            }else{
+                return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
+            }
+        }, "관리자 로그인을 위한 API", "account", "password");
+
+        super.get(service, "/admin/userList", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            final int page = map.getInt("page", 1);
+            final int limit = map.getInt("limit", 20);
+            final String account = map.getString("account", "");
+            final String phone = map.getString("phone", "");
+
+            ListBox retVal = adminSVC.getUserList(page, limit, account, phone);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
+        }, "유저 목록 취득을 위한 API. 아이디와 전화번호를 통해 검색할 수 있음", "page", "limit", "account", "phone");
+
+        
 
     }
 

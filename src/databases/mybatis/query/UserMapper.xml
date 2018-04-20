@@ -193,10 +193,29 @@
         WHERE searchId = #{searchId}
     </select>
 
+    <delete id="deleteUserRegion">
+        DELETE FROM tblUserRegion
+        WHERE userId = #{id}
+    </delete>
 
+    <delete id="deleteUserWork">
+        DELETE FROM tblUserWork
+        WHERE userId = #{id}
+    </delete>
 
+    <delete id="deleteUserGear">
+        DELETE FROM tblUserGear
+        WHERE userId = #{id}
+    </delete>
 
-
+    <insert id="applySearch">
+        INSERT INTO tblApply(`userId`, `searchId`, `regDate`)
+        VALUES(
+          #{userId},
+          #{searchId},
+          NOW()
+        )
+    </insert>
 
 
 

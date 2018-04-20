@@ -49,8 +49,7 @@
         <mapper resource="databases/mybatis/query/CommMapper.xml"/>
         <!-- Mapper for executing queries commonly used in an web directly -->
         <mapper resource="databases/mybatis/query/UserMapper.xml"/>
-        <!-- Mapper for executing queries mainly used in the diligence checking process -->
-        <mapper resource="databases/mybatis/query/DiligenceMapper.xml"/>
+        <mapper resource="databases/mybatis/query/AdminMapper.xml"/>
     </mappers>
 
 </configuration>

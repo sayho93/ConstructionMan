@@ -146,7 +146,8 @@
     </select>
 
     <select id="findManMatch" resultType="DataMap">
-        SELECT userId
+        SELECT userId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
+        FROM
         (
             SELECT userId, gugunId
             FROM tblUserRegion
@@ -154,13 +155,19 @@
             (
               SELECT userId FROM tblUserWork UW
               WHERE (UW.workId, UW.career, UW.welderType) IN
-              SELECT workId, career, welderType FROM tblSearchWork WHERE searchId = #{searchId}
+              (SELECT workId, career, welderType FROM tblSearchWork WHERE searchId = #{searchId})
             )
-        )
+        ) tmp
         WHERE gugunId = #{gugunId}
         <if test="allType == 1">
             OR gugunId = 0
         </if>
+    </select>
+
+    <select id="findGearMatch" resultType="DataMap">
+        SELECT userId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
+        FROM tblUserGear
+        WHERE gearId = #{gearId} AND attachment = #{attachment}
     </select>
 
     <update id="updatePushKey">
@@ -169,21 +176,46 @@
         WHERE id = #{id}
     </update>
 
-    <select id="getSearchBasicInfo">
+    <select id="getSearchBasicInfo" resultType="DataMap">
         SELECT *, (SELECT description FROM tblZipGugun WHERE gugunID = gugunId) as gugunText
         from tblSearch WHERE id = #{searchId}
     </select>
 
-    <select id="getSearchManInfo">
+    <select id="getSearchManInfo" resultType="DataMap">
         SELECT *, (SELECT `name` FROM tblWork W WHERE W.id = workId)
         from tblSearchWork
         WHERE searchId = #{searchId}
     </select>
 
+    <select id="getSearchGearInfo" resultType="DataMap">
+        SELECT *,
+        FROM tblSearcGear SG JOIN tblGearType GT ON SG.gearId = GT.id
+        WHERE searchId = #{searchId}
+    </select>
 
+    <delete id="deleteUserRegion">
+        DELETE FROM tblUserRegion
+        WHERE userId = #{id}
+    </delete>
 
+    <delete id="deleteUserWork">
+        DELETE FROM tblUserWork
+        WHERE userId = #{id}
+    </delete>
 
+    <delete id="deleteUserGear">
+        DELETE FROM tblUserGear
+        WHERE userId = #{id}
+    </delete>
 
+    <insert id="applySearch">
+        INSERT INTO tblApply(`userId`, `searchId`, `regDate`)
+        VALUES(
+          #{userId},
+          #{searchId},
+          NOW()
+        )
+    </insert>
 
 
 

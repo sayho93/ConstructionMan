@@ -52,10 +52,13 @@ public interface UserMapper {
 
     DataMap getSearchGearInfo(@Param("searchId") int searchId);
 
+    void deleteUserRegion(@Param("id") int id);
 
+    void deleteUserWork(@Param("id") int id);
 
+    void deleteUserGear(@Param("id") int id);
 
-
+    void applySearch(@Param("userId") int userId, @Param("searchId") int searchId);
 
 
 
