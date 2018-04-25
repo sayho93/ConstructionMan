@@ -8,4 +8,26 @@
         WHERE `account` = #{account} AND `password` = #{password} LIMIT 1
     </select>
 
+    <select id="getUserList" resultType="DataMap">
+        SELECT * FROM tblUser
+        WHERE `status` = 1
+        <if test="account != null and account != ''">
+            AND (`account` LIKE CONCAT('%', #{account}, '%'))
+        </if>
+        <if test="phone != null and phone != ''">
+            AND (`phone` LIKE CONCAT('%', #{phone}, '%'))
+        </if>
+        ORDER BY regDate DESC LIMIT #{page}, #{limit}
+    </select>
+
+    <select id="getUserCount" resultType="Integer">
+        SELECT COUNT(*) FROM tblUser
+        WHERE `status` = 1
+        <if test="account != null and account != ''">
+            AND (`account` LIKE CONCAT('%', #{account}, '%'))
+        </if>
+        <if test="phone != null and phone != ''">
+            AND (`phone` LIKE CONCAT('%', #{phone}, '%'))
+        </if>
+    </select>
 </mapper>

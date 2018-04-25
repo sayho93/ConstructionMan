@@ -265,6 +265,20 @@ public class DataMap extends HashMap<String, Object>
         return stringArr;
     }
 
+    public String[] getStringArrWithDelimiter(Object key, String delimiter){
+        String[] strArr = new String[]{};
+
+        Object obj = get(key.toString());
+
+        if(obj == null){
+            return null;
+        }else {
+            strArr = StringUtils.split(obj.toString(), delimiter);
+        }
+
+        return strArr;
+    }
+
     private String convert(double doubleObj, String pattern) throws Exception
     {
 

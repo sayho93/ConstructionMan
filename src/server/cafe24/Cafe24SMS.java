@@ -104,7 +104,7 @@ public class Cafe24SMS {
     private final static String apiUrl = "https://sslsms.cafe24.com/sms_sender.php";
     private final static String userAgent = "Mozilla/5.0";
     private final static String charset = "UTF-8";
-    private final static boolean isTest = true;
+    private final static boolean isTest = false;
 
     private final String mode = base64Encode("1");
     private final String sms = "S";

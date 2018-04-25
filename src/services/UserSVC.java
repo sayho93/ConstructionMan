@@ -68,6 +68,15 @@ public class UserSVC extends BaseService {
         }
     }
 
+    public DataMap checkPhone(String phone){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            final DataMap accountInfo = userMapper.getUserByPhone(phone);
+
+            return accountInfo;
+        }
+    }
+
     public int joinUser(DataMap map){
         final String password = RestUtil.getMessageDigest(map.getString("password"));
         final String phone = map.getString("phone").replaceAll("-", "");
@@ -79,8 +88,7 @@ public class UserSVC extends BaseService {
         if(ValidationUtil.validate(phone, ValidationUtil.ValidationType.Phone)){
             try(SqlSession sqlSession = super.getSession()){
                 UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-                final DataMap preProcessUser = userMapper.getUserByPhone(phone);
-                if(preProcessUser != null) return ResponseConst.CODE_ALREADY_EXIST;
+
                 userMapper.registerUserBasic(map);
                 sqlSession.commit();
                 lastId = map.getInt("id");
@@ -95,8 +103,11 @@ public class UserSVC extends BaseService {
             }
             else if(type.equals("G")){
                 final int[] region = map.getStringToIntArr("region", ",");
-                final int gearId = map.getInt("gearId");
-                final String attachment = map.getString("attachment");
+
+                final int[] gearId = map.getStringToIntArr("gearId", ",");
+                final String[] attachment = map.getStringArrWithDelimiter("attachment", ",");
+//                final int gearId = map.getInt("gearId");
+//                final String attachment = map.getString("attachment");
 
                 joinGear(lastId, region, gearId, attachment);
             }
@@ -125,14 +136,17 @@ public class UserSVC extends BaseService {
         }
     }
 
-    private void joinGear(int userId, int[] region, int gearId, String attachment){
+    private void joinGear(int userId, int[] region, int[] gearId, String[] attachment){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             for(int i=0; i<region.length; i++)
                 userMapper.setUserRegion(userId, region[i]);
 
-            userMapper.setUserGear(userId, gearId, attachment);
+            for(int i=0; i<gearId.length; i++){
+                userMapper.setUserGear(userId, gearId[i], attachment[i]);
+            }
+
             sqlSession.commit();
         }
     }
@@ -177,7 +191,7 @@ public class UserSVC extends BaseService {
             final int gearId = map.getInt("gearId");
             final String attachment = map.getString("attachment");
 
-            searchGear(lastId, gearId, attachment);
+            searchGear(lastId, gearId, attachment, gugunId);
         }
 
         return ResponseConst.CODE_SUCCESS;
@@ -240,14 +254,14 @@ public class UserSVC extends BaseService {
         }
     }
 
-    private void searchGear(int searchId, int gearId, String attachment){
+    private void searchGear(int searchId, int gearId, String attachment, int gugunId){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             userMapper.setSearchGear(searchId, gearId, attachment);
             sqlSession.commit();
 
-            List<DataMap> userList = userMapper.findGearMatch(gearId, attachment);
+            List<DataMap> userList = userMapper.findGearMatch(gearId, attachment, gugunId);
             final String title = "장비";
             String message = "";
 
@@ -277,12 +291,10 @@ public class UserSVC extends BaseService {
     public DataMap userLogin(DataMap map){
         final String account = map.getString("account");
         final String password = RestUtil.getMessageDigest(map.getString("password"));
-        final String pushKey = map.getString("pushKey");
 
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
             int id = userMapper.getUserIdByAccount(account, password);
-            userMapper.updatePushKey(id, pushKey);
 
             DataMap userInfo = userMapper.getUserById(id);
             DataMapUtil.mask(userInfo, "password");
@@ -346,8 +358,8 @@ public class UserSVC extends BaseService {
         }
         else if(type.equals("G")){
             final int[] region = map.getStringToIntArr("region", ",");
-            final int gearId = map.getInt("gearId");
-            final String attachment = map.getString("attachment");
+            final int[] gearId = map.getStringToIntArr("gearId", ",");
+            final String[] attachment = map.getStringArrWithDelimiter("attachment", ",");
 
             try(SqlSession sqlSession = super.getSession()){
                 UserMapper userMapper = sqlSession.getMapper(UserMapper.class);

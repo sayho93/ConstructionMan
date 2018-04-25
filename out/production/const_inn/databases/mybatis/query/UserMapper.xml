@@ -146,7 +146,7 @@
     </select>
 
     <select id="findManMatch" resultType="DataMap">
-        SELECT userId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
+        SELECT userId, gugunId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
         FROM
         (
             SELECT userId, gugunId
@@ -165,9 +165,19 @@
     </select>
 
     <select id="findGearMatch" resultType="DataMap">
-        SELECT userId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
-        FROM tblUserGear
-        WHERE gearId = #{gearId} AND attachment = #{attachment}
+        SELECT userId, gugunId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
+        FROM
+        (
+          SELECT userId, gugunId
+          FROM tblUserRegion
+          WHERE userId IN
+          (
+            SELECT userId
+            FROM tblUserGear
+            WHERE gearId = #{gearId} AND attachment = #{attachment}
+          )
+        ) tmp
+        WHERE gugunId = #{gugunId}
     </select>
 
     <update id="updatePushKey">

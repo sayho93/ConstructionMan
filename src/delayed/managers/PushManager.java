@@ -34,6 +34,52 @@ public class PushManager extends QueuedProcessorImpl{
         PushManager.getInstance().start(DEFAULT_POOL_SIZE);
     }
 
+    private void _sendOnlyData(List<String> registrationKeys, DataMap extras){
+        if(registrationKeys.size() == 0) return;
+        try {
+            URL url = new URL(API_URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setUseCaches(false);
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", "key=" + senderId);
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            final ObjectMapper objectMapper = new ObjectMapper();
+
+            final DataMap json = new DataMap();
+            final DataMap info = new DataMap();
+
+            json.put("notification", info);
+            json.put("registration_ids", registrationKeys);
+
+            json.put("data", extras);
+
+            final String jsonString = objectMapper.writeValueAsString(json);
+            Log.e(jsonString);
+
+            Log.i(this.getClass().getSimpleName(), "Sending FCM to " + registrationKeys.size() + " user(s).");
+
+            try (OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream(), "UTF-8")) {
+                wr.write(jsonString);
+                wr.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+
+            String output;
+            while ((output = br.readLine()) != null) Log.i(this.getClass().getSimpleName(), output);
+
+            conn.disconnect();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     private void _send(List<String> registrationKeys, String title, String message, DataMap extras){
         if(registrationKeys.size() == 0) return;
         try {
@@ -89,12 +135,21 @@ public class PushManager extends QueuedProcessorImpl{
         }
     }
 
-    public static void main(String... args){
-        PushManager.start("AAAAow6XPw8:APA91bHPWWLemYijEmDL-Qriu50TAJpVap44kvt8ufhOHkPa-lmNK67yzYm-lZalD1KTPf497BPMR2jswzPYDmw9K8edGdivWZQKah2DkuFdwAPmw46nKOyFgWaPra4Y4VWJXkGHldNE");
-        final List<String> regKeys = new Vector<>();
-        regKeys.add("ccgIyMKJ1Bo:APA91bGMZv0PYmc5Kemir8mwU3eDymtAkK2Wj6sBN_5617OP4qPruKT5DOUwsWz-4HZjWbFT8h4iU6RItT2W-VAkCseGgXQxA-HC6cdtWnLBf8pzvcLFpm4CWlUHmE8BjnpWO69x_b03");
+    public void sendOnlyData(List<String> registrationKeys, DataMap extras){
+        for(final List<String> multicastUnit : ListUtils.partition(registrationKeys, MULTICAST_LIMIT_SIZE)) {
+            super.offer(() -> _sendOnlyData(multicastUnit, extras));
+        }
+    }
 
-        PushManager.getInstance().send(regKeys, "test", "contents", new DataMap());
+    public static void main(String... args){
+        PushManager.start("AAAALAuy9Ms:APA91bHvU-eINQYL59NviY_imyPrhNc76o_Kgb1J9GFv6LhYBl545-yfpHK6iShVUCsOrXNNcZdPznFzR4p5NBrFOnubcWD93DzxzyNG0yv3j5jNGg_X1fjT_jNYmTq8Bcr_IVv6fp3A");
+        final List<String> regKeys = new Vector<>();
+        regKeys.add("fmgs31uYE_Q:APA91bH-g2Pv7zgKhnjtKHkE9KEjdu2C0IzgH5HhoTnmUF-TA1Tdz-iqttohxkOLIoeB08zdh5qvmReACFzsS9Q3BHKVyT9w_6aje0sRZ8gTAxn277d7PAC6NAiXChrF3brFnnVo2-9u");
+
+        final DataMap dataMap = new DataMap();
+        dataMap.put("title", "Test Title");
+        dataMap.put("body", "Test Body");
+        PushManager.getInstance().sendOnlyData(regKeys, dataMap);
     }
 
 }

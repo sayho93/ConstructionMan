@@ -32,7 +32,7 @@ public interface UserMapper {
 
     List<DataMap> findManMatch(@Param("searchId") int searchId, @Param("allType") int allType, @Param("gugunId") int gugunId);
 
-    List<DataMap> findGearMatch(@Param("gearId") int gearId, @Param("attachment") String attachment);
+    List<DataMap> findGearMatch(@Param("gearId") int gearId, @Param("attachment") String attachment, @Param("gugunId") int gugunId);
 
     int getUserIdByAccount(@Param("account") String account, @Param("password") String password);
 

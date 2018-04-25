@@ -170,7 +170,7 @@ public class ServiceIgniter extends BaseIgniter{
                 return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
             }
         }, "APP 회원가입을 위한 API", "name", "account", "password", "phone", "age", "type",
-                "pushKey", "region[ARR]", "work[ARR]", "career[ARR]", "welderType", "gearId", "attachment");
+                "pushKey", "region[ARR]", "work[ARR]", "career[ARR]", "welderType", "gearId[ARR]", "attachment[ARR]");
 
         super.get(service, "/web/user/checkAccountDuplication/:account", (req, res) -> {
             final String account = req.params(":account");
@@ -179,6 +179,14 @@ public class ServiceIgniter extends BaseIgniter{
             if(map == null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
             else return new Response(ResponseConst.CODE_ALREADY_EXIST, ResponseConst.MSG_ALREADY_EXIST);
         }, "회원가입시 아이디 중복 체크를 위한 API", "account[REST]");
+
+        super.get(service, "/web/user/checkPhoneDuplication/:phone", (req, res) -> {
+            final String phone = req.params(":phone");
+            DataMap map = userSVC.checkPhone(phone);
+
+            if(map == null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
+            else return new Response(ResponseConst.CODE_ALREADY_EXIST, ResponseConst.MSG_ALREADY_EXIST);
+        }, "회원가입시 휴대폰번호 중복 체크를 위한 API", "phone[REST]");
 
         super.post(service, "/web/register/search/:id", (req, res) -> {
             final int userId = Integer.parseInt(req.params(":id"));
@@ -197,14 +205,14 @@ public class ServiceIgniter extends BaseIgniter{
         super.post(service, "/web/user/login", (req, res) -> {
             DataMap map = RestProcessor.makeProcessData(req.raw());
 
-            if(DataMapUtil.isValid(map, "account", "password", "pushKey")){
+            if(DataMapUtil.isValid(map, "account", "password")){
                 DataMap userInfo = userSVC.userLogin(map);
                 if(userInfo != null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, userInfo);
                 else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
             } else{
                 return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
             }
-        }, "유저 로그인을 위한 API", "account", "password", "pushKey");
+        }, "유저 로그인을 위한 API", "account", "password");
 
         super.get(service, "web/user/info/:id", (req, res) -> {
             final int id = Integer.parseInt(req.params(":id"));
@@ -275,7 +283,9 @@ public class ServiceIgniter extends BaseIgniter{
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
         }, "유저 목록 취득을 위한 API. 아이디와 전화번호를 통해 검색할 수 있음", "page", "limit", "account", "phone");
 
-        
+        super.get(service, "web/introprocess", (req, res) -> {
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, null);
+        });
 
     }
 
