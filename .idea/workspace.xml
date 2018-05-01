@@ -6,12 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5bfcc820-013b-4e6f-b8c4-b08ef693735a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java" afterPath="$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java" />
-      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" afterPath="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/src/delayed/managers/PushManager.java" afterPath="$PROJECT_DIR$/src/delayed/managers/PushManager.java" />
+      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java" afterPath="$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java" />
+      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml" afterPath="$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml" />
       <change beforePath="$PROJECT_DIR$/src/server/cafe24/Cafe24SMS.java" afterPath="$PROJECT_DIR$/src/server/cafe24/Cafe24SMS.java" />
-      <change beforePath="$PROJECT_DIR$/src/server/comm/DataMap.java" afterPath="$PROJECT_DIR$/src/server/comm/DataMap.java" />
       <change beforePath="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" afterPath="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" />
+      <change beforePath="$PROJECT_DIR$/src/services/CommonSVC.java" afterPath="$PROJECT_DIR$/src/services/CommonSVC.java" />
       <change beforePath="$PROJECT_DIR$/src/services/UserSVC.java" afterPath="$PROJECT_DIR$/src/services/UserSVC.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -35,11 +34,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ServiceIgniter.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ServiceIgniter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="146" column="39" lean-forward="true" selection-start-line="146" selection-start-column="39" selection-end-line="146" selection-end-column="39" />
+            <state relative-caret-position="16">
+              <caret line="283" column="59" lean-forward="false" selection-start-line="283" selection-start-column="59" selection-end-line="283" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -55,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cafe24SMS.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Cafe24SMS.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/cafe24/Cafe24SMS.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-198">
-              <caret line="115" column="22" lean-forward="false" selection-start-line="115" selection-start-column="22" selection-end-line="115" selection-end-column="22" />
+            <state relative-caret-position="983">
+              <caret line="104" column="31" lean-forward="false" selection-start-line="104" selection-start-column="31" selection-end-line="104" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -68,35 +67,56 @@
       <file leaf-file-name="UserSVC.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/services/UserSVC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+            <state relative-caret-position="182">
+              <caret line="244" column="22" lean-forward="false" selection-start-line="244" selection-start-column="18" selection-end-line="244" selection-end-column="22" />
               <folding>
-                <element signature="e#9146#9154#0" expanded="true" />
-                <element signature="e#14501#14509#0" expanded="true" />
+                <element signature="e#9028#9036#0" expanded="true" />
+                <element signature="e#14383#14391#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PushManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/delayed/managers/PushManager.java">
+      <file leaf-file-name="CommonSVC.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/CommonSVC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="152" column="5" lean-forward="true" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
+            <state relative-caret-position="401">
+              <caret line="60" column="58" lean-forward="false" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/AdminMapper.xml">
+      <file leaf-file-name="CommMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+            <state relative-caret-position="204">
+              <caret line="15" column="61" lean-forward="false" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
               <folding>
-                <marker date="1524457477243" expanded="true" signature="271:375" ph="SELECT * FRO... tblAdmin" />
-                <marker date="1524457477243" expanded="true" signature="450:804" ph="SELECT * FRO... tblUser" />
+                <marker date="1525158023290" expanded="true" signature="267:386" ph="SELECT detai... tblGearType" />
+                <marker date="1525158023290" expanded="true" signature="746:789" ph="SELECT * FRO... tblZipSido" />
+                <marker date="1525158023290" expanded="true" signature="865:936" ph="SELECT * FRO... tblZipGugun" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/server/rest/RestUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -115,7 +135,7 @@
         <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="155">
-              <caret line="12" column="53" lean-forward="true" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
+              <caret line="12" column="53" lean-forward="false" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
               <folding>
                 <marker date="1524466485275" expanded="true" signature="242:290" ph="UPDATE tblUser... " />
                 <marker date="1524466485275" expanded="true" signature="344:392" ph="UPDATE tblUser... " />
@@ -219,23 +239,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataMap.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/comm/DataMap.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="604">
-              <caret line="277" column="0" lean-forward="true" selection-start-line="277" selection-start-column="0" selection-end-line="277" selection-end-column="0" />
-              <folding>
-                <element signature="e#14224#14225#0" expanded="true" />
-                <element signature="e#14275#14276#0" expanded="true" />
-                <element signature="e#14733#14734#0" expanded="true" />
-                <element signature="e#14781#14782#0" expanded="true" />
-                <element signature="e#14854#14855#0" expanded="true" />
-                <element signature="e#14916#14917#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -250,18 +253,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getUserByAccount</find>
-      <find>QueuedPro</find>
-      <find>final</find>
-      <find>new Thread</find>
-      <find>mkdir</find>
       <find>setSe</find>
       <find>mask</find>
       <find>getUserById</find>
       <find>getWorkplaceList</find>
       <find>find</find>
       <find>updatePushKey</find>
-      <find>iter</find>
       <find>smstest</find>
       <find>iterat</find>
       <find>iterator</find>
@@ -274,12 +271,18 @@
       <find>testF</find>
       <find>checkA</find>
       <find>getUserByPhone</find>
-      <find>join</find>
       <find>du</find>
       <find>check</find>
       <find>checkPhoneDuplication</find>
-      <find>auth</find>
       <find>발신번호</find>
+      <find>sphone1</find>
+      <find>flg</find>
+      <find>testflag</find>
+      <find>auth</find>
+      <find>verify</find>
+      <find>itera</find>
+      <find>iter</find>
+      <find>join</find>
     </findStrings>
     <replaceStrings>
       <replace>;</replace>
@@ -318,8 +321,6 @@
         <option value="$PROJECT_DIR$/src/utils/RecursionClass.java" />
         <option value="$PROJECT_DIR$/src/server/rest/RestConstant.java" />
         <option value="$PROJECT_DIR$/src/server/ignition/docs/APIDocument.java" />
-        <option value="$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java" />
-        <option value="$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml" />
         <option value="$PROJECT_DIR$/src/server/rest/DataMapUtil.java" />
         <option value="$PROJECT_DIR$/src/utils/DR_AES_SAMPLE.java" />
         <option value="$PROJECT_DIR$/src/utils/PushSender.java" />
@@ -330,7 +331,6 @@
         <option value="$PROJECT_DIR$/src/utils/Log.java" />
         <option value="$PROJECT_DIR$/src/server/Server.java" />
         <option value="$PROJECT_DIR$/src/server/ignition/BaseIgniter.java" />
-        <option value="$PROJECT_DIR$/src/services/CommonSVC.java" />
         <option value="$PROJECT_DIR$/src/server/cafe24/cafe24SMS.java" />
         <option value="$PROJECT_DIR$/src/server/temporaries/SMSAuth.java" />
         <option value="$PROJECT_DIR$/src/server/cafe24/Cafe24SMSManager.java" />
@@ -345,10 +345,13 @@
         <option value="$PROJECT_DIR$/src/server/comm/DataMap.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" />
         <option value="$PROJECT_DIR$/src/delayed/managers/PushManager.java" />
-        <option value="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java" />
-        <option value="$PROJECT_DIR$/src/services/UserSVC.java" />
         <option value="$PROJECT_DIR$/src/server/cafe24/Cafe24SMS.java" />
+        <option value="$PROJECT_DIR$/src/services/UserSVC.java" />
+        <option value="$PROJECT_DIR$/src/services/CommonSVC.java" />
+        <option value="$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java" />
+        <option value="$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml" />
+        <option value="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" />
       </list>
     </option>
   </component>
@@ -460,6 +463,11 @@
             <path>
               <item name="ConstructionMan" type="b2602c69:ProjectViewProjectNode" />
               <item name="ConstructionMan" type="462c0819:PsiDirectoryNode" />
+              <item name="img_upload" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ConstructionMan" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ConstructionMan" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -547,7 +555,7 @@
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Richware/IdeaProjects/kopas/src/databases/mybatis/query/CommMapper.xml" />
+    <property name="SearchEverywhereHistoryKey" value="CommM&#9;FILE&#9;file:///Users/sayho/IdeaProjects/ConstructionMan/src/databases/mybatis/mapper/CommMapper.java" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JAVA" />
   </component>
   <component name="RecentsManager">
@@ -763,7 +771,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="379562000" />
+    <option name="totallyTimeSpent" value="390519000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -879,13 +887,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/rest/RestUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="39" column="19" lean-forward="true" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/response/ResponseConst.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
@@ -919,20 +920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="3" column="92" lean-forward="false" selection-start-line="3" selection-start-column="92" selection-end-line="3" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -992,13 +979,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/CommonSVC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="24" column="32" lean-forward="false" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/databases/mybatis/DBSessionWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
@@ -1048,6 +1028,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
           <caret line="35" column="54" lean-forward="true" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1055,17 +1036,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="13" column="89" lean-forward="true" selection-start-line="13" selection-start-column="89" selection-end-line="13" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/AdminMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding>
-            <marker date="1524457477243" expanded="true" signature="271:375" ph="SELECT * FRO... tblAdmin" />
-            <marker date="1524457477243" expanded="true" signature="450:804" ph="SELECT * FRO... tblUser" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1074,12 +1045,12 @@
         <state relative-caret-position="604">
           <caret line="277" column="0" lean-forward="true" selection-start-line="277" selection-start-column="0" selection-end-line="277" selection-end-column="0" />
           <folding>
-            <element signature="e#14224#14225#0" expanded="true" />
-            <element signature="e#14275#14276#0" expanded="true" />
-            <element signature="e#14733#14734#0" expanded="true" />
-            <element signature="e#14781#14782#0" expanded="true" />
-            <element signature="e#14854#14855#0" expanded="true" />
-            <element signature="e#14916#14917#0" expanded="true" />
+            <element signature="e#14224#14225#0" expanded="false" />
+            <element signature="e#14275#14276#0" expanded="false" />
+            <element signature="e#14733#14734#0" expanded="false" />
+            <element signature="e#14781#14782#0" expanded="false" />
+            <element signature="e#14854#14855#0" expanded="false" />
+            <element signature="e#14916#14917#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1088,14 +1059,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
           <caret line="152" column="5" lean-forward="true" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/cafe24/Cafe24SMSManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="39" lean-forward="false" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1111,7 +1074,7 @@
     <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
-          <caret line="12" column="53" lean-forward="true" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
+          <caret line="12" column="53" lean-forward="false" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
           <folding>
             <marker date="1524466485275" expanded="true" signature="242:290" ph="UPDATE tblUser... " />
             <marker date="1524466485275" expanded="true" signature="344:392" ph="UPDATE tblUser... " />
@@ -1214,29 +1177,84 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/UserSVC.java">
+    <entry file="file://$PROJECT_DIR$/src/server/cafe24/Cafe24SMSManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-          <folding>
-            <element signature="e#9146#9154#0" expanded="true" />
-            <element signature="e#14501#14509#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="146" column="39" lean-forward="true" selection-start-line="146" selection-start-column="39" selection-end-line="146" selection-end-column="39" />
+        <state relative-caret-position="153">
+          <caret line="10" column="39" lean-forward="false" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/cafe24/Cafe24SMS.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-198">
-          <caret line="115" column="22" lean-forward="false" selection-start-line="115" selection-start-column="22" selection-end-line="115" selection-end-column="22" />
+        <state relative-caret-position="983">
+          <caret line="104" column="31" lean-forward="false" selection-start-line="104" selection-start-column="31" selection-end-line="104" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/AdminMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+          <folding>
+            <marker date="1524457477243" expanded="true" signature="271:375" ph="SELECT * FRO... tblAdmin" />
+            <marker date="1524457477243" expanded="true" signature="450:804" ph="SELECT * FRO... tblUser" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/UserSVC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="244" column="22" lean-forward="false" selection-start-line="244" selection-start-column="18" selection-end-line="244" selection-end-column="22" />
+          <folding>
+            <element signature="e#9028#9036#0" expanded="true" />
+            <element signature="e#14383#14391#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/CommonSVC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="60" column="58" lean-forward="false" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" column="61" lean-forward="false" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding>
+            <marker date="1525158023290" expanded="true" signature="267:386" ph="SELECT detai... tblGearType" />
+            <marker date="1525158023290" expanded="true" signature="746:789" ph="SELECT * FRO... tblZipSido" />
+            <marker date="1525158023290" expanded="true" signature="865:936" ph="SELECT * FRO... tblZipGugun" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/rest/RestUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="283" column="59" lean-forward="false" selection-start-line="283" selection-start-column="59" selection-end-line="283" selection-end-column="59" />
           <folding />
         </state>
       </provider>

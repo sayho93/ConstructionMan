@@ -54,9 +54,9 @@ public class ServiceIgniter extends BaseIgniter{
         Cafe24SMS inst = Cafe24SMS.getInstance(
                 "huneps71",
                 "e6ac61f053b7abf60ee934857d2955c7",
-                "02",
-                "555",
-                "5555");
+                "070",
+                "8804",
+                "5688");
         Cafe24SMSManager.initialize(inst);
 
         commonSVC = new CommonSVC();
@@ -109,7 +109,7 @@ public class ServiceIgniter extends BaseIgniter{
                 try (InputStream input = req.raw().getPart("uploadImg").getInputStream()) {
                     Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
                 }
-                return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, tempFile.getFileName());
+                return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, tempFile.toString());
             }catch (Exception e){
                 return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
             }
@@ -156,7 +156,7 @@ public class ServiceIgniter extends BaseIgniter{
             SMSAuth.getInstance().removeAuth(phone);
             if(isValid) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
             else return new Response(ResponseConst.CODE_UNAUTHORIZED, ResponseConst.MSG_UNAUTHORIZED);
-        }, "SMS 코드 인증을 위한 API", "phone[REST]");
+        }, "SMS 코드 인증을 위한 API", "phone[REST]", "code");
 
         super.post(service, "/web/user/join", (req, res) -> {
             DataMap map = RestProcessor.makeProcessData(req.raw());
@@ -287,6 +287,19 @@ public class ServiceIgniter extends BaseIgniter{
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, null);
         });
 
+        super.get(service, "/info/work", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            final int[] workArr = map.getStringToIntArr("work", ",");
+            List<DataMap> retVal = commonSVC.getWorkInfo(workArr);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
+        }, "직종 번호를 받아 관련 정보를 반환하는 API", "work[ARR]");
+
+        super.get(service, "/info/gearOption1", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            final String name = map.getString("name");
+            List<DataMap> retVal = commonSVC.getGearOption1(name);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
+        }, "장비의 첫 번째 옵션 목록 취득을 위한 API", "name");
     }
 
 }

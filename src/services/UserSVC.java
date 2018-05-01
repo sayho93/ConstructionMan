@@ -219,9 +219,8 @@ public class UserSVC extends BaseService {
             message = "위치 " + searchBasicInfo.getString("gugunText") + "/ " + searchBasicInfo.getString("name") + "현장/ ";
 
             List<DataMap> workList = userMapper.getSearchManInfo(searchId);
-            final Iterator<DataMap> iterator = workList.iterator();
-            while(iterator.hasNext()){
-                final DataMap map = iterator.next();
+
+            for(DataMap map : workList){
                 message += map.getString("name") + "/ 숙련도";
                 final int tmpCareer = map.getInt("career");
                 switch(tmpCareer){
