@@ -170,7 +170,7 @@ public class ServiceIgniter extends BaseIgniter{
                 return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
             }
         }, "APP 회원가입을 위한 API", "name", "account", "password", "phone", "age", "type",
-                "pushKey", "region[ARR]", "work[ARR]", "career[ARR]", "welderType", "gearId[ARR]", "attachment[ARR]");
+                "pushKey", "region[ARR]", "work[ARR]", "career[ARR]", "welderType", "gearInfo[json]");
 
         super.get(service, "/web/user/checkAccountDuplication/:account", (req, res) -> {
             final String account = req.params(":account");
@@ -300,6 +300,14 @@ public class ServiceIgniter extends BaseIgniter{
             List<DataMap> retVal = commonSVC.getGearOption1(name);
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
         }, "장비의 첫 번째 옵션 목록 취득을 위한 API", "name");
+
+        super.get(service, "/info/gearOption2", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            final String name = map.getString("name");
+            final String detail = map.getString("detail");
+            List<DataMap> retVal = commonSVC.getGearOption2(name, detail);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
+        }, "장비의 두 번째 옵션 목록 취득을 위한 API", "name", "detail");
     }
 
 }

@@ -11,9 +11,12 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.eclipse.jetty.server.Authentication;
 import server.cafe24.Cafe24SMSManager;
 import server.comm.DataMap;
+import server.comm.models.GearInfo;
 import server.response.Response;
 import server.response.ResponseConst;
 import server.rest.DataMapUtil;
@@ -24,6 +27,7 @@ import utils.Log;
 import utils.MailSender;
 
 import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
@@ -104,14 +108,18 @@ public class UserSVC extends BaseService {
             else if(type.equals("G")){
                 final int[] region = map.getStringToIntArr("region", ",");
 
-                final int[] gearId = map.getStringToIntArr("gearId", ",");
-                final String[] attachment = map.getStringArrWithDelimiter("attachment", ",");
-//                final int gearId = map.getInt("gearId");
-//                final String attachment = map.getString("attachment");
+                ObjectMapper mapper = new ObjectMapper();
 
-                joinGear(lastId, region, gearId, attachment);
+                final String jsonInput = map.getString("gearInfo");
+                try {
+                    List<GearInfo> myObjects = mapper.readValue(jsonInput, new TypeReference<List<GearInfo>>() {});
+                    Log.e("GearInfo Test", myObjects.toString());
+                    joinGear(lastId, region, myObjects);
+                }catch (IOException e){
+                    e.printStackTrace();
+                    return ResponseConst.CODE_FAILURE;
+                }
             }
-
 
             return ResponseConst.CODE_SUCCESS;
         }
@@ -136,15 +144,15 @@ public class UserSVC extends BaseService {
         }
     }
 
-    private void joinGear(int userId, int[] region, int[] gearId, String[] attachment){
+    private void joinGear(int userId, int[] region, List<GearInfo> gearInfoList){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             for(int i=0; i<region.length; i++)
                 userMapper.setUserRegion(userId, region[i]);
 
-            for(int i=0; i<gearId.length; i++){
-                userMapper.setUserGear(userId, gearId[i], attachment[i]);
+            for(GearInfo gearInfo : gearInfoList){
+                userMapper.setUserGear(userId, gearInfo.getId(), gearInfo.getAttach());
             }
 
             sqlSession.commit();
@@ -357,15 +365,23 @@ public class UserSVC extends BaseService {
         }
         else if(type.equals("G")){
             final int[] region = map.getStringToIntArr("region", ",");
-            final int[] gearId = map.getStringToIntArr("gearId", ",");
-            final String[] attachment = map.getStringArrWithDelimiter("attachment", ",");
 
             try(SqlSession sqlSession = super.getSession()){
                 UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
                 userMapper.deleteUserGear(id);
             }
-            joinGear(id, region, gearId, attachment);
+
+            ObjectMapper mapper = new ObjectMapper();
+
+            final String jsonInput = map.getString("gearInfo");
+            try {
+                List<GearInfo> myObjects = mapper.readValue(jsonInput, new TypeReference<List<GearInfo>>() {});
+                Log.e("GearInfo Test", myObjects.toString());
+                joinGear(id, region, myObjects);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         }
 
         return getUserInfo(id);

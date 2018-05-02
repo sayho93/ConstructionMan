@@ -62,4 +62,13 @@ public class CommonSVC extends BaseService {
             return list;
         }
     }
+
+    public List<DataMap> getGearOption2(String name, String detail){
+        try(SqlSession sqlSession = super.getSession()){
+            CommMapper commMapper = sqlSession.getMapper(CommMapper.class);
+
+            List<DataMap> list = commMapper.getGearOption2(name, detail);
+            return list;
+        }
+    }
 }

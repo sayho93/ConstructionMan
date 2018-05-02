@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="databases.mybatis.mapper.CommMapper">
 
+    <select id="getGearOption2" resultType="DataMap">
+        SELECT `id`, `size`, attachment
+        FROM tblGearType
+        WHERE `name` = #{name} AND `detail` = #{detail}
+        ORDER BY `id` ASC
+    </select>
+
     <select id="getGearOption1" resultType="DataMap">
         SELECT detail
         FROM tblGearType
