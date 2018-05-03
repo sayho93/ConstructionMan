@@ -200,7 +200,7 @@ public class ServiceIgniter extends BaseIgniter{
             } else
                 return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
         },"인력찾기/장비찾기를 위한 API", "id[REST]", "type", "work[ARR]", "career[ARR]", "welderType", "sidoId",
-                "gugunId", "name", "startDate", "endDate", "lodging", "price", "gearId", "attachment");
+                "gugunId", "name", "startDate", "endDate", "lodging", "price", "discussLater", "gearId", "attachment");
 
         super.post(service, "/web/user/login", (req, res) -> {
             DataMap map = RestProcessor.makeProcessData(req.raw());

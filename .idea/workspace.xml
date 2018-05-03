@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bfcc820-013b-4e6f-b8c4-b08ef693735a" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/server/comm/models/GearInfo.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/mapper/CommMapper.class" afterPath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/mapper/CommMapper.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/query/CommMapper.xml" afterPath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/query/CommMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/server/ignition/ServiceIgniter.class" afterPath="$PROJECT_DIR$/out/production/const_inn/server/ignition/ServiceIgniter.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/services/CommonSVC.class" afterPath="$PROJECT_DIR$/out/production/const_inn/services/CommonSVC.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/services/UserSVC.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java" afterPath="$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java" />
-      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml" afterPath="$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" afterPath="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" />
       <change beforePath="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" afterPath="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" />
-      <change beforePath="$PROJECT_DIR$/src/services/CommonSVC.java" afterPath="$PROJECT_DIR$/src/services/CommonSVC.java" />
-      <change beforePath="$PROJECT_DIR$/src/services/UserSVC.java" afterPath="$PROJECT_DIR$/src/services/UserSVC.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,8 +33,8 @@
       <file leaf-file-name="ServiceIgniter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+            <state relative-caret-position="280">
+              <caret line="195" column="51" lean-forward="true" selection-start-line="195" selection-start-column="51" selection-end-line="195" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -69,14 +60,132 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserSVC.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserSVC.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/services/UserSVC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1926">
-              <caret line="370" column="0" lean-forward="true" selection-start-line="370" selection-start-column="0" selection-end-line="370" selection-end-column="0" />
+            <state relative-caret-position="233">
+              <caret line="224" column="59" lean-forward="false" selection-start-line="224" selection-start-column="59" selection-end-line="224" selection-end-column="59" />
               <folding>
                 <element signature="e#9374#9382#0" expanded="true" />
                 <element signature="e#14962#14970#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="48" column="59" lean-forward="false" selection-start-line="48" selection-start-column="59" selection-end-line="48" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserMapper.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="193" column="13" lean-forward="true" selection-start-line="193" selection-start-column="13" selection-end-line="193" selection-end-column="13" />
+              <folding>
+                <marker date="1525319530952" expanded="true" signature="242:290" ph="UPDATE tblUser... " />
+                <marker date="1525319530952" expanded="true" signature="344:392" ph="UPDATE tblUser... " />
+                <marker date="1525319530952" expanded="true" signature="470:541" ph="SELECT * FRO... tblUser" />
+                <marker date="1525319530952" expanded="true" signature="601:931" ph="INSERT INTO tblUser... " />
+                <marker date="1525319530952" expanded="true" signature="1002:1025" ph="SELECT LAST_... " />
+                <marker date="1525319530952" expanded="true" signature="1126:1201" ph="SELECT * FRO... tblUser" />
+                <marker date="1525319530952" expanded="true" signature="1257:1674" ph="INSERT INTO tblUserRegion... " />
+                <marker date="1525319530952" expanded="true" signature="1441:1498" ph="SELECT sidoI... tblZipGugun" />
+                <marker date="1525319530952" expanded="true" signature="1728:1937" ph="INSERT INTO tblUserWork... " />
+                <marker date="1525319530952" expanded="true" signature="1991:2098" ph="INSERT INTO tblUserGear... " />
+                <marker date="1525319530952" expanded="true" signature="2160:2678" ph="INSERT INTO tblSearch... " />
+                <marker date="1525319530952" expanded="true" signature="2749:2772" ph="SELECT LAST_... " />
+                <marker date="1525319530952" expanded="true" signature="2849:3063" ph="INSERT INTO tblSearchWork... " />
+                <marker date="1525319530952" expanded="true" signature="3119:3302" ph="INSERT INTO tblSearchGear... " />
+                <marker date="1525319530952" expanded="true" signature="3384:3460" ph="SELECT id FR... tblUser" />
+                <marker date="1525319530952" expanded="true" signature="3535:3581" ph="SELECT * FRO... tblUser" />
+                <marker date="1525319530952" expanded="true" signature="3658:3712" ph="SELECT * FRO... tblUserRegion" />
+                <marker date="1525319530952" expanded="true" signature="3787:3839" ph="SELECT * FRO... tblUserGear" />
+                <marker date="1525319530952" expanded="true" signature="3914:4036" ph="SELECT * FRO... tblUserWork" />
+                <marker date="1525319530952" expanded="true" signature="4112:4557" ph="SELECT userI... " />
+                <marker date="1525319530952" expanded="true" signature="4112:4575" ph="SELECT userI... " />
+                <marker date="1525319530952" expanded="true" signature="4112:4596" ph="SELECT userI... " />
+                <marker date="1525319530952" expanded="true" signature="4137:4186" ph="SELECT pushK... tblUser" />
+                <marker date="1525319530952" expanded="true" signature="4231:4547" ph="SELECT userI... tblUserRegion" />
+                <marker date="1525319530952" expanded="true" signature="4341:4533" ph="SELECT userI... tblUserWork" />
+                <marker date="1525319530952" expanded="true" signature="4451:4532" ph="SELECT workI... tblSearchWork" />
+                <marker date="1525319530952" expanded="true" signature="4747:5116" ph="SELECT userI... userId" />
+                <marker date="1525319530952" expanded="true" signature="4747:5137" ph="SELECT userI... userId" />
+                <marker date="1525319530952" expanded="true" signature="4772:4821" ph="SELECT pushK... tblUser" />
+                <marker date="1525319530952" expanded="true" signature="4864:5088" ph="SELECT userI... tblUserRegion" />
+                <marker date="1525319530952" expanded="true" signature="4966:5076" ph="SELECT userI... tblUserGear" />
+                <marker date="1525319530952" expanded="true" signature="5193:5265" ph="UPDATE tblUser... " />
+                <marker date="1525319530952" expanded="true" signature="5347:5481" ph="SELECT *, (S... tblSearch" />
+                <marker date="1525319530952" expanded="true" signature="5358:5419" ph="SELECT descr... tblZipGugun" />
+                <marker date="1525319530952" expanded="true" signature="5561:5685" ph="SELECT *, (S... tblSearchWork" />
+                <marker date="1525319530952" expanded="true" signature="5572:5620" ph="SELECT `name... tblWork" />
+                <marker date="1525319530952" expanded="true" signature="5766:5882" ph="SELECT *, FR... tblSearcGear" />
+                <marker date="1525319530952" expanded="true" signature="5941:5995" ph="DELETE FROM tblUserRegion... " />
+                <marker date="1525319530952" expanded="true" signature="6052:6104" ph="DELETE FROM tblUserWork... " />
+                <marker date="1525319530952" expanded="true" signature="6161:6213" ph="DELETE FROM tblUserGear... " />
+                <marker date="1525319530952" expanded="true" signature="6267:6406" ph="INSERT INTO tblApply... " />
+                <marker date="1525319530952" expanded="true" signature="6497:6766" ph="INSERT INTO tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="6837:6924" ph="SELECT * FRO... tblMember" />
+                <marker date="1525319530952" expanded="true" signature="7000:7040" ph="SELECT * FRO... tblMember" />
+                <marker date="1525319530952" expanded="true" signature="7123:7188" ph="SELECT * FRO... tblAffiliation" />
+                <marker date="1525319530952" expanded="true" signature="7282:7342" ph="SELECT * FRO... tblMember" />
+                <marker date="1525319530952" expanded="true" signature="7427:7502" ph="SELECT * FRO... tblMember" />
+                <marker date="1525319530952" expanded="true" signature="7561:7617" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="7668:7714" ph="INSERT INTO tblAdmin... " />
+                <marker date="1525319530952" expanded="true" signature="7787:7875" ph="SELECT * FRO... tblMember" />
+                <marker date="1525319530952" expanded="true" signature="7951:8060" ph="SELECT * FRO... tblMember" />
+                <marker date="1525319530952" expanded="true" signature="8124:8183" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="8236:8288" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="8342:8396" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="8453:8507" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="8561:8612" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="8667:8718" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="8774:8827" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="8884:8937" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="8999:9056" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="9136:9309" ph="SELECT *, (S... tblAffiliation" />
+                <marker date="1525319530952" expanded="true" signature="9391:9784" ph="SELECT *, (S... tblAffiliation" />
+                <marker date="1525319530952" expanded="true" signature="9422:9482" ph="SELECT descr... tblZipSido" />
+                <marker date="1525319530952" expanded="true" signature="9507:9570" ph="SELECT descr... tblZipGugun" />
+                <marker date="1525319530952" expanded="true" signature="9596:9656" ph="SELECT descr... tblZipDong" />
+                <marker date="1525319530952" expanded="true" signature="9865:10219" ph="SELECT *, (S... tblMember" />
+                <marker date="1525319530952" expanded="true" signature="9896:9949" ph="SELECT title... tblPosition" />
+                <marker date="1525319530952" expanded="true" signature="9978:10023" ph="SELECT title... tblDept" />
+                <marker date="1525319530952" expanded="true" signature="10302:10391" ph="SELECT COUNT... tblAffiliation" />
+                <marker date="1525319530952" expanded="true" signature="10447:10596" ph="INSERT INTO tblAffiliation... " />
+                <marker date="1525319530952" expanded="true" signature="10674:10741" ph="SELECT code tblApproval" />
+                <marker date="1525319530952" expanded="true" signature="10798:10908" ph="UPDATE tblAffiliation... " />
+                <marker date="1525319530952" expanded="true" signature="10995:11318" ph="SELECT * FRO... *" />
+                <marker date="1525319530952" expanded="true" signature="11029:11226" ph="SELECT *, (S... tblDiligence" />
+                <marker date="1525319530952" expanded="true" signature="11060:11109" ph="SELECT compa... tblGate" />
+                <marker date="1525319530952" expanded="true" signature="11399:11470" ph="SELECT COUNT... tblGestureAllowedGate" />
+                <marker date="1525319530952" expanded="true" signature="11524:11663" ph="INSERT INTO tblGestureAllowedGate... " />
+                <marker date="1525319530952" expanded="true" signature="11664:11686" ph="UPDATE uptDate... " />
+                <marker date="1525319530952" expanded="true" signature="11744:11837" ph="DELETE FROM tblGestureAllowedGate... " />
+                <marker date="1525319530952" expanded="true" signature="11915:11978" ph="SELECT COUNT... tblFavoriteGate" />
+                <marker date="1525319530952" expanded="true" signature="12029:12162" ph="INSERT INTO tblFavoriteGate... " />
+                <marker date="1525319530952" expanded="true" signature="12163:12185" ph="UPDATE uptDate... " />
+                <marker date="1525319530952" expanded="true" signature="12238:12325" ph="DELETE FROM tblFavoriteGate... " />
+                <marker date="1525319530952" expanded="true" signature="12405:12551" ph="SELECT *, (S... tblFavoriteGate" />
+                <marker date="1525319530952" expanded="true" signature="12416:12459" ph="SELECT title... tblGate" />
+                <marker date="1525319530952" expanded="true" signature="12635:12876" ph="SELECT *, CA... tblGate" />
+                <marker date="1525319530952" expanded="true" signature="12676:12736" ph="SELECT membe... tblGestureAllowedGate" />
+                <marker date="1525319530952" expanded="true" signature="12953:13500" ph="SELECT *, CA... tblGate" />
+                <marker date="1525319530952" expanded="true" signature="12994:13082" ph="SELECT COUNT... tblFavoriteGate" />
+                <marker date="1525319530952" expanded="true" signature="13161:13255" ph="SELECT COUNT... tblGestureAllowedGate" />
+                <marker date="1525319530952" expanded="true" signature="13580:13670" ph="SELECT * FRO... tblEntranceRange" />
+                <marker date="1525319530952" expanded="true" signature="13721:13848" ph="UPDATE tblMember... " />
+                <marker date="1525319530952" expanded="true" signature="13906:13978" ph="DELETE FROM tblAffiliation... " />
+                <marker date="1525319530952" expanded="true" signature="14067:14252" ph="SELECT * FRO... tblDiligence" />
+                <marker date="1525319530952" expanded="true" signature="14338:14611" ph="SELECT *, (S... tblDiligence" />
+                <marker date="1525319530952" expanded="true" signature="14349:14399" ph="SELECT name tblCompany" />
+                <marker date="1525319530952" expanded="true" signature="14669:14833" ph="INSERT INTO tblDiligence... " />
               </folding>
             </state>
           </provider>
@@ -113,155 +222,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommonSVC.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/services/CommonSVC.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="69" column="58" lean-forward="false" selection-start-line="69" selection-start-column="44" selection-end-line="69" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommMapper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="17" column="93" lean-forward="false" selection-start-line="17" selection-start-column="93" selection-end-line="17" selection-end-column="93" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
-              <folding>
-                <marker date="1525162617009" expanded="true" signature="267:405" ph="SELECT `id`,... tblGearType" />
-                <marker date="1525162617009" expanded="true" signature="483:602" ph="SELECT detai... tblGearType" />
-                <marker date="1525162617009" expanded="true" signature="962:1005" ph="SELECT * FRO... tblZipSido" />
-                <marker date="1525162617009" expanded="true" signature="1081:1152" ph="SELECT * FRO... tblZipGugun" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="RestUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/rest/RestUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="164">
               <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="12" column="53" lean-forward="false" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
-              <folding>
-                <marker date="1524466485275" expanded="true" signature="242:290" ph="UPDATE tblUser... " />
-                <marker date="1524466485275" expanded="true" signature="344:392" ph="UPDATE tblUser... " />
-                <marker date="1524466485275" expanded="true" signature="470:541" ph="SELECT * FRO... tblUser" />
-                <marker date="1524466485275" expanded="true" signature="601:931" ph="INSERT INTO tblUser... " />
-                <marker date="1524466485275" expanded="true" signature="1002:1025" ph="SELECT LAST_... " />
-                <marker date="1524466485275" expanded="true" signature="1126:1201" ph="SELECT * FRO... tblUser" />
-                <marker date="1524466485275" expanded="true" signature="1257:1674" ph="INSERT INTO tblUserRegion... " />
-                <marker date="1524466485275" expanded="true" signature="1441:1498" ph="SELECT sidoI... tblZipGugun" />
-                <marker date="1524466485275" expanded="true" signature="1728:1937" ph="INSERT INTO tblUserWork... " />
-                <marker date="1524466485275" expanded="true" signature="1991:2098" ph="INSERT INTO tblUserGear... " />
-                <marker date="1524466485275" expanded="true" signature="2160:2625" ph="INSERT INTO tblSearch... " />
-                <marker date="1524466485275" expanded="true" signature="2696:2719" ph="SELECT LAST_... " />
-                <marker date="1524466485275" expanded="true" signature="2796:3010" ph="INSERT INTO tblSearchWork... " />
-                <marker date="1524466485275" expanded="true" signature="3066:3249" ph="INSERT INTO tblSearchGear... " />
-                <marker date="1524466485275" expanded="true" signature="3331:3407" ph="SELECT id FR... tblUser" />
-                <marker date="1524466485275" expanded="true" signature="3482:3528" ph="SELECT * FRO... tblUser" />
-                <marker date="1524466485275" expanded="true" signature="3605:3659" ph="SELECT * FRO... tblUserRegion" />
-                <marker date="1524466485275" expanded="true" signature="3734:3786" ph="SELECT * FRO... tblUserGear" />
-                <marker date="1524466485275" expanded="true" signature="3861:3983" ph="SELECT * FRO... tblUserWork" />
-                <marker date="1524466485275" expanded="true" signature="4059:4504" ph="SELECT userI... " />
-                <marker date="1524466485275" expanded="true" signature="4059:4522" ph="SELECT userI... " />
-                <marker date="1524466485275" expanded="true" signature="4059:4543" ph="SELECT userI... " />
-                <marker date="1524466485275" expanded="true" signature="4084:4133" ph="SELECT pushK... tblUser" />
-                <marker date="1524466485275" expanded="true" signature="4178:4494" ph="SELECT userI... tblUserRegion" />
-                <marker date="1524466485275" expanded="true" signature="4288:4480" ph="SELECT userI... tblUserWork" />
-                <marker date="1524466485275" expanded="true" signature="4398:4479" ph="SELECT workI... tblSearchWork" />
-                <marker date="1524466485275" expanded="true" signature="4694:5063" ph="SELECT userI... userId" />
-                <marker date="1524466485275" expanded="true" signature="4694:5084" ph="SELECT userI... userId" />
-                <marker date="1524466485275" expanded="true" signature="4719:4768" ph="SELECT pushK... tblUser" />
-                <marker date="1524466485275" expanded="true" signature="4811:5035" ph="SELECT userI... tblUserRegion" />
-                <marker date="1524466485275" expanded="true" signature="4913:5023" ph="SELECT userI... tblUserGear" />
-                <marker date="1524466485275" expanded="true" signature="5140:5212" ph="UPDATE tblUser... " />
-                <marker date="1524466485275" expanded="true" signature="5294:5424" ph="SELECT *, (S... tblSearch" />
-                <marker date="1524466485275" expanded="true" signature="5305:5364" ph="SELECT descr... tblZipGugun" />
-                <marker date="1524466485275" expanded="true" signature="5504:5628" ph="SELECT *, (S... tblSearchWork" />
-                <marker date="1524466485275" expanded="true" signature="5515:5563" ph="SELECT `name... tblWork" />
-                <marker date="1524466485275" expanded="true" signature="5709:5825" ph="SELECT *, FR... tblSearcGear" />
-                <marker date="1524466485275" expanded="true" signature="5884:5938" ph="DELETE FROM tblUserRegion... " />
-                <marker date="1524466485275" expanded="true" signature="5995:6047" ph="DELETE FROM tblUserWork... " />
-                <marker date="1524466485275" expanded="true" signature="6104:6156" ph="DELETE FROM tblUserGear... " />
-                <marker date="1524466485275" expanded="true" signature="6210:6349" ph="INSERT INTO tblApply... " />
-                <marker date="1524466485275" expanded="true" signature="6440:6709" ph="INSERT INTO tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="6780:6867" ph="SELECT * FRO... tblMember" />
-                <marker date="1524466485275" expanded="true" signature="6943:6983" ph="SELECT * FRO... tblMember" />
-                <marker date="1524466485275" expanded="true" signature="7066:7131" ph="SELECT * FRO... tblAffiliation" />
-                <marker date="1524466485275" expanded="true" signature="7225:7285" ph="SELECT * FRO... tblMember" />
-                <marker date="1524466485275" expanded="true" signature="7370:7445" ph="SELECT * FRO... tblMember" />
-                <marker date="1524466485275" expanded="true" signature="7504:7560" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="7611:7657" ph="INSERT INTO tblAdmin... " />
-                <marker date="1524466485275" expanded="true" signature="7730:7818" ph="SELECT * FRO... tblMember" />
-                <marker date="1524466485275" expanded="true" signature="7894:8003" ph="SELECT * FRO... tblMember" />
-                <marker date="1524466485275" expanded="true" signature="8067:8126" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="8179:8231" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="8285:8339" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="8396:8450" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="8504:8555" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="8610:8661" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="8717:8770" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="8827:8880" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="8942:8999" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="9079:9252" ph="SELECT *, (S... tblAffiliation" />
-                <marker date="1524466485275" expanded="true" signature="9334:9727" ph="SELECT *, (S... tblAffiliation" />
-                <marker date="1524466485275" expanded="true" signature="9365:9425" ph="SELECT descr... tblZipSido" />
-                <marker date="1524466485275" expanded="true" signature="9450:9513" ph="SELECT descr... tblZipGugun" />
-                <marker date="1524466485275" expanded="true" signature="9539:9599" ph="SELECT descr... tblZipDong" />
-                <marker date="1524466485275" expanded="true" signature="9808:10162" ph="SELECT *, (S... tblMember" />
-                <marker date="1524466485275" expanded="true" signature="9839:9892" ph="SELECT title... tblPosition" />
-                <marker date="1524466485275" expanded="true" signature="9921:9966" ph="SELECT title... tblDept" />
-                <marker date="1524466485275" expanded="true" signature="10245:10334" ph="SELECT COUNT... tblAffiliation" />
-                <marker date="1524466485275" expanded="true" signature="10390:10539" ph="INSERT INTO tblAffiliation... " />
-                <marker date="1524466485275" expanded="true" signature="10617:10684" ph="SELECT code tblApproval" />
-                <marker date="1524466485275" expanded="true" signature="10741:10851" ph="UPDATE tblAffiliation... " />
-                <marker date="1524466485275" expanded="true" signature="10938:11261" ph="SELECT * FRO... *" />
-                <marker date="1524466485275" expanded="true" signature="10972:11169" ph="SELECT *, (S... tblDiligence" />
-                <marker date="1524466485275" expanded="true" signature="11003:11052" ph="SELECT compa... tblGate" />
-                <marker date="1524466485275" expanded="true" signature="11342:11413" ph="SELECT COUNT... tblGestureAllowedGate" />
-                <marker date="1524466485275" expanded="true" signature="11467:11606" ph="INSERT INTO tblGestureAllowedGate... " />
-                <marker date="1524466485275" expanded="true" signature="11607:11629" ph="UPDATE uptDate... " />
-                <marker date="1524466485275" expanded="true" signature="11687:11780" ph="DELETE FROM tblGestureAllowedGate... " />
-                <marker date="1524466485275" expanded="true" signature="11858:11921" ph="SELECT COUNT... tblFavoriteGate" />
-                <marker date="1524466485275" expanded="true" signature="11972:12105" ph="INSERT INTO tblFavoriteGate... " />
-                <marker date="1524466485275" expanded="true" signature="12106:12128" ph="UPDATE uptDate... " />
-                <marker date="1524466485275" expanded="true" signature="12181:12268" ph="DELETE FROM tblFavoriteGate... " />
-                <marker date="1524466485275" expanded="true" signature="12348:12494" ph="SELECT *, (S... tblFavoriteGate" />
-                <marker date="1524466485275" expanded="true" signature="12359:12402" ph="SELECT title... tblGate" />
-                <marker date="1524466485275" expanded="true" signature="12578:12819" ph="SELECT *, CA... tblGate" />
-                <marker date="1524466485275" expanded="true" signature="12619:12679" ph="SELECT membe... tblGestureAllowedGate" />
-                <marker date="1524466485275" expanded="true" signature="12896:13443" ph="SELECT *, CA... tblGate" />
-                <marker date="1524466485275" expanded="true" signature="12937:13025" ph="SELECT COUNT... tblFavoriteGate" />
-                <marker date="1524466485275" expanded="true" signature="13104:13198" ph="SELECT COUNT... tblGestureAllowedGate" />
-                <marker date="1524466485275" expanded="true" signature="13523:13613" ph="SELECT * FRO... tblEntranceRange" />
-                <marker date="1524466485275" expanded="true" signature="13664:13791" ph="UPDATE tblMember... " />
-                <marker date="1524466485275" expanded="true" signature="13849:13921" ph="DELETE FROM tblAffiliation... " />
-                <marker date="1524466485275" expanded="true" signature="14010:14195" ph="SELECT * FRO... tblDiligence" />
-                <marker date="1524466485275" expanded="true" signature="14281:14554" ph="SELECT *, (S... tblDiligence" />
-                <marker date="1524466485275" expanded="true" signature="14292:14342" ph="SELECT name tblCompany" />
-                <marker date="1524466485275" expanded="true" signature="14612:14776" ph="INSERT INTO tblDiligence... " />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -280,24 +246,15 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setSe</find>
-      <find>mask</find>
-      <find>getUserById</find>
-      <find>getWorkplaceList</find>
-      <find>find</find>
-      <find>updatePushKey</find>
       <find>smstest</find>
       <find>iterat</find>
       <find>iterator</find>
-      <find>getSearchBasicInfo</find>
       <find>getSearchManInfo</find>
-      <find>findManMatch</find>
       <find>findGearMatch</find>
       <find>.send(</find>
       <find>login</find>
       <find>testF</find>
       <find>checkA</find>
-      <find>getUserByPhone</find>
       <find>du</find>
       <find>check</find>
       <find>checkPhoneDuplication</find>
@@ -310,6 +267,15 @@
       <find>itera</find>
       <find>iter</find>
       <find>join</find>
+      <find>/info/</find>
+      <find>/info/regiaon</find>
+      <find>search</find>
+      <find>getUserByPhone</find>
+      <find>searchMan</find>
+      <find>registerSearchBasic</find>
+      <find>setSearchWork</find>
+      <find>findManMatch</find>
+      <find>getSearchBasicInfo</find>
     </findStrings>
     <replaceStrings>
       <replace>;</replace>
@@ -369,16 +335,16 @@
         <option value="$PROJECT_DIR$/src/databases/mybatis/mapper/AdminMapper.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/query/AdminMapper.xml" />
         <option value="$PROJECT_DIR$/src/server/comm/DataMap.java" />
-        <option value="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" />
         <option value="$PROJECT_DIR$/src/delayed/managers/PushManager.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/server/cafe24/Cafe24SMS.java" />
         <option value="$PROJECT_DIR$/src/services/CommonSVC.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml" />
-        <option value="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" />
         <option value="$PROJECT_DIR$/src/server/comm/models/GearInfo.java" />
         <option value="$PROJECT_DIR$/src/services/UserSVC.java" />
+        <option value="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" />
+        <option value="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" />
       </list>
     </option>
   </component>
@@ -805,10 +771,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="393236000" />
+    <option name="totallyTimeSpent" value="395999000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -818,7 +785,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282353" sideWeight="0.50208336" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36588237" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36588237" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979852" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1095,120 +1062,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="12" column="53" lean-forward="false" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
-          <folding>
-            <marker date="1524466485275" expanded="true" signature="242:290" ph="UPDATE tblUser... " />
-            <marker date="1524466485275" expanded="true" signature="344:392" ph="UPDATE tblUser... " />
-            <marker date="1524466485275" expanded="true" signature="470:541" ph="SELECT * FRO... tblUser" />
-            <marker date="1524466485275" expanded="true" signature="601:931" ph="INSERT INTO tblUser... " />
-            <marker date="1524466485275" expanded="true" signature="1002:1025" ph="SELECT LAST_... " />
-            <marker date="1524466485275" expanded="true" signature="1126:1201" ph="SELECT * FRO... tblUser" />
-            <marker date="1524466485275" expanded="true" signature="1257:1674" ph="INSERT INTO tblUserRegion... " />
-            <marker date="1524466485275" expanded="true" signature="1441:1498" ph="SELECT sidoI... tblZipGugun" />
-            <marker date="1524466485275" expanded="true" signature="1728:1937" ph="INSERT INTO tblUserWork... " />
-            <marker date="1524466485275" expanded="true" signature="1991:2098" ph="INSERT INTO tblUserGear... " />
-            <marker date="1524466485275" expanded="true" signature="2160:2625" ph="INSERT INTO tblSearch... " />
-            <marker date="1524466485275" expanded="true" signature="2696:2719" ph="SELECT LAST_... " />
-            <marker date="1524466485275" expanded="true" signature="2796:3010" ph="INSERT INTO tblSearchWork... " />
-            <marker date="1524466485275" expanded="true" signature="3066:3249" ph="INSERT INTO tblSearchGear... " />
-            <marker date="1524466485275" expanded="true" signature="3331:3407" ph="SELECT id FR... tblUser" />
-            <marker date="1524466485275" expanded="true" signature="3482:3528" ph="SELECT * FRO... tblUser" />
-            <marker date="1524466485275" expanded="true" signature="3605:3659" ph="SELECT * FRO... tblUserRegion" />
-            <marker date="1524466485275" expanded="true" signature="3734:3786" ph="SELECT * FRO... tblUserGear" />
-            <marker date="1524466485275" expanded="true" signature="3861:3983" ph="SELECT * FRO... tblUserWork" />
-            <marker date="1524466485275" expanded="true" signature="4059:4504" ph="SELECT userI... " />
-            <marker date="1524466485275" expanded="true" signature="4059:4522" ph="SELECT userI... " />
-            <marker date="1524466485275" expanded="true" signature="4059:4543" ph="SELECT userI... " />
-            <marker date="1524466485275" expanded="true" signature="4084:4133" ph="SELECT pushK... tblUser" />
-            <marker date="1524466485275" expanded="true" signature="4178:4494" ph="SELECT userI... tblUserRegion" />
-            <marker date="1524466485275" expanded="true" signature="4288:4480" ph="SELECT userI... tblUserWork" />
-            <marker date="1524466485275" expanded="true" signature="4398:4479" ph="SELECT workI... tblSearchWork" />
-            <marker date="1524466485275" expanded="true" signature="4694:5063" ph="SELECT userI... userId" />
-            <marker date="1524466485275" expanded="true" signature="4694:5084" ph="SELECT userI... userId" />
-            <marker date="1524466485275" expanded="true" signature="4719:4768" ph="SELECT pushK... tblUser" />
-            <marker date="1524466485275" expanded="true" signature="4811:5035" ph="SELECT userI... tblUserRegion" />
-            <marker date="1524466485275" expanded="true" signature="4913:5023" ph="SELECT userI... tblUserGear" />
-            <marker date="1524466485275" expanded="true" signature="5140:5212" ph="UPDATE tblUser... " />
-            <marker date="1524466485275" expanded="true" signature="5294:5424" ph="SELECT *, (S... tblSearch" />
-            <marker date="1524466485275" expanded="true" signature="5305:5364" ph="SELECT descr... tblZipGugun" />
-            <marker date="1524466485275" expanded="true" signature="5504:5628" ph="SELECT *, (S... tblSearchWork" />
-            <marker date="1524466485275" expanded="true" signature="5515:5563" ph="SELECT `name... tblWork" />
-            <marker date="1524466485275" expanded="true" signature="5709:5825" ph="SELECT *, FR... tblSearcGear" />
-            <marker date="1524466485275" expanded="true" signature="5884:5938" ph="DELETE FROM tblUserRegion... " />
-            <marker date="1524466485275" expanded="true" signature="5995:6047" ph="DELETE FROM tblUserWork... " />
-            <marker date="1524466485275" expanded="true" signature="6104:6156" ph="DELETE FROM tblUserGear... " />
-            <marker date="1524466485275" expanded="true" signature="6210:6349" ph="INSERT INTO tblApply... " />
-            <marker date="1524466485275" expanded="true" signature="6440:6709" ph="INSERT INTO tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="6780:6867" ph="SELECT * FRO... tblMember" />
-            <marker date="1524466485275" expanded="true" signature="6943:6983" ph="SELECT * FRO... tblMember" />
-            <marker date="1524466485275" expanded="true" signature="7066:7131" ph="SELECT * FRO... tblAffiliation" />
-            <marker date="1524466485275" expanded="true" signature="7225:7285" ph="SELECT * FRO... tblMember" />
-            <marker date="1524466485275" expanded="true" signature="7370:7445" ph="SELECT * FRO... tblMember" />
-            <marker date="1524466485275" expanded="true" signature="7504:7560" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="7611:7657" ph="INSERT INTO tblAdmin... " />
-            <marker date="1524466485275" expanded="true" signature="7730:7818" ph="SELECT * FRO... tblMember" />
-            <marker date="1524466485275" expanded="true" signature="7894:8003" ph="SELECT * FRO... tblMember" />
-            <marker date="1524466485275" expanded="true" signature="8067:8126" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="8179:8231" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="8285:8339" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="8396:8450" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="8504:8555" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="8610:8661" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="8717:8770" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="8827:8880" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="8942:8999" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="9079:9252" ph="SELECT *, (S... tblAffiliation" />
-            <marker date="1524466485275" expanded="true" signature="9334:9727" ph="SELECT *, (S... tblAffiliation" />
-            <marker date="1524466485275" expanded="true" signature="9365:9425" ph="SELECT descr... tblZipSido" />
-            <marker date="1524466485275" expanded="true" signature="9450:9513" ph="SELECT descr... tblZipGugun" />
-            <marker date="1524466485275" expanded="true" signature="9539:9599" ph="SELECT descr... tblZipDong" />
-            <marker date="1524466485275" expanded="true" signature="9808:10162" ph="SELECT *, (S... tblMember" />
-            <marker date="1524466485275" expanded="true" signature="9839:9892" ph="SELECT title... tblPosition" />
-            <marker date="1524466485275" expanded="true" signature="9921:9966" ph="SELECT title... tblDept" />
-            <marker date="1524466485275" expanded="true" signature="10245:10334" ph="SELECT COUNT... tblAffiliation" />
-            <marker date="1524466485275" expanded="true" signature="10390:10539" ph="INSERT INTO tblAffiliation... " />
-            <marker date="1524466485275" expanded="true" signature="10617:10684" ph="SELECT code tblApproval" />
-            <marker date="1524466485275" expanded="true" signature="10741:10851" ph="UPDATE tblAffiliation... " />
-            <marker date="1524466485275" expanded="true" signature="10938:11261" ph="SELECT * FRO... *" />
-            <marker date="1524466485275" expanded="true" signature="10972:11169" ph="SELECT *, (S... tblDiligence" />
-            <marker date="1524466485275" expanded="true" signature="11003:11052" ph="SELECT compa... tblGate" />
-            <marker date="1524466485275" expanded="true" signature="11342:11413" ph="SELECT COUNT... tblGestureAllowedGate" />
-            <marker date="1524466485275" expanded="true" signature="11467:11606" ph="INSERT INTO tblGestureAllowedGate... " />
-            <marker date="1524466485275" expanded="true" signature="11607:11629" ph="UPDATE uptDate... " />
-            <marker date="1524466485275" expanded="true" signature="11687:11780" ph="DELETE FROM tblGestureAllowedGate... " />
-            <marker date="1524466485275" expanded="true" signature="11858:11921" ph="SELECT COUNT... tblFavoriteGate" />
-            <marker date="1524466485275" expanded="true" signature="11972:12105" ph="INSERT INTO tblFavoriteGate... " />
-            <marker date="1524466485275" expanded="true" signature="12106:12128" ph="UPDATE uptDate... " />
-            <marker date="1524466485275" expanded="true" signature="12181:12268" ph="DELETE FROM tblFavoriteGate... " />
-            <marker date="1524466485275" expanded="true" signature="12348:12494" ph="SELECT *, (S... tblFavoriteGate" />
-            <marker date="1524466485275" expanded="true" signature="12359:12402" ph="SELECT title... tblGate" />
-            <marker date="1524466485275" expanded="true" signature="12578:12819" ph="SELECT *, CA... tblGate" />
-            <marker date="1524466485275" expanded="true" signature="12619:12679" ph="SELECT membe... tblGestureAllowedGate" />
-            <marker date="1524466485275" expanded="true" signature="12896:13443" ph="SELECT *, CA... tblGate" />
-            <marker date="1524466485275" expanded="true" signature="12937:13025" ph="SELECT COUNT... tblFavoriteGate" />
-            <marker date="1524466485275" expanded="true" signature="13104:13198" ph="SELECT COUNT... tblGestureAllowedGate" />
-            <marker date="1524466485275" expanded="true" signature="13523:13613" ph="SELECT * FRO... tblEntranceRange" />
-            <marker date="1524466485275" expanded="true" signature="13664:13791" ph="UPDATE tblMember... " />
-            <marker date="1524466485275" expanded="true" signature="13849:13921" ph="DELETE FROM tblAffiliation... " />
-            <marker date="1524466485275" expanded="true" signature="14010:14195" ph="SELECT * FRO... tblDiligence" />
-            <marker date="1524466485275" expanded="true" signature="14281:14554" ph="SELECT *, (S... tblDiligence" />
-            <marker date="1524466485275" expanded="true" signature="14292:14342" ph="SELECT name tblCompany" />
-            <marker date="1524466485275" expanded="true" signature="14612:14776" ph="INSERT INTO tblDiligence... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/cafe24/Cafe24SMS.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="983">
@@ -1304,19 +1157,133 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+        <state relative-caret-position="280">
+          <caret line="195" column="51" lean-forward="true" selection-start-line="195" selection-start-column="51" selection-end-line="195" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/services/UserSVC.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1926">
-          <caret line="370" column="0" lean-forward="true" selection-start-line="370" selection-start-column="0" selection-end-line="370" selection-end-column="0" />
+        <state relative-caret-position="233">
+          <caret line="224" column="59" lean-forward="false" selection-start-line="224" selection-start-column="59" selection-end-line="224" selection-end-column="59" />
           <folding>
             <element signature="e#9374#9382#0" expanded="true" />
             <element signature="e#14962#14970#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="48" column="59" lean-forward="false" selection-start-line="48" selection-start-column="59" selection-end-line="48" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="193" column="13" lean-forward="true" selection-start-line="193" selection-start-column="13" selection-end-line="193" selection-end-column="13" />
+          <folding>
+            <marker date="1525319530952" expanded="true" signature="242:290" ph="UPDATE tblUser... " />
+            <marker date="1525319530952" expanded="true" signature="344:392" ph="UPDATE tblUser... " />
+            <marker date="1525319530952" expanded="true" signature="470:541" ph="SELECT * FRO... tblUser" />
+            <marker date="1525319530952" expanded="true" signature="601:931" ph="INSERT INTO tblUser... " />
+            <marker date="1525319530952" expanded="true" signature="1002:1025" ph="SELECT LAST_... " />
+            <marker date="1525319530952" expanded="true" signature="1126:1201" ph="SELECT * FRO... tblUser" />
+            <marker date="1525319530952" expanded="true" signature="1257:1674" ph="INSERT INTO tblUserRegion... " />
+            <marker date="1525319530952" expanded="true" signature="1441:1498" ph="SELECT sidoI... tblZipGugun" />
+            <marker date="1525319530952" expanded="true" signature="1728:1937" ph="INSERT INTO tblUserWork... " />
+            <marker date="1525319530952" expanded="true" signature="1991:2098" ph="INSERT INTO tblUserGear... " />
+            <marker date="1525319530952" expanded="true" signature="2160:2678" ph="INSERT INTO tblSearch... " />
+            <marker date="1525319530952" expanded="true" signature="2749:2772" ph="SELECT LAST_... " />
+            <marker date="1525319530952" expanded="true" signature="2849:3063" ph="INSERT INTO tblSearchWork... " />
+            <marker date="1525319530952" expanded="true" signature="3119:3302" ph="INSERT INTO tblSearchGear... " />
+            <marker date="1525319530952" expanded="true" signature="3384:3460" ph="SELECT id FR... tblUser" />
+            <marker date="1525319530952" expanded="true" signature="3535:3581" ph="SELECT * FRO... tblUser" />
+            <marker date="1525319530952" expanded="true" signature="3658:3712" ph="SELECT * FRO... tblUserRegion" />
+            <marker date="1525319530952" expanded="true" signature="3787:3839" ph="SELECT * FRO... tblUserGear" />
+            <marker date="1525319530952" expanded="true" signature="3914:4036" ph="SELECT * FRO... tblUserWork" />
+            <marker date="1525319530952" expanded="true" signature="4112:4557" ph="SELECT userI... " />
+            <marker date="1525319530952" expanded="true" signature="4112:4575" ph="SELECT userI... " />
+            <marker date="1525319530952" expanded="true" signature="4112:4596" ph="SELECT userI... " />
+            <marker date="1525319530952" expanded="true" signature="4137:4186" ph="SELECT pushK... tblUser" />
+            <marker date="1525319530952" expanded="true" signature="4231:4547" ph="SELECT userI... tblUserRegion" />
+            <marker date="1525319530952" expanded="true" signature="4341:4533" ph="SELECT userI... tblUserWork" />
+            <marker date="1525319530952" expanded="true" signature="4451:4532" ph="SELECT workI... tblSearchWork" />
+            <marker date="1525319530952" expanded="true" signature="4747:5116" ph="SELECT userI... userId" />
+            <marker date="1525319530952" expanded="true" signature="4747:5137" ph="SELECT userI... userId" />
+            <marker date="1525319530952" expanded="true" signature="4772:4821" ph="SELECT pushK... tblUser" />
+            <marker date="1525319530952" expanded="true" signature="4864:5088" ph="SELECT userI... tblUserRegion" />
+            <marker date="1525319530952" expanded="true" signature="4966:5076" ph="SELECT userI... tblUserGear" />
+            <marker date="1525319530952" expanded="true" signature="5193:5265" ph="UPDATE tblUser... " />
+            <marker date="1525319530952" expanded="true" signature="5347:5481" ph="SELECT *, (S... tblSearch" />
+            <marker date="1525319530952" expanded="true" signature="5358:5419" ph="SELECT descr... tblZipGugun" />
+            <marker date="1525319530952" expanded="true" signature="5561:5685" ph="SELECT *, (S... tblSearchWork" />
+            <marker date="1525319530952" expanded="true" signature="5572:5620" ph="SELECT `name... tblWork" />
+            <marker date="1525319530952" expanded="true" signature="5766:5882" ph="SELECT *, FR... tblSearcGear" />
+            <marker date="1525319530952" expanded="true" signature="5941:5995" ph="DELETE FROM tblUserRegion... " />
+            <marker date="1525319530952" expanded="true" signature="6052:6104" ph="DELETE FROM tblUserWork... " />
+            <marker date="1525319530952" expanded="true" signature="6161:6213" ph="DELETE FROM tblUserGear... " />
+            <marker date="1525319530952" expanded="true" signature="6267:6406" ph="INSERT INTO tblApply... " />
+            <marker date="1525319530952" expanded="true" signature="6497:6766" ph="INSERT INTO tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="6837:6924" ph="SELECT * FRO... tblMember" />
+            <marker date="1525319530952" expanded="true" signature="7000:7040" ph="SELECT * FRO... tblMember" />
+            <marker date="1525319530952" expanded="true" signature="7123:7188" ph="SELECT * FRO... tblAffiliation" />
+            <marker date="1525319530952" expanded="true" signature="7282:7342" ph="SELECT * FRO... tblMember" />
+            <marker date="1525319530952" expanded="true" signature="7427:7502" ph="SELECT * FRO... tblMember" />
+            <marker date="1525319530952" expanded="true" signature="7561:7617" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="7668:7714" ph="INSERT INTO tblAdmin... " />
+            <marker date="1525319530952" expanded="true" signature="7787:7875" ph="SELECT * FRO... tblMember" />
+            <marker date="1525319530952" expanded="true" signature="7951:8060" ph="SELECT * FRO... tblMember" />
+            <marker date="1525319530952" expanded="true" signature="8124:8183" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="8236:8288" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="8342:8396" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="8453:8507" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="8561:8612" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="8667:8718" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="8774:8827" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="8884:8937" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="8999:9056" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="9136:9309" ph="SELECT *, (S... tblAffiliation" />
+            <marker date="1525319530952" expanded="true" signature="9391:9784" ph="SELECT *, (S... tblAffiliation" />
+            <marker date="1525319530952" expanded="true" signature="9422:9482" ph="SELECT descr... tblZipSido" />
+            <marker date="1525319530952" expanded="true" signature="9507:9570" ph="SELECT descr... tblZipGugun" />
+            <marker date="1525319530952" expanded="true" signature="9596:9656" ph="SELECT descr... tblZipDong" />
+            <marker date="1525319530952" expanded="true" signature="9865:10219" ph="SELECT *, (S... tblMember" />
+            <marker date="1525319530952" expanded="true" signature="9896:9949" ph="SELECT title... tblPosition" />
+            <marker date="1525319530952" expanded="true" signature="9978:10023" ph="SELECT title... tblDept" />
+            <marker date="1525319530952" expanded="true" signature="10302:10391" ph="SELECT COUNT... tblAffiliation" />
+            <marker date="1525319530952" expanded="true" signature="10447:10596" ph="INSERT INTO tblAffiliation... " />
+            <marker date="1525319530952" expanded="true" signature="10674:10741" ph="SELECT code tblApproval" />
+            <marker date="1525319530952" expanded="true" signature="10798:10908" ph="UPDATE tblAffiliation... " />
+            <marker date="1525319530952" expanded="true" signature="10995:11318" ph="SELECT * FRO... *" />
+            <marker date="1525319530952" expanded="true" signature="11029:11226" ph="SELECT *, (S... tblDiligence" />
+            <marker date="1525319530952" expanded="true" signature="11060:11109" ph="SELECT compa... tblGate" />
+            <marker date="1525319530952" expanded="true" signature="11399:11470" ph="SELECT COUNT... tblGestureAllowedGate" />
+            <marker date="1525319530952" expanded="true" signature="11524:11663" ph="INSERT INTO tblGestureAllowedGate... " />
+            <marker date="1525319530952" expanded="true" signature="11664:11686" ph="UPDATE uptDate... " />
+            <marker date="1525319530952" expanded="true" signature="11744:11837" ph="DELETE FROM tblGestureAllowedGate... " />
+            <marker date="1525319530952" expanded="true" signature="11915:11978" ph="SELECT COUNT... tblFavoriteGate" />
+            <marker date="1525319530952" expanded="true" signature="12029:12162" ph="INSERT INTO tblFavoriteGate... " />
+            <marker date="1525319530952" expanded="true" signature="12163:12185" ph="UPDATE uptDate... " />
+            <marker date="1525319530952" expanded="true" signature="12238:12325" ph="DELETE FROM tblFavoriteGate... " />
+            <marker date="1525319530952" expanded="true" signature="12405:12551" ph="SELECT *, (S... tblFavoriteGate" />
+            <marker date="1525319530952" expanded="true" signature="12416:12459" ph="SELECT title... tblGate" />
+            <marker date="1525319530952" expanded="true" signature="12635:12876" ph="SELECT *, CA... tblGate" />
+            <marker date="1525319530952" expanded="true" signature="12676:12736" ph="SELECT membe... tblGestureAllowedGate" />
+            <marker date="1525319530952" expanded="true" signature="12953:13500" ph="SELECT *, CA... tblGate" />
+            <marker date="1525319530952" expanded="true" signature="12994:13082" ph="SELECT COUNT... tblFavoriteGate" />
+            <marker date="1525319530952" expanded="true" signature="13161:13255" ph="SELECT COUNT... tblGestureAllowedGate" />
+            <marker date="1525319530952" expanded="true" signature="13580:13670" ph="SELECT * FRO... tblEntranceRange" />
+            <marker date="1525319530952" expanded="true" signature="13721:13848" ph="UPDATE tblMember... " />
+            <marker date="1525319530952" expanded="true" signature="13906:13978" ph="DELETE FROM tblAffiliation... " />
+            <marker date="1525319530952" expanded="true" signature="14067:14252" ph="SELECT * FRO... tblDiligence" />
+            <marker date="1525319530952" expanded="true" signature="14338:14611" ph="SELECT *, (S... tblDiligence" />
+            <marker date="1525319530952" expanded="true" signature="14349:14399" ph="SELECT name tblCompany" />
+            <marker date="1525319530952" expanded="true" signature="14669:14833" ph="INSERT INTO tblDiligence... " />
           </folding>
         </state>
       </provider>

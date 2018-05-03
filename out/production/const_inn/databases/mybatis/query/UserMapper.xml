@@ -81,6 +81,7 @@
           `endDate`,
           `lodging`,
           `price`,
+          `discussLater`,
           `regDate`
         )
         VALUES(
@@ -93,6 +94,7 @@
           #{endDate},
           #{lodging},
           #{price},
+          #{discussLater},
           NOW()
         )
         <selectKey keyProperty="id" resultType="Integer">
@@ -101,7 +103,7 @@
     </insert>
 
     <insert id="setSearchWork">
-        INSERT INTO tblSearchWork(`searchId`. `workId`, `career`, `welderType`, `regDate`)
+        INSERT INTO tblSearchWork(`searchId`, `workId`, `career`, `welderType`, `regDate`)
         VALUES(
           #{searchId},
           #{workId},
@@ -187,8 +189,8 @@
     </update>
 
     <select id="getSearchBasicInfo" resultType="DataMap">
-        SELECT *, (SELECT description FROM tblZipGugun WHERE gugunID = gugunId) as gugunText
-        from tblSearch WHERE id = #{searchId}
+        SELECT *, (SELECT description FROM tblZipGugun WHERE gugunID = S.gugunId) as gugunText
+        from tblSearch S WHERE id = #{searchId}
     </select>
 
     <select id="getSearchManInfo" resultType="DataMap">
