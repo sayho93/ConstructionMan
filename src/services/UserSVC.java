@@ -323,7 +323,7 @@ public class UserSVC extends BaseService {
                 userBasic.put("workInfo", workInfo);
             }
             else if(type.equals("G")){
-                DataMap gearInfo = userMapper.getUserGear(id);
+                List<DataMap> gearInfo = userMapper.getUserGear(id);
                 userBasic.put("gearInfo", gearInfo);
             }
 

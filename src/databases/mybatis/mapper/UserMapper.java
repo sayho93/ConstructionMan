@@ -42,7 +42,7 @@ public interface UserMapper {
 
     List<DataMap> getUserRegion(@Param("userId") int userId);
 
-    DataMap getUserGear(@Param("userId") int userId);
+    List<DataMap> getUserGear(@Param("userId") int userId);
 
     List<DataMap> getUserWork(@Param("userId") int userId);
 
