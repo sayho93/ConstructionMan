@@ -132,7 +132,13 @@
     </select>
 
     <select id="getUserRegion" resultType="DataMap">
-        SELECT * FROM tblUserRegion WHERE `userId` = #{userId}
+        SELECT
+          *,
+          CASE R.gugunId WHEN 0 THEN "전국"
+          ELSE (SELECT description FROM tblZipGugun G WHERE R.gugunId = G.gugunID)
+          END AS gugunTxt
+        FROM tblUserRegion R
+        WHERE `userId` = #{userId}
     </select>
 
     <select id="getUserGear" resultType="DataMap">
