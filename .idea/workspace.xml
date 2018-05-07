@@ -6,20 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5bfcc820-013b-4e6f-b8c4-b08ef693735a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/mapper/CommMapper.class" afterPath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/mapper/CommMapper.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/mapper/UserMapper.class" afterPath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/mapper/UserMapper.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/query/CommMapper.xml" afterPath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/query/CommMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/query/UserMapper.xml" afterPath="$PROJECT_DIR$/out/production/const_inn/databases/mybatis/query/UserMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/server/ignition/ServiceIgniter.class" afterPath="$PROJECT_DIR$/out/production/const_inn/server/ignition/ServiceIgniter.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/services/CommonSVC.class" afterPath="$PROJECT_DIR$/out/production/const_inn/services/CommonSVC.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/services/UserSVC$2.class" afterPath="$PROJECT_DIR$/out/production/const_inn/services/UserSVC$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/const_inn/services/UserSVC.class" afterPath="$PROJECT_DIR$/out/production/const_inn/services/UserSVC.class" />
-      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java" afterPath="$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java" />
-      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java" afterPath="$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java" />
-      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml" afterPath="$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" afterPath="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" afterPath="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" />
-      <change beforePath="$PROJECT_DIR$/src/services/CommonSVC.java" afterPath="$PROJECT_DIR$/src/services/CommonSVC.java" />
       <change beforePath="$PROJECT_DIR$/src/services/UserSVC.java" afterPath="$PROJECT_DIR$/src/services/UserSVC.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -43,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ServiceIgniter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ServiceIgniter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1282">
-              <caret line="316" column="36" lean-forward="true" selection-start-line="316" selection-start-column="36" selection-end-line="316" selection-end-column="36" />
+            <state relative-caret-position="294">
+              <caret line="240" column="52" lean-forward="false" selection-start-line="240" selection-start-column="52" selection-end-line="240" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -89,14 +75,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserSVC.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserSVC.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/services/UserSVC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="395" column="37" lean-forward="false" selection-start-line="395" selection-start-column="23" selection-end-line="395" selection-end-column="37" />
+            <state relative-caret-position="426">
+              <caret line="374" column="47" lean-forward="false" selection-start-line="374" selection-start-column="47" selection-end-line="374" selection-end-column="47" />
               <folding>
                 <element signature="e#9419#9427#0" expanded="true" />
-                <element signature="e#15460#15468#0" expanded="true" />
+                <element signature="e#15546#15554#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -369,13 +355,13 @@
         <option value="$PROJECT_DIR$/src/delayed/managers/PushManager.java" />
         <option value="$PROJECT_DIR$/src/server/cafe24/Cafe24SMS.java" />
         <option value="$PROJECT_DIR$/src/server/comm/models/GearInfo.java" />
-        <option value="$PROJECT_DIR$/src/services/UserSVC.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" />
         <option value="$PROJECT_DIR$/src/services/CommonSVC.java" />
         <option value="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/mapper/CommMapper.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/query/CommMapper.xml" />
+        <option value="$PROJECT_DIR$/src/services/UserSVC.java" />
       </list>
     </option>
   </component>
@@ -792,12 +778,12 @@
       <workItem from="1524117956898" duration="4241000" />
       <workItem from="1524195296046" duration="2626000" />
       <workItem from="1524218540884" duration="2773000" />
-      <workItem from="1525434605193" duration="2901000" />
+      <workItem from="1525434605193" duration="3214000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="401675000" />
+    <option name="totallyTimeSpent" value="401988000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1120,17 +1106,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/UserSVC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="395" column="37" lean-forward="false" selection-start-line="395" selection-start-column="23" selection-end-line="395" selection-end-column="37" />
-          <folding>
-            <element signature="e#9419#9427#0" expanded="true" />
-            <element signature="e#15460#15468#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/databases/mybatis/mapper/UserMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="316">
@@ -1279,9 +1254,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1282">
-          <caret line="316" column="36" lean-forward="true" selection-start-line="316" selection-start-column="36" selection-end-line="316" selection-end-column="36" />
+        <state relative-caret-position="294">
+          <caret line="240" column="52" lean-forward="false" selection-start-line="240" selection-start-column="52" selection-end-line="240" selection-end-column="52" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/UserSVC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="374" column="47" lean-forward="false" selection-start-line="374" selection-start-column="47" selection-end-line="374" selection-end-column="47" />
+          <folding>
+            <element signature="e#9419#9427#0" expanded="true" />
+            <element signature="e#15546#15554#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

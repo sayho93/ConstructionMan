@@ -37,7 +37,9 @@
     </select>
 
     <select id="getGearInfo" resultType="DataMap">
-        SELECT * FROM tblGearType WHERE `id` = #{gearId} LIMIT 1
+        SELECT *
+        FROM tblGearType
+        WHERE `id` = #{gearId} LIMIT 1
     </select>
 
 </mapper>

@@ -372,7 +372,9 @@ public class UserSVC extends BaseService {
             try(SqlSession sqlSession = super.getSession()){
                 UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
+                userMapper.deleteUserRegion(id);
                 userMapper.deleteUserGear(id);
+                sqlSession.commit();
             }
 
             ObjectMapper mapper = new ObjectMapper();
