@@ -62,6 +62,8 @@ public interface UserMapper {
 
     void updateUserName(@Param("userId") int userId, @Param("name") String name);
 
+    void withdrawUser(@Param("userId") int userId);
+
 
 
 

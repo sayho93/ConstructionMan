@@ -39,7 +39,7 @@ public class UserSVC extends BaseService {
             userMapper.turnOnPush(id);
             sqlSession.commit();
 
-            final DataMap map = getUserByKey(id);
+            final DataMap map = getUserInfo(id);
             DataMapUtil.mask(map, "password");
             return map;
         }
@@ -51,7 +51,7 @@ public class UserSVC extends BaseService {
             userMapper.turnOffPush(id);
             sqlSession.commit();
 
-            final DataMap map = getUserByKey(id);
+            final DataMap map = getUserInfo(id);
             DataMapUtil.mask(map, "password");
             return map;
         }
@@ -401,6 +401,15 @@ public class UserSVC extends BaseService {
         return getUserInfo(userId);
     }
 
+    public DataMap withdrawUser(int userId){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.withdrawUser(userId);
+            sqlSession.commit();
+        }
+        return getUserInfo(userId);
+    }
+
     public void applySearch(int userId, int searchId){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -415,6 +424,7 @@ public class UserSVC extends BaseService {
         PushManager.start("AAAALAuy9Ms:APA91bHvU-eINQYL59NviY_imyPrhNc76o_Kgb1J9GFv6LhYBl545-yfpHK6iShVUCsOrXNNcZdPznFzR4p5NBrFOnubcWD93DzxzyNG0yv3j5jNGg_X1fjT_jNYmTq8Bcr_IVv6fp3A");
         PushManager.getInstance().send(regKeys, "test", "testtesttest", null);
     }
+
 
 
 

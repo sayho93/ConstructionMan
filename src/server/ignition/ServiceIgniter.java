@@ -214,7 +214,7 @@ public class ServiceIgniter extends BaseIgniter{
             }
         }, "유저 로그인을 위한 API", "account", "password");
 
-        super.get(service, "web/user/info/:id", (req, res) -> {
+        super.get(service, "/web/user/info/:id", (req, res) -> {
             final int id = Integer.parseInt(req.params(":id"));
             DataMap map = userSVC.getUserInfo(id);
 
@@ -222,7 +222,7 @@ public class ServiceIgniter extends BaseIgniter{
             else return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
         }, "마이페이지 유저 장비/인력 정보 취득을 위한 API", "id[REST]");
 
-        super.get(service, "web/user/update/pushKey/:id", (req, res) -> {
+        super.get(service, "/web/user/update/pushKey/:id", (req, res) -> {
             final int id = Integer.parseInt(req.params(":id"));
             DataMap map = RestProcessor.makeProcessData(req.raw());
             final String pushKey = map.getString("pushKey");
@@ -324,6 +324,14 @@ public class ServiceIgniter extends BaseIgniter{
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, userInfo);
 
         }, "유저 이름 변경을 위한 API", "id[REST]", "name");
+
+        super.post(service, "/web/user/withdraw/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            DataMap userInfo = userSVC.withdrawUser(id);
+            final int status = userInfo.getInt("status");
+            if(status == 0) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, null);
+            else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+        }, "회원 탈퇴를 위한 API", "id[REST]");
     }
 
 }

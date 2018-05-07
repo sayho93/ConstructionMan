@@ -142,7 +142,9 @@
     </select>
 
     <select id="getUserGear" resultType="DataMap">
-        SELECT * FROM tblUserGear WHERE `userId` = #{userId}
+        SELECT *
+        FROM tblUserGear UG JOIN tblGearType GT ON UG.gearId = GT.id
+        WHERE `userId` = #{userId}
     </select>
 
     <select id="getUserWork" resultType="DataMap">
@@ -239,6 +241,13 @@
         UPDATE tblUser
         SET
           `name` = #{name}
+        WHERE `id` = #{userId}
+    </update>
+
+    <update id="withdrawUser">
+        UPDATE tblUser
+        SET
+          `status` = 0
         WHERE `id` = #{userId}
     </update>
 
