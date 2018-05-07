@@ -36,4 +36,8 @@
         SELECT * FROM tblZipGugun WHERE sidoID=#{sidoID} ORDER BY `description`
     </select>
 
+    <select id="getGearInfo" resultType="DataMap">
+        SELECT * FROM tblGearType WHERE `id` = #{gearId} LIMIT 1
+    </select>
+
 </mapper>

@@ -235,6 +235,13 @@
         )
     </insert>
 
+    <update id="updateUserName">
+        UPDATE tblUser
+        SET
+          `name` = #{name}
+        WHERE `id` = #{userId}
+    </update>
+
 
 
 

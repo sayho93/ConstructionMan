@@ -60,6 +60,8 @@ public interface UserMapper {
 
     void applySearch(@Param("userId") int userId, @Param("searchId") int searchId);
 
+    void updateUserName(@Param("userId") int userId, @Param("name") String name);
+
 
 
 

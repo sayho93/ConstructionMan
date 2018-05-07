@@ -17,4 +17,6 @@ public interface CommMapper {
 
     List<DataMap> getGearOption2(@Param("name") String name, @Param("detail") String detail);
 
+    DataMap getGearInfo(@Param("gearId") int gearId);
+
 }

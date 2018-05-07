@@ -308,6 +308,22 @@ public class ServiceIgniter extends BaseIgniter{
             List<DataMap> retVal = commonSVC.getGearOption2(name, detail);
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
         }, "장비의 두 번째 옵션 목록 취득을 위한 API", "name", "detail");
+
+        super.get(service, "/info/gear/:id", (req, res) -> {
+            final int gearId = Integer.parseInt(req.params(":id"));
+            DataMap map = commonSVC.getGearInfo(gearId);
+            if(map != null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
+            else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+        }, "장비 한 개의 정보 취득을 위한 API", "id[REST]");
+
+        super.post(service, "/web/user/update/name/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            final String name = map.getString("name");
+            DataMap userInfo = userSVC.updateUserName(id, name);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, userInfo);
+
+        }, "유저 이름 변경을 위한 API", "id[REST]", "name");
     }
 
 }

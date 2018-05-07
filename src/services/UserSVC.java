@@ -129,6 +129,7 @@ public class UserSVC extends BaseService {
 
     private void joinMan(int userId, int[] region, int[] work, int[] career, String welderType){
         try(SqlSession sqlSession = super.getSession()){
+            Log.i("joinMain :::::::::::::");
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             for(int i=0; i<region.length; i++)
@@ -359,7 +360,9 @@ public class UserSVC extends BaseService {
                 UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
                 userMapper.deleteUserRegion(id);
+                Log.i("deleteUserRegion executed :::::::::::::::::::::::::");
                 userMapper.deleteUserWork(id);
+                sqlSession.commit();
             }
             joinMan(id, region, work, career, welderType);
         }
@@ -385,6 +388,15 @@ public class UserSVC extends BaseService {
         }
 
         return getUserInfo(id);
+    }
+
+    public DataMap updateUserName(int userId, String name){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.updateUserName(userId, name);
+            sqlSession.commit();
+        }
+        return getUserInfo(userId);
     }
 
     public void applySearch(int userId, int searchId){
