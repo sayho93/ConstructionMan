@@ -432,6 +432,29 @@ public class UserSVC extends BaseService {
         }
     }
 
+    public DataMap getUSerByAccountPhone(DataMap map){
+        final String name = map.getString("name");
+        final String phone = map.getString("phone");
+        final String account = map.getString("account");
+
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            DataMap userInfo = userMapper.getUserByAccountPhone(name, phone, account);
+            DataMapUtil.mask(userInfo, "password");
+
+            return userInfo;
+        }
+    }
+
+    public void changePassword(int id, String newPassword){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.changePassword(id, RestUtil.getMessageDigest(newPassword));
+            sqlSession.commit();
+        }
+    }
+
     public static void main(String ... args){
         List<String> regKeys = new ArrayList<String>();
         regKeys.add("fmgs31uYE_Q:APA91bH-g2Pv7zgKhnjtKHkE9KEjdu2C0IzgH5HhoTnmUF-TA1Tdz-iqttohxkOLIoeB08zdh5qvmReACFzsS9Q3BHKVyT9w_6aje0sRZ8gTAxn277d7PAC6NAiXChrF3brFnnVo2-9u");
@@ -534,13 +557,7 @@ public class UserSVC extends BaseService {
         }
     }
 
-    public void changePassword(int id, String newPassword){
-        try(SqlSession sqlSession = super.getSession()){
-            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            userMapper.changePassword(id, RestUtil.getMessageDigest(newPassword));
-            sqlSession.commit();
-        }
-    }
+
 
     public DataMap addWorkplace(int memberId, int companyId, int permission){
         try(SqlSession sqlSession = super.getSession()){

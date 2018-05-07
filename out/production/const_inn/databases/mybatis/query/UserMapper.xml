@@ -258,6 +258,19 @@
         LIMIT 1
     </select>
 
+    <select id="getUserByAccountPhone" resultType="DataMap">
+        SELECT *
+        FROM tblUser
+        WHERE `name` = #{name} AND `phone` = #{phone} AND `account` = #{account} AND `status` = 1
+        LIMIT 1
+    </select>
+
+    <update id="changePassword">
+        UPDATE tblUser
+        SET `password`=#{pw}
+        WHERE `id`=#{id}
+    </update>
+
 
 
 
@@ -343,10 +356,6 @@
 
     <update id="changePhone">
         UPDATE tblMember SET `phone`=#{phone} WHERE `id`=#{id}
-    </update>
-
-    <update id="changePassword">
-        UPDATE tblMember SET `password`=#{pw} WHERE `id`=#{id}
     </update>
 
     <update id="turnOnAlarm">

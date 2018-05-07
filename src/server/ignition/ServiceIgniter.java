@@ -339,6 +339,22 @@ public class ServiceIgniter extends BaseIgniter{
             if(userInfo != null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, userInfo);
             else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
         }, "회원 ID 취득을 위한 API", "name", "phone");
+
+        super.get(service, "/web/user/findPW", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            DataMap userInfo = userSVC.getUSerByAccountPhone(map);
+            if(userInfo != null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, userInfo);
+            else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+        }, "비밀번호 찾기 조건에 맞는 회원 정보를 취득하기 위한 API", "name", "phone", "account");
+
+        super.post(service, "/web/user/changePW/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            final String password = map.getString("password");
+
+            userSVC.changePassword(id, password);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
+        }, "비밀번호 변경을 위한 API", "id[REST], password");
     }
 
 }

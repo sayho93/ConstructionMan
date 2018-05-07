@@ -66,6 +66,10 @@ public interface UserMapper {
 
     DataMap getUserByNamePhone(@Param("name") String name, @Param("phone") String phone);
 
+    DataMap getUserByAccountPhone(@Param("name") String name, @Param("phone") String phone, @Param("account") String account);
+
+    void changePassword(@Param("id") int id, @Param("pw") String pw);
+
 
 
 
@@ -121,8 +125,6 @@ public interface UserMapper {
     void changeName(@Param("id") int id, @Param("name") String name);
 
     void changePhone(@Param("id") int id, @Param("phone") String phone);
-
-    void changePassword(@Param("id") int id, @Param("pw") String pw);
 
     void initEmailApprovalCode(@Param("id") int id);
 
