@@ -418,6 +418,20 @@ public class UserSVC extends BaseService {
         }
     }
 
+    public DataMap getUserByNamePhone(DataMap map){
+        final String name = map.getString("name");
+        final String phone = map.getString("phone");
+
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            DataMap userInfo = userMapper.getUserByNamePhone(name, phone);
+            DataMapUtil.mask(userInfo, "password");
+
+            return userInfo;
+        }
+    }
+
     public static void main(String ... args){
         List<String> regKeys = new ArrayList<String>();
         regKeys.add("fmgs31uYE_Q:APA91bH-g2Pv7zgKhnjtKHkE9KEjdu2C0IzgH5HhoTnmUF-TA1Tdz-iqttohxkOLIoeB08zdh5qvmReACFzsS9Q3BHKVyT9w_6aje0sRZ8gTAxn277d7PAC6NAiXChrF3brFnnVo2-9u");

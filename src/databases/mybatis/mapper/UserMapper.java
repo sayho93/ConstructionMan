@@ -64,6 +64,8 @@ public interface UserMapper {
 
     void withdrawUser(@Param("userId") int userId);
 
+    DataMap getUserByNamePhone(@Param("name") String name, @Param("phone") String phone);
+
 
 
 

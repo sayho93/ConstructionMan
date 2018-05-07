@@ -332,6 +332,13 @@ public class ServiceIgniter extends BaseIgniter{
             if(status == 0) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, null);
             else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
         }, "회원 탈퇴를 위한 API", "id[REST]");
+
+        super.get(service, "/web/user/findID", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            DataMap userInfo = userSVC.getUserByNamePhone(map);
+            if(userInfo != null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, userInfo);
+            else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+        }, "회원 ID 취득을 위한 API", "name", "phone");
     }
 
 }

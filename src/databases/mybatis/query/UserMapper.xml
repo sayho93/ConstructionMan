@@ -251,6 +251,13 @@
         WHERE `id` = #{userId}
     </update>
 
+    <select id="getUserByNamePhone" resultType="DataMap">
+        SELECT *
+        FROM tblUser
+        WHERE `name` = #{name} AND `phone` = #{phone} AND `status` = 1
+        LIMIT 1
+    </select>
+
 
 
 
