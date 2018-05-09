@@ -126,6 +126,17 @@ public class ServiceIgniter extends BaseIgniter{
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
         }, "시/군/구 목록을 취득하기 위한 API입니다.", "sidoID[REST]");
 
+
+        //TODO
+        super.get(service, "/info/test/:sidoID", (req, res) -> {
+            final int sidoID = Integer.parseInt(req.params(":sidoID"));
+            List<DataMap> retVal = commonSVC.test2(sidoID);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
+        }, "시/군/구 목록을 취득하기 위한 API입니다.", "sidoID[REST]");
+
+
+
+
         super.post(service, "/web/user/push/on/:id", (req, res) -> {
             final int id = Integer.parseInt(req.params(":id"));
             DataMap map = userSVC.turnOnPush(id);
@@ -355,6 +366,62 @@ public class ServiceIgniter extends BaseIgniter{
             userSVC.changePassword(id, password);
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
         }, "비밀번호 변경을 위한 API", "id[REST], password");
+
+        super.post(service, "/web/user/updateImg/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            final String imgPath = map.getString("imgPath");
+
+            DataMap userInfo = userSVC.updateUserImg(id, imgPath);
+            if(userInfo != null) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, userInfo);
+            return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+        }, "유저 프로필 사진 업데이트를 위한 API", "id[REST]", "imgPath");
+
+        super.get(service, "/web/user/point/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            int point = userSVC.getUserPoint(id);
+            return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, point);
+
+        }, "유저 포인트 조회를 위한 API", "id[REST]");
+
+        super.post(service, "/web/user/point/inc/:id", (req, res) -> {
+            DataMap map = RestProcessor.makeProcessData(req.raw());
+            final int id = Integer.parseInt(req.params(":id"));
+            if(DataMapUtil.isValid(map, "inc", "payType")){
+                final int inc = map.getInt("inc");
+                final int payType = map.getInt("payType");
+                final String comment = map.getString("comment");
+                int point = userSVC.getUserPoint(id);
+                if(point + inc < 0){
+                    return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_ILLEGAL_STATE);
+                }else{
+                    int patched;
+                    if(payType == 0) {
+                        patched = userSVC.changeUserPoint(id, inc, payType, -1, comment);
+                    } else {
+                        final int paymentId = map.getInt("paymentId");
+                        patched = userSVC.changeUserPoint(id, inc, payType, paymentId, comment);
+                    }
+                    return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, patched);
+                }
+            }else{
+                return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
+            }
+        }, "포인트 수치 변경을 위한 API", "id[REST]", "inc", "payType", "comment[optional]");
+
+        super.get(service, "/web/user/pointList/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            List<DataMap> pointList = userSVC.getPointList(id);
+            return Response.success(pointList);
+        }, "유저 포인트 히스토리 조회를 위한 API", "id[REST]");
+
+        super.get(service, "/web/user/applications/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            List<DataMap> applicationList = userSVC.getApps(id);
+            if(applicationList == null) return new Response(ResponseConst.CODE_NO_PROPER_VALUE, ResponseConst.MSG_NO_PROPER_VALUE);
+            return Response.success(applicationList);
+        }, "구인 리스트 취득을 위한 API", "id[REST]");
+
     }
 
 }

@@ -36,6 +36,7 @@ public class ResponseConst {
     public static final String MSG_ALREADY_EXIST = "User account you just requested is already exist. Please check if there is any problem. :(";
     public static final String MSG_SAVE_SUCC = "Saving succeeded.";
     public static final String MSG_SAVE_FAIL = "Saving failed.";
+    public static final String MSG_ILLEGAL_STATE = "Something goes crazy :(";
     public static final String MSG_NONE = "Process succeeded but unknown error occurred.";
     public static final String MSG_INVALID_LOCALE = "The locale string you were about to apply is not applicable for setting.";
     public static final String MSG_UNAUTHORIZED = "The access token you sent is not qualified to access. :(";

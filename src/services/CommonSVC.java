@@ -28,6 +28,19 @@ public class CommonSVC extends BaseService {
         }
     }
 
+
+    //TODO
+    public List<DataMap> test2(int sidoID){
+        return provide(s -> s.getMapper(CommMapper.class).getGugunList(sidoID));
+    }
+
+    public List<DataMap> test(int sidoID){
+        return provide(s -> {
+            CommMapper commMapper = s.getMapper(CommMapper.class);
+            return commMapper.getGugunList(sidoID);
+        });
+    }
+
     public List<DataMap> getWorkInfo(int[] work){
         try(SqlSession sqlSession = super.getSession()){
             CommMapper commMapper = sqlSession.getMapper(CommMapper.class);

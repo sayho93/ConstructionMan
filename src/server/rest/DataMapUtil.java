@@ -55,6 +55,21 @@ public class DataMapUtil {
         return true;
     }
 
+    public static boolean isEmptyValue(DataMap map, String... args){
+        for(String arg : args) if(map.get(arg) == null || map.get(arg).toString().trim().equals("")) return false;
+        return true;
+    }
+
+    public static void isEmptyValueThenPut(DataMap map, String[] keyArray, Object[] toPut){
+        if(keyArray.length != toPut.length) throw new IllegalArgumentException("The size of Key Array and toPut Array must be same.");
+        for(int i = 0; i < keyArray.length; i++) {
+            String arg = keyArray[i];
+            if(map.get(arg) == null || map.get(arg).toString().trim().equals("")) {
+                map.put(arg, toPut[i]);
+            }
+        }
+    }
+
     public static boolean isVoid(String str){
         return str == null || str.equals("");
     }

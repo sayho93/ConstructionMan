@@ -25,6 +25,14 @@ public class Response {
 
     }
 
+    public static Response success(Object extra){
+        return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, extra);
+    }
+
+    public static Response failure(){
+        return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+    }
+
     public Response(int returnCode, String returnMessage) {
         this.returnCode = returnCode;
         this.returnMessage = returnMessage;
