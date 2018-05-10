@@ -626,9 +626,17 @@ public class UserSVC extends BaseService {
 
             final int cnt = userMapper.getAppCount(id);
 
+            int start = 0;
+            int end = 0;
+
             DataMap map = userMapper.getAppLimit(id);
-            int start = map.getInt("start");
-            int end = map.getInt("end");
+            if(map != null){
+                start = map.getInt("start");
+                end = map.getInt("end");
+            }
+
+            Log.i("cnt", cnt);
+
             if(cnt < 10 || cnt - (end-start) < 10){
                 return -1;
             }
@@ -636,6 +644,7 @@ public class UserSVC extends BaseService {
 
             final int amount = 10;
             userMapper.addExposure(id, amount);
+            sqlSession.commit();
             return 1;
         }
     }

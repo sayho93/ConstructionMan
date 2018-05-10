@@ -358,7 +358,7 @@
     <insert id="addExposure">
         INSERT INTO tblExposure(`userId`, `amount`, `regDate`)
         VALUES(
-          #{userId},
+          #{id},
           #{amount},
           NOW()
         )
