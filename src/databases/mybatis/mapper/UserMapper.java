@@ -92,4 +92,9 @@ public interface UserMapper {
 
     List<DataMap> getApps(@Param("userId") int userId, @Param("start") int start, @Param("end") int end);
 
+    void hidePointHistory(@Param("id") int id);
+
+    int getAppCountBySearchId(@Param("searchId") int searchId);
+
+    void addExposure(@Param("id") int id, @Param("amount") int amount);
 }

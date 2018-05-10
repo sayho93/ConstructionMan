@@ -30,6 +30,7 @@ import utils.MailSender;
 import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class UserSVC extends BaseService {
@@ -137,10 +138,11 @@ public class UserSVC extends BaseService {
                 userMapper.setUserRegion(userId, region[i]);
 
             for(int i=0; i<work.length; i++){
-                if(work[i] == 16)
-                    userMapper.setUserWork(userId, work[i], career[i], welderType);
-                else
-                    userMapper.setUserWork(userId, work[i], career[i], null);
+                userMapper.setUserWork(userId, work[i], career[i], "");
+//                if(work[i] == 16)
+//                    userMapper.setUserWork(userId, work[i], career[i], welderType);
+//                else
+//                    userMapper.setUserWork(userId, work[i], career[i], "");
             }
             sqlSession.commit();
         }
@@ -182,7 +184,7 @@ public class UserSVC extends BaseService {
         if(type.equals("M")){
             final int[] work = map.getStringToIntArr("work", ",");
             final int[] career = map.getStringToIntArr("career", ",");
-            final String welderType = map.getString("welderType");
+            final String welderType = map.getString("welderType", "");
 
             int allType = 0;
             final int lodging = map.getInt("lodging");
@@ -217,10 +219,11 @@ public class UserSVC extends BaseService {
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             for(int i=0; i<work.length; i++){
-                if(work[i] == 16)   //용접공 선택시 welderType 사용
-                    userMapper.setSearchWork(searchId, work[i], career[i], welderType);
-                else
-                    userMapper.setSearchWork(searchId, work[i], career[i], null);
+                userMapper.setSearchWork(searchId, work[i], career[i], welderType);
+//                if(work[i] == 16)   //용접공 선택시 welderType 사용
+//                    userMapper.setSearchWork(searchId, work[i], career[i], welderType);
+//                else
+//                    userMapper.setSearchWork(searchId, work[i], career[i], welderType);
             }
             sqlSession.commit();
 
@@ -257,18 +260,25 @@ public class UserSVC extends BaseService {
             userMapper.saveComment(searchId, message);
             sqlSession.commit();
 
-
-            final Iterator<DataMap> iter = userList.iterator();
             List<String> pushKeyList = new ArrayList<String>();
 
-            while(iter.hasNext()){
-                final DataMap map = iter.next();
+            for(DataMap map : userList){
                 final int userId = map.getInt("userId");
                 pushKeyList.add(map.getString("pushKey"));
                 Log.i("userList :: pushKey", map.getInt("userId") + "::" + map.getString("pushKey"));
             }
+
             //TODO sendPush
-//            PushManager.getInstance().send(pushKeyList, title, message);
+            final DataMap dataMap = new DataMap();
+            dataMap.put("title", "구인 정보 알림");
+            dataMap.put("body", "두 손가락으로 펼쳐서 알림 상세보기");
+            dataMap.put("notiClass", title);
+            dataMap.put("notiBox", message);
+            dataMap.put("notiGuide", "위 현장에 지원하시겠습니까?");
+            dataMap.put("articleNumber", Integer.toString(searchId)); // 구인글 번호
+            dataMap.put("isRedirect", Boolean.toString(false)); // 알림글일 경우 true
+            PushManager.getInstance().sendOnlyData(pushKeyList, dataMap);
+
         }
     }
 
@@ -304,10 +314,17 @@ public class UserSVC extends BaseService {
                 pushKeyList.add(map.getString("pushKey"));
                 Log.i("userId :: pushKey", userId + " :: " + map.getString("pushKey"));
             }
-            //TODO sendPush
 
-
-//            PushManager.getInstance().send(pushKeyList, title, message);
+            //sendPush
+            final DataMap dataMap = new DataMap();
+            dataMap.put("title", "구인 정보 알림");
+            dataMap.put("body", "두 손가락으로 펼쳐서 알림 상세보기");
+            dataMap.put("notiClass", title);
+            dataMap.put("notiBox", message);
+            dataMap.put("notiGuide", "위 현장에 지원하시겠습니까?");
+            dataMap.put("articleNumber", Integer.toString(searchId)); // 구인글 번호
+            dataMap.put("isRedirect", Boolean.toString(false)); // 알림글일 경우 true
+            PushManager.getInstance().sendOnlyData(pushKeyList, dataMap);
         }
     }
 
@@ -324,12 +341,23 @@ public class UserSVC extends BaseService {
         }
     }
 
+    public DataMap getUserBasic(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            DataMap userInfo = userMapper.getUserById(id);
+            DataMapUtil.mask(userInfo, "password");
+            return userInfo;
+        }
+    }
+
     public DataMap getUserInfo(int id){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             DataMap userBasic = userMapper.getUserById(id);
             List<DataMap> userRegion = userMapper.getUserRegion(id);
+            userBasic.put("regionInfo", userRegion);
 
             final String type = userBasic.getString("type");
 
@@ -368,7 +396,7 @@ public class UserSVC extends BaseService {
             final int[] region = map.getStringToIntArr("region", ",");
             final int[] work = map.getStringToIntArr("work", ",");
             final int[] career = map.getStringToIntArr("career", ",");
-            final String welderType = map.getString("welderType");
+            final String welderType = map.getString("welderType", "");
 
             try(SqlSession sqlSession = super.getSession()){
                 UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -429,6 +457,42 @@ public class UserSVC extends BaseService {
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
             userMapper.applySearch(userId, searchId);
+            sqlSession.commit();
+            //TODO send push
+
+            int applyCnt = userMapper.getAppCountBySearchId(searchId);
+            if(applyCnt % 10 == 0){
+                DataMap searchInfo = userMapper.getSearchBasicInfo(searchId);
+                SimpleDateFormat fmtOrigin = new SimpleDateFormat("yyyy-mm-dd hh:MM:ss");
+                SimpleDateFormat fmt = new SimpleDateFormat("yyyy년 mm월 dd일");
+                String rawDate = searchInfo.getString("regDate");
+                try {
+                    Date regDt = fmtOrigin.parse(rawDate);
+                    rawDate = fmt.format(regDt);
+                }catch (ParseException e){
+                    e.printStackTrace();
+                }
+
+                final int id = searchInfo.getInt("userInfo");
+                final DataMap userInfo = userMapper.getUserById(id);
+
+
+                List<String> pushKeyList = new ArrayList<>();
+                pushKeyList.add(userInfo.getString("pushKey"));
+
+                String message = "귀하가 " + rawDate + "에 요청하신 인력/장비에 대하여 " + applyCnt + "명이 지원하였습니다.";
+
+                final DataMap dataMap = new DataMap();
+                dataMap.put("title", "구인 정보 알림");
+                dataMap.put("body", "두 손가락으로 펼쳐서 알림 상세보기");
+                dataMap.put("notiClass", "");
+                dataMap.put("notiBox", "");
+                dataMap.put("notiGuide", String.format("%s\n\n%s", message, "포인트로 결제 후 지원명단을 확인하시겠습니까?"));
+                dataMap.put("articleNumber", Integer.toString(searchId)); // 구인글 번호
+                dataMap.put("isRedirect", Boolean.toString(true)); // 알림글일 경우 true
+                PushManager.getInstance().sendOnlyData(pushKeyList, dataMap);
+
+            }
         }
     }
 
@@ -514,27 +578,66 @@ public class UserSVC extends BaseService {
         }
     }
 
+    public void hidePointHistory(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.hidePointHistory(id);
+            sqlSession.commit();
+        }
+    }
+
     public List<DataMap> getApps(int id){
         return provide(s -> {
             UserMapper userMapper = s.getMapper(UserMapper.class);
 
             final int count = userMapper.getAppCount(id);
-            if(count < 10) return null;
+//            if(count < 10) return null;
 
             final DataMap limits = userMapper.getAppLimit(id);
             final int start = limits.getInt("start");
             final int end = limits.getInt("end");
+            Log.i("start :: end", start + "::::" + end);
             List<DataMap> apps = userMapper.getApps(id, start, end);
+
+            for(DataMap map : apps){
+                final int userId= map.getInt("id");
+                final String type = map.getString("type");
+
+                List<DataMap> regionInfo = userMapper.getUserRegion(userId);
+                map.put("regionInfo", regionInfo);
+
+                if(type.equals("M")){
+                    List<DataMap> workInfo = userMapper.getUserWork(userId);
+                    map.put("workInfo", workInfo);
+                }
+                else if(type.equals("G")){
+                    List<DataMap> gearInfo = userMapper.getUserGear(userId);
+                    map.put("gearInfo", gearInfo);
+                }
+            }
 
             return apps;
         });
     }
 
-    public static void main(String ... args){
-        List<String> regKeys = new ArrayList<String>();
-        regKeys.add("fmgs31uYE_Q:APA91bH-g2Pv7zgKhnjtKHkE9KEjdu2C0IzgH5HhoTnmUF-TA1Tdz-iqttohxkOLIoeB08zdh5qvmReACFzsS9Q3BHKVyT9w_6aje0sRZ8gTAxn277d7PAC6NAiXChrF3brFnnVo2-9u");
-        PushManager.start("AAAALAuy9Ms:APA91bHvU-eINQYL59NviY_imyPrhNc76o_Kgb1J9GFv6LhYBl545-yfpHK6iShVUCsOrXNNcZdPznFzR4p5NBrFOnubcWD93DzxzyNG0yv3j5jNGg_X1fjT_jNYmTq8Bcr_IVv6fp3A");
-        PushManager.getInstance().send(regKeys, "test", "testtesttest", null);
+    public int usePoint(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            final int cnt = userMapper.getAppCount(id);
+
+            DataMap map = userMapper.getAppLimit(id);
+            int start = map.getInt("start");
+            int end = map.getInt("end");
+            if(cnt < 10 || cnt - (end-start) < 10){
+                return -1;
+            }
+            userMapper.addPointHistory(id, -1000, -1, -1, "포인트 사용");
+
+            final int amount = 10;
+            userMapper.addExposure(id, amount);
+            return 1;
+        }
     }
 
 }

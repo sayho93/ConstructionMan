@@ -104,7 +104,7 @@ public class ServiceIgniter extends BaseIgniter{
 
         super.post(service, "/imgUpload", (req, res) -> {
             try {
-                final Path tempFile = Files.createTempFile(img_path.toPath(), "", "");
+                final Path tempFile = Files.createTempFile(img_path.toPath(), "", ".jpg");
                 req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
                 try (InputStream input = req.raw().getPart("uploadImg").getInputStream()) {
                     Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
@@ -225,6 +225,12 @@ public class ServiceIgniter extends BaseIgniter{
             }
         }, "유저 로그인을 위한 API", "account", "password");
 
+        super.get(service, "web/user/basic/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            DataMap userInfo = userSVC.getUserBasic(id);
+            return Response.success(userInfo);
+        }, "유저 기본 정보 취득을 위한 API", "id[REST]");
+
         super.get(service, "/web/user/info/:id", (req, res) -> {
             final int id = Integer.parseInt(req.params(":id"));
             DataMap map = userSVC.getUserInfo(id);
@@ -259,7 +265,7 @@ public class ServiceIgniter extends BaseIgniter{
         }, "마이페이지 유저 정보 변경을 위한 API", "id[REST]", "type", "region[ARR]", "work[ARR]",
                 "career[ARR]", "welderType", "gearId", "attachment");
 
-        super.post(service, "web/user/apply/:id", (req, res) -> {
+        super.get(service, "web/user/apply/:id", (req, res) -> {
             final int userId = Integer.parseInt(req.params(":id"));
             DataMap map = RestProcessor.makeProcessData(req.raw());
 
@@ -294,7 +300,7 @@ public class ServiceIgniter extends BaseIgniter{
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, retVal);
         }, "유저 목록 취득을 위한 API. 아이디와 전화번호를 통해 검색할 수 있음", "page", "limit", "account", "phone");
 
-        super.get(service, "web/introprocess", (req, res) -> {
+        super.get(service, "/web/introprocess", (req, res) -> {
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, null);
         });
 
@@ -415,12 +421,25 @@ public class ServiceIgniter extends BaseIgniter{
             return Response.success(pointList);
         }, "유저 포인트 히스토리 조회를 위한 API", "id[REST]");
 
+        super.post(service, "/web/user/point/del/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            userSVC.hidePointHistory(id);
+            return Response.success(null);
+        });
+
         super.get(service, "/web/user/applications/:id", (req, res) -> {
             final int id = Integer.parseInt(req.params(":id"));
             List<DataMap> applicationList = userSVC.getApps(id);
             if(applicationList == null) return new Response(ResponseConst.CODE_NO_PROPER_VALUE, ResponseConst.MSG_NO_PROPER_VALUE);
             return Response.success(applicationList);
         }, "구인 리스트 취득을 위한 API", "id[REST]");
+
+        super.post(service, "/web/user/point/use/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            int retVal = userSVC.usePoint(id);
+            if(retVal == -1) return new Response(ResponseConst.CODE_NO_PROPER_VALUE, ResponseConst.MSG_NO_PROPER_VALUE);
+            return Response.success(null);
+        }, "포인트 소비를 위한 API", "id[REST]");
 
     }
 

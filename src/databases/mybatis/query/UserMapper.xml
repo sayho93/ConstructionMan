@@ -337,11 +337,30 @@
 
     <select id="getApps" resultType="DataMap">
         SELECT *
-        FROM tblApply A
+        FROM tblApply A join tblUser U ON A.userId = U.id
         WHERE A.searchId IN (SELECT `id` FROM tblSearch WHERE `userId` = #{userId})
-        ORDER BY regDate DESC
+        ORDER BY A.regDate DESC
         LIMIT #{start}, #{end}
     </select>
 
-    
+    <update id="hidePointHistory">
+        UPDATE tblPoint
+        SET `exposed` = 0
+        WHERE `id` = #{id}
+    </update>
+
+    <select id="getAppCountBySearchId" resultType="Integer">
+        SELECT COUNT(*) as count
+        FROM tblApply
+        WHERE searchId = #{searchId}
+    </select>
+
+    <insert id="addExposure">
+        INSERT INTO tblExposure(`userId`, `amount`, `regDate`)
+        VALUES(
+          #{userId},
+          #{amount},
+          NOW()
+        )
+    </insert>
 </mapper>
