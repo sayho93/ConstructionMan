@@ -10,9 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bfcc820-013b-4e6f-b8c4-b08ef693735a" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/const_inn_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/databases/mybatis/config/mybatis-config.xml" afterPath="$PROJECT_DIR$/src/databases/mybatis/config/mybatis-config.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +36,28 @@
       <file leaf-file-name="ServiceIgniter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="405" column="51" lean-forward="true" selection-start-line="405" selection-start-column="51" selection-end-line="405" selection-end-column="51" />
+            <state relative-caret-position="278">
+              <caret line="122" column="62" lean-forward="true" selection-start-line="122" selection-start-column="62" selection-end-line="122" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/databases/mybatis/config/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mybatis-config.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/databases/mybatis/config/mybatis-config.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="714">
+              <caret line="42" column="19" lean-forward="true" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -79,7 +97,7 @@
         <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="307">
-              <caret line="341" column="31" lean-forward="true" selection-start-line="341" selection-start-column="31" selection-end-line="341" selection-end-column="31" />
+              <caret line="341" column="31" lean-forward="false" selection-start-line="341" selection-start-column="31" selection-end-line="341" selection-end-column="31" />
               <folding>
                 <marker date="1525942668517" expanded="true" signature="242:290" ph="UPDATE tblUser... " />
                 <marker date="1525942668517" expanded="true" signature="344:392" ph="UPDATE tblUser... " />
@@ -207,7 +225,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>for</find>
       <find>&lt;for</find>
       <find>LIKE</find>
       <find>FROM tblSearcGear SG JOIN tblGearType GT</find>
@@ -235,8 +252,9 @@
       <find>addExposure</find>
       <find>user</find>
       <find>getApps</find>
-      <find>admin</find>
       <find>welderType</find>
+      <find>admin</find>
+      <find>/info/re</find>
     </findStrings>
     <replaceStrings>
       <replace>;</replace>
@@ -287,7 +305,6 @@
         <option value="$PROJECT_DIR$/src/configs/Constatns.java" />
         <option value="$PROJECT_DIR$/src/configs/Constants.java" />
         <option value="$PROJECT_DIR$/src/utils/ImageProcessor.java" />
-        <option value="$PROJECT_DIR$/src/databases/mybatis/config/mybatis-config.xml" />
         <option value="$PROJECT_DIR$/src/services/AdminSVC.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/mapper/AdminMapper.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/query/AdminMapper.xml" />
@@ -306,6 +323,7 @@
         <option value="$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java" />
         <option value="$PROJECT_DIR$/src/services/UserSVC.java" />
         <option value="$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/databases/mybatis/config/mybatis-config.xml" />
       </list>
     </option>
   </component>
@@ -343,11 +361,6 @@
             <path>
               <item name="ConstructionMan" type="b2602c69:ProjectViewProjectNode" />
               <item name="ConstructionMan" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ConstructionMan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ConstructionMan" type="462c0819:PsiDirectoryNode" />
-              <item name="img_upload" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ConstructionMan" type="b2602c69:ProjectViewProjectNode" />
@@ -753,12 +766,12 @@
       <workItem from="1525434605193" duration="6742000" />
       <workItem from="1525689409027" duration="1217000" />
       <workItem from="1525756533451" duration="12271000" />
-      <workItem from="1525928793446" duration="11263000" />
+      <workItem from="1525928793446" duration="12105000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="430267000" />
+    <option name="totallyTimeSpent" value="431109000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -773,11 +786,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3082353" sideWeight="0.50555557" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3071342" sideWeight="0.49444443" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3071342" sideWeight="0.49444443" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979852" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1795422" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22174536" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3705637" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282353" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -899,13 +912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/config/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="92" lean-forward="false" selection-start-line="3" selection-start-column="92" selection-end-line="3" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/rest/ValidationUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -995,14 +1001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/config/mybatis-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="32" column="63" lean-forward="true" selection-start-line="32" selection-start-column="63" selection-end-line="32" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1147,7 +1145,7 @@
     <entry file="file://$PROJECT_DIR$/src/databases/mybatis/query/UserMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="307">
-          <caret line="341" column="31" lean-forward="true" selection-start-line="341" selection-start-column="31" selection-end-line="341" selection-end-column="31" />
+          <caret line="341" column="31" lean-forward="false" selection-start-line="341" selection-start-column="31" selection-end-line="341" selection-end-column="31" />
           <folding>
             <marker date="1525942668517" expanded="true" signature="242:290" ph="UPDATE tblUser... " />
             <marker date="1525942668517" expanded="true" signature="344:392" ph="UPDATE tblUser... " />
@@ -1237,10 +1235,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/config/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databases/mybatis/config/mybatis-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="42" column="19" lean-forward="true" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/ignition/ServiceIgniter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="405" column="51" lean-forward="true" selection-start-line="405" selection-start-column="51" selection-end-line="405" selection-end-column="51" />
+        <state relative-caret-position="278">
+          <caret line="122" column="62" lean-forward="true" selection-start-line="122" selection-start-column="62" selection-end-line="122" selection-end-column="62" />
           <folding />
         </state>
       </provider>

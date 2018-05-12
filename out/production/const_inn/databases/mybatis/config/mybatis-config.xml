@@ -28,9 +28,9 @@
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://picklecode.co.kr:3306/ConstructionMan?useUnicode=yes&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;" />
+                <property name="url" value="jdbc:mysql://huneps.com:3306/ConstructionMan?useUnicode=yes&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;" />
                 <property name="username" value="root" />
-                <property name="password" value="pickle!@#$" />
+                <property name="password" value="pickle" />
                 <property name="poolMaximumActiveConnections" value="20"></property>
                 <property name="poolMaximumIdleConnections" value="20"></property>
                 <property name="poolMaximumCheckoutTime" value="20000"></property>
