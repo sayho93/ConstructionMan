@@ -68,7 +68,10 @@ public class UserSVC extends BaseService {
     public DataMap checkAccount(String account){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            Log.i("accoun", account);
             final DataMap accountInfo = userMapper.getUserByAccount(account);
+            if(accountInfo != null)
+                Log.i("info", accountInfo.toString());
 
             return accountInfo;
         }
