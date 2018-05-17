@@ -172,11 +172,10 @@ public class ServiceIgniter extends BaseIgniter{
         super.post(service, "/web/user/join", (req, res) -> {
             DataMap map = RestProcessor.makeProcessData(req.raw());
             if(DataMapUtil.isValid(map, "name", "account", "password", "phone", "age", "type", "pushKey")){
-                final int retCode = userSVC.joinUser(map);
+                final DataMap userInfo = userSVC.joinUser(map);
 
-                if(retCode == ResponseConst.CODE_SUCCESS) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
-                else if(retCode == ResponseConst.CODE_ALREADY_EXIST) return new Response(ResponseConst.CODE_ALREADY_EXIST, ResponseConst.MSG_ALREADY_EXIST);
-                else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+                if(userInfo != null) return Response.success(userInfo);
+                else return Response.failure();
             }else{
                 return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
             }

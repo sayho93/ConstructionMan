@@ -87,7 +87,7 @@ public class UserSVC extends BaseService {
         }
     }
 
-    public int joinUser(DataMap map){
+    public DataMap joinUser(DataMap map){
         final String password = RestUtil.getMessageDigest(map.getString("password"));
         final String phone = map.getString("phone").replaceAll("-", "");
         final String type = map.getString("type");
@@ -123,13 +123,13 @@ public class UserSVC extends BaseService {
                     joinGear(lastId, region, myObjects);
                 }catch (IOException e){
                     e.printStackTrace();
-                    return ResponseConst.CODE_FAILURE;
+                    return null;
                 }
             }
 
-            return ResponseConst.CODE_SUCCESS;
+            return getUserInfo(lastId);
         }
-        return ResponseConst.CODE_FAILURE;
+        return null;
     }
 
 
@@ -260,6 +260,9 @@ public class UserSVC extends BaseService {
 
             message += "공사기간 " + searchBasicInfo.getString("startDate") + "~" + searchBasicInfo.getString("endDate") + "/ ";
             message += "단가 " + searchBasicInfo.getInt("price");
+            if(searchBasicInfo.getInt("discussLater") == 1){
+                message += "(추후협의)";
+            }
 
             userMapper.saveComment(searchId, message);
             sqlSession.commit();
