@@ -61,8 +61,9 @@ public class UserSVC extends BaseService {
 
     public void userSMSAuth(String phone){
         final String code = SMSAuth.getInstance().addAuthAndGetCode(phone, 6);
+        String message = "인증번호는 [" + code + "]입니다. 본인 외 제3자에게 누설금지! -휴넵스/건설인-";
         Log.i("SMS Code Generated", phone + " : " + code);
-        Cafe24SMSManager.getInstanceIfExisting().send(phone, code);
+        Cafe24SMSManager.getInstanceIfExisting().send(phone, message);
     }
 
     public DataMap checkAccount(String account){
