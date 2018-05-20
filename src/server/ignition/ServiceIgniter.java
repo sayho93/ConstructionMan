@@ -448,6 +448,7 @@ public class ServiceIgniter extends BaseIgniter{
             final int id = Integer.parseInt(req.params(":id"));
             int retVal = userSVC.usePoint(id);
             if(retVal == -1) return new Response(ResponseConst.CODE_NO_PROPER_VALUE, ResponseConst.MSG_NO_PROPER_VALUE);
+            else if(retVal == -2) return new Response(ResponseConst.CODE_NOT_EXISTING, ResponseConst.MSG_NOT_EXISTING);
             return Response.success(null);
         }, "포인트 소비를 위한 API", "id[REST]");
 

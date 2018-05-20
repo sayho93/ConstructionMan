@@ -649,7 +649,7 @@ public class UserSVC extends BaseService {
                 final int userId= map.getInt("id");
                 final String type = map.getString("type");
                 //TODO limit
-                if(i<start || i>end){
+                if(i<start || i>=end){
                     DataMapUtil.maskWithLength(map, "name");
                     DataMapUtil.maskWithLength(map, "account");
                     DataMapUtil.maskWithLength(map, "password");
@@ -709,10 +709,21 @@ public class UserSVC extends BaseService {
             }
 
             Log.i("cnt", cnt);
-//            //2018/05/20
+            //2018/05/20
 //            if(cnt < 10 || cnt - (end-start) < 10){
 //                return -1;
 //            }
+
+            if(cnt - (end-start)%10 == 0 || cnt < (end-start)){
+                return -1;
+            }
+
+            int point = getUserPoint(id);
+            Log.i("point", point);
+            if(point < 1000){
+                return -2;
+            }
+
             userMapper.addPointHistory(id, -1000, -1, -1, "포인트 사용");
 
             final int amount = 10;
