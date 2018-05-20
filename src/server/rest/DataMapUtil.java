@@ -45,6 +45,16 @@ public class DataMapUtil {
         if(map != null) map.put(key, MASK_STRING);
     }
 
+    public static void maskWithLength(DataMap map, String key){
+        if(map != null){
+            String mask = "";
+            for(int i=0; i<map.getString(key).length(); i++){
+                mask += "*";
+            }
+            map.put(key, mask);
+        }
+    }
+
     public static boolean isSatisfied(DataMap map, String... args){
         for(String arg : args)
             if(map.get(arg) == null){

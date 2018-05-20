@@ -386,7 +386,6 @@ public class ServiceIgniter extends BaseIgniter{
             final int id = Integer.parseInt(req.params(":id"));
             int point = userSVC.getUserPoint(id);
             return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, point);
-
         }, "유저 포인트 조회를 위한 API", "id[REST]");
 
         super.post(service, "/web/user/point/inc/:id", (req, res) -> {
@@ -419,6 +418,18 @@ public class ServiceIgniter extends BaseIgniter{
             List<DataMap> pointList = userSVC.getPointList(id);
             return Response.success(pointList);
         }, "유저 포인트 히스토리 조회를 위한 API", "id[REST]");
+
+        super.get(service, "/web/user/myApplyList/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            List<DataMap> applyList = userSVC.getApplyList(id);
+            return Response.success(applyList);
+        }, "유저가 지원한 리스트 조회를 위한 API", "id[REST]");
+
+        super.post(service, "/web/user/apply/del/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            userSVC.hideApplyHistory(id);
+            return Response.success(null);
+        });
 
         super.post(service, "/web/user/point/del/:id", (req, res) -> {
             final int id = Integer.parseInt(req.params(":id"));

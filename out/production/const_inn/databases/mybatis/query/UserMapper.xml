@@ -206,7 +206,10 @@
     </update>
 
     <select id="getSearchBasicInfo" resultType="DataMap">
-        SELECT *, (SELECT description FROM tblZipGugun WHERE gugunID = S.gugunId) as gugunText
+        SELECT
+          *,
+          (SELECT description FROM tblZipGugun WHERE gugunID = S.gugunId) as gugunText,
+          (SELECT abbreviation FROM tblZipSido WHERE sidoID = S.sidoId) as sidoText
         from tblSearch S WHERE id = #{searchId}
     </select>
 
@@ -310,6 +313,23 @@
         ORDER BY regDate DESC
     </select>
 
+    <select id="getApplyList" resultType="DataMap">
+        SELECT *, S.userId as searchUserId
+        FROM tblApply A JOIN tblSearch S ON A.searchId = S.id
+        WHERE A.userId = #{id} AND hideFlag = 0
+        ORDER BY A.regDate DESC
+    </select>
+
+    <select id="getPaymentStatus" resultType="Integer">
+        SELECT SUM(bl) > 0 AS ret
+        FROM
+        (
+          SELECT `id`, (`id`=#{searchId}) AS bl
+          FROM tblSearch
+          WHERE userId = #{searchUserId} LIMIT #{start}, #{end}
+        ) AS temp
+    </select>
+
     <update id="saveComment">
         UPDATE tblSearch
         SET `comment` = #{comment}
@@ -339,14 +359,20 @@
         SELECT *
         FROM tblApply A join tblUser U ON A.userId = U.id
         WHERE A.searchId IN (SELECT `id` FROM tblSearch WHERE `userId` = #{userId})
-        ORDER BY A.regDate DESC
-        LIMIT #{start}, #{end}
+        ORDER BY A.regDate ASC
     </select>
+    <!--getApps의 LIMIT 제거, regDate ASC로 변경-->
 
     <update id="hidePointHistory">
         UPDATE tblPoint
         SET `exposed` = 0
         WHERE `id` = #{id}
+    </update>
+
+    <update id="hideApplyHistory">
+        UPDATE tblApply
+        SET `hideFlag` = 1
+        WHERE `searchId` = #{id}
     </update>
 
     <select id="getAppCountBySearchId" resultType="Integer">

@@ -238,7 +238,7 @@ public class UserSVC extends BaseService {
 
             DataMap searchBasicInfo = userMapper.getSearchBasicInfo(searchId);
 
-            message = "위치 " + searchBasicInfo.getString("gugunText") + "/ " + searchBasicInfo.getString("name") + "현장/ ";
+            message = "위치 " + searchBasicInfo.getString("sidoText") + " " + searchBasicInfo.getString("gugunText") + "/ " + searchBasicInfo.getString("name") + "현장/ ";
 
             List<DataMap> workList = userMapper.getSearchManInfo(searchId);
 
@@ -278,7 +278,7 @@ public class UserSVC extends BaseService {
             //TODO sendPush
             final DataMap dataMap = new DataMap();
             dataMap.put("title", "구인 정보 알림");
-            dataMap.put("body", "두 손가락으로 펼쳐서 알림 상세보기");
+            dataMap.put("body", "아래로 당겨 자세히 보기");
             dataMap.put("notiClass", title);
             dataMap.put("notiBox", message);
             dataMap.put("notiGuide", "위 현장에 지원하시겠습니까?");
@@ -301,7 +301,7 @@ public class UserSVC extends BaseService {
             String message = "";
 
             DataMap searchBasicInfo = userMapper.getSearchBasicInfo(searchId);
-            message = "위치 " + searchBasicInfo.getString("gugunText") + "/ ";
+            message = "위치 " + searchBasicInfo.getString("sidoText") + " " + searchBasicInfo.getString("gugunText") + "/ ";
 
             DataMap gearInfo = userMapper.getSearchGearInfo(searchId);
             message += gearInfo.getString("name") + "/ ";
@@ -491,7 +491,7 @@ public class UserSVC extends BaseService {
 
                 final DataMap dataMap = new DataMap();
                 dataMap.put("title", "구인 정보 알림");
-                dataMap.put("body", "두 손가락으로 펼쳐서 알림 상세보기");
+                dataMap.put("body", "아래로 당겨 자세히 보기");
                 dataMap.put("notiClass", "");
                 dataMap.put("notiBox", "");
                 dataMap.put("notiGuide", String.format("%s\n\n%s", message, "포인트로 결제 후 지원명단을 확인하시겠습니까?"));
@@ -585,6 +585,35 @@ public class UserSVC extends BaseService {
         }
     }
 
+    public List<DataMap> getApplyList(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            List<DataMap> list = userMapper.getApplyList(id);
+
+            for(DataMap item : list){
+                final int searchUserId = item.getInt("searchUserId");
+                final int searchId = item.getInt("searchId");
+                DataMap limits = userMapper.getAppLimit(searchUserId);
+                if(limits == null) limits = new DataMap();
+                final int start = limits.getInt("start", 0);
+                final int end = limits.getInt("end", 0);
+                Log.i("start :: end", start + "::::" + end);
+
+                final Integer isPaid = userMapper.getPaymentStatus(searchUserId, searchId, start, end);
+                item.put("isPaid", isPaid == null ? 0 : isPaid);
+            }
+            return list;
+        }
+    }
+
+    public void hideApplyHistory(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.hideApplyHistory(id);
+            sqlSession.commit();
+        }
+    }
+
     public void hidePointHistory(int id){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -601,14 +630,31 @@ public class UserSVC extends BaseService {
 //            if(count < 10) return null;
 
             final DataMap limits = userMapper.getAppLimit(id);
-            final int start = limits.getInt("start");
-            final int end = limits.getInt("end");
+            int start = -1;
+            int end = -1;
+
+            if(limits != null){
+                start = limits.getInt("start");
+                end = limits.getInt("end");
+            }
+
+//            final Integer start = limits.getInt("start");
+//            final Integer end = limits.getInt("end");
             Log.i("start :: end", start + "::::" + end);
             List<DataMap> apps = userMapper.getApps(id, start, end);
 
-            for(DataMap map : apps){
+            for(int i=0; i<apps.size(); i++){
+                final DataMap map = apps.get(i);
                 final int userId= map.getInt("id");
                 final String type = map.getString("type");
+                //TODO limit
+                if(i<start || i>end){
+                    DataMapUtil.maskWithLength(map, "name");
+                    DataMapUtil.maskWithLength(map, "account");
+                    DataMapUtil.maskWithLength(map, "password");
+                    DataMapUtil.maskWithLength(map, "phone");
+                    DataMapUtil.maskWithLength(map, "age");
+                }
 
                 List<DataMap> regionInfo = userMapper.getUserRegion(userId);
                 map.put("regionInfo", regionInfo);
@@ -622,6 +668,25 @@ public class UserSVC extends BaseService {
                     map.put("gearInfo", gearInfo);
                 }
             }
+
+            Collections.reverse(apps);
+
+//            for(DataMap map : apps){
+//                final int userId= map.getInt("id");
+//                final String type = map.getString("type");
+//
+//                List<DataMap> regionInfo = userMapper.getUserRegion(userId);
+//                map.put("regionInfo", regionInfo);
+//
+//                if(type.equals("M")){
+//                    List<DataMap> workInfo = userMapper.getUserWork(userId);
+//                    map.put("workInfo", workInfo);
+//                }
+//                else if(type.equals("G")){
+//                    List<DataMap> gearInfo = userMapper.getUserGear(userId);
+//                    map.put("gearInfo", gearInfo);
+//                }
+//            }
 
             return apps;
         });
