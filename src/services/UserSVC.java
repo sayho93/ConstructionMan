@@ -709,10 +709,10 @@ public class UserSVC extends BaseService {
             }
 
             Log.i("cnt", cnt);
-
-            if(cnt < 10 || cnt - (end-start) < 10){
-                return -1;
-            }
+//            //2018/05/20
+//            if(cnt < 10 || cnt - (end-start) < 10){
+//                return -1;
+//            }
             userMapper.addPointHistory(id, -1000, -1, -1, "포인트 사용");
 
             final int amount = 10;
