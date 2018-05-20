@@ -172,7 +172,7 @@
               (SELECT workId, career, welderType FROM tblSearchWork WHERE searchId = #{searchId})
             )
         ) tmp
-        WHERE gugunId = #{gugunId}
+        WHERE gugunId = #{gugunId} AND (SELECT pushFlag FROM tblUser U WHERE userId = U.id) = 1
         <if test="allType == 1">
             OR gugunId = 0
         </if>
@@ -196,7 +196,7 @@
             )
         )
         ) tmp
-        WHERE gugunId = #{gugunId}
+        WHERE gugunId = #{gugunId} AND (SELECT pushFlag FROM tblUser U WHERE userId = U.id) = 1
     </select>
 
     <update id="updatePushKey">
