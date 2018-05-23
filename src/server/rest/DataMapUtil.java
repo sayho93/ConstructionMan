@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import server.comm.DataMap;
+import utils.Log;
 
 import java.util.List;
 import java.util.Vector;
@@ -47,11 +48,12 @@ public class DataMapUtil {
 
     public static void maskWithLength(DataMap map, String key){
         if(map != null){
-            String mask = "";
+            StringBuffer mask = new StringBuffer("");
             for(int i=0; i<map.getString(key).length(); i++){
-                mask += "*";
+                if(i == 0) mask.append(map.getString(key).charAt(0));
+                else mask.append("*");
             }
-            map.put(key, mask);
+            map.put(key, mask.toString());
         }
     }
 

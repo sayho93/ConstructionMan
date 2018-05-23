@@ -171,7 +171,7 @@ public class ServiceIgniter extends BaseIgniter{
 
         super.post(service, "/web/user/join", (req, res) -> {
             DataMap map = RestProcessor.makeProcessData(req.raw());
-            if(DataMapUtil.isValid(map, "name", "account", "password", "phone", "age", "type", "pushKey")){
+            if(DataMapUtil.isValid(map, "name", "account", "password", "phone", "age", "type", "pushKey", "sex")){
                 final DataMap userInfo = userSVC.joinUser(map);
 
                 if(userInfo != null) return Response.success(userInfo);
@@ -179,7 +179,7 @@ public class ServiceIgniter extends BaseIgniter{
             }else{
                 return new Response(ResponseConst.CODE_INVALID_PARAM, ResponseConst.MSG_INVALID_PARAM);
             }
-        }, "APP 회원가입을 위한 API", "name", "account", "password", "phone", "age", "type",
+        }, "APP 회원가입을 위한 API", "name", "account", "password", "phone", "age", "sex", "type",
                 "pushKey", "region[ARR]", "work[ARR]", "career[ARR]", "welderType", "gearInfo[json]");
 
         super.get(service, "/web/user/checkAccountDuplication/:account", (req, res) -> {

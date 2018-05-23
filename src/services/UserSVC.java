@@ -468,39 +468,40 @@ public class UserSVC extends BaseService {
             //TODO send push
 
             int applyCnt = userMapper.getAppCountBySearchId(searchId);
-            if(applyCnt % 10 == 0){
-                DataMap searchInfo = userMapper.getSearchBasicInfo(searchId);
-                SimpleDateFormat fmtOrigin = new SimpleDateFormat("yyyy-mm-dd hh:MM:ss");
-                SimpleDateFormat fmt = new SimpleDateFormat("yyyy년 mm월 dd일");
-                String rawDate = searchInfo.getString("regDate");
-                try {
-                    Date regDt = fmtOrigin.parse(rawDate);
-                    rawDate = fmt.format(regDt);
-                }catch (ParseException e){
-                    e.printStackTrace();
-                }
 
-                final int id = searchInfo.getInt("userInfo");
-                final DataMap userInfo = userMapper.getUserById(id);
-                final int pushFlag = userInfo.getInt("pushFlag");
-
-                if(pushFlag == 1){
-                    List<String> pushKeyList = new ArrayList<>();
-                    pushKeyList.add(userInfo.getString("pushKey"));
-
-                    String message = "귀하가 " + rawDate + "에 요청하신 인력/장비에 대하여 " + applyCnt + "명이 지원하였습니다.";
-
-                    final DataMap dataMap = new DataMap();
-                    dataMap.put("title", "구인 정보 알림");
-                    dataMap.put("body", "아래로 당겨 자세히 보기");
-                    dataMap.put("notiClass", "");
-                    dataMap.put("notiBox", "");
-                    dataMap.put("notiGuide", String.format("%s\n\n%s", message, "포인트로 결제 후 지원명단을 확인하시겠습니까?"));
-                    dataMap.put("articleNumber", Integer.toString(searchId)); // 구인글 번호
-                    dataMap.put("isRedirect", Boolean.toString(true)); // 알림글일 경우 true
-                    PushManager.getInstance().sendOnlyData(pushKeyList, dataMap);
-                }
+            DataMap searchInfo = userMapper.getSearchBasicInfo(searchId);
+            SimpleDateFormat fmtOrigin = new SimpleDateFormat("yyyy-mm-dd hh:MM:ss");
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy년 mm월 dd일");
+            String rawDate = searchInfo.getString("regDate");
+            try {
+                Date regDt = fmtOrigin.parse(rawDate);
+                rawDate = fmt.format(regDt);
+            }catch (ParseException e){
+                e.printStackTrace();
             }
+
+            final int id = searchInfo.getInt("userId");
+            final DataMap userInfo = userMapper.getUserById(id);
+            Log.i("userInfo", userInfo.toString());
+            final int pushFlag = userInfo.getInt("pushFlag");
+
+            if(pushFlag == 1){
+                List<String> pushKeyList = new ArrayList<>();
+                pushKeyList.add(userInfo.getString("pushKey"));
+
+                String message = "귀하가 " + rawDate + "에 요청하신 인력/장비에 대하여 " + applyCnt + "명이 지원하였습니다.";
+
+                final DataMap dataMap = new DataMap();
+                dataMap.put("title", "구인 정보 알림");
+                dataMap.put("body", "아래로 당겨 자세히 보기");
+                dataMap.put("notiClass", "");
+                dataMap.put("notiBox", "");
+                dataMap.put("notiGuide", String.format("%s\n\n%s", message, "포인트로 결제 후 지원명단을 확인하시겠습니까?"));
+                dataMap.put("articleNumber", Integer.toString(searchId)); // 구인글 번호
+                dataMap.put("isRedirect", Boolean.toString(true)); // 알림글일 경우 true
+                PushManager.getInstance().sendOnlyData(pushKeyList, dataMap);
+            }
+
         }
     }
 
@@ -601,7 +602,10 @@ public class UserSVC extends BaseService {
                 Log.i("start :: end", start + "::::" + end);
 
                 final Integer isPaid = userMapper.getPaymentStatus(searchUserId, searchId, start, end);
+                Log.i("isPaid", isPaid);
                 item.put("isPaid", isPaid == null ? 0 : isPaid);
+
+                Log.i(item.toString());
             }
             return list;
         }
@@ -654,7 +658,7 @@ public class UserSVC extends BaseService {
                     DataMapUtil.maskWithLength(map, "account");
                     DataMapUtil.maskWithLength(map, "password");
                     DataMapUtil.maskWithLength(map, "phone");
-                    DataMapUtil.maskWithLength(map, "age");
+//                    DataMapUtil.maskWithLength(map, "age");
                 }
 
                 List<DataMap> regionInfo = userMapper.getUserRegion(userId);

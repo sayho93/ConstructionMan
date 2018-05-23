@@ -15,13 +15,14 @@
     </select>
 
     <insert id="registerUserBasic">
-        INSERT INTO tblUser(`name`, `account`, `password`, `phone`, `age`, `type`, `pushKey`, `pushFlag`, `regDate`, `status`)
+        INSERT INTO tblUser(`name`, `account`, `password`, `phone`, `age`, `sex`, `type`, `pushKey`, `pushFlag`, `regDate`, `status`)
         VALUES (
           #{name},
           #{account},
           #{password},
           #{phone},
           #{age},
+          #{sex},
           #{type},
           #{pushKey},
           1,
