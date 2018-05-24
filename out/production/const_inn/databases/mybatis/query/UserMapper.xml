@@ -43,8 +43,11 @@
         VALUES(
           #{userId},
           <choose>
-              <when test="gugunId != 0">
+              <when test="gugunId > 0">
                   (SELECT sidoID FROM tblZipGugun WHERE gugunID = #{gugunId}),
+              </when>
+              <when test="0 > gugunId">
+                  #{gugunId} * (-1),
               </when>
               <when test="gugunId == 0">
                   0,
@@ -139,7 +142,9 @@
     <select id="getUserRegion" resultType="DataMap">
         SELECT
           *,
-          CASE R.gugunId WHEN 0 THEN "전국"
+          CASE
+          WHEN R.gugunId = 0 THEN "전국"
+          WHEN 0 > R.gugunId THEN "전체"
           ELSE (SELECT description FROM tblZipGugun G WHERE R.gugunId = G.gugunID)
           END AS gugunTxt
         FROM tblUserRegion R
@@ -164,7 +169,7 @@
         SELECT userId, gugunId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
         FROM
         (
-            SELECT userId, gugunId
+            SELECT userId, gugunId, sidoId
             FROM tblUserRegion
             WHERE userId IN
             (
@@ -173,7 +178,14 @@
               (SELECT workId, career, welderType FROM tblSearchWork WHERE searchId = #{searchId})
             )
         ) tmp
-        WHERE gugunId = #{gugunId} AND (SELECT pushFlag FROM tblUser U WHERE userId = U.id) = 1
+        WHERE
+          <if test="0 > gugunId">
+              sidoId = #{gugunId} * (-1)
+          </if>
+          <if test="gugunId > 0">
+              gugunId = #{gugunId}
+          </if>
+          AND (SELECT pushFlag FROM tblUser U WHERE userId = U.id) = 1
         <if test="allType == 1">
             OR gugunId = 0
         </if>

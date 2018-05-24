@@ -138,8 +138,9 @@ public class UserSVC extends BaseService {
             Log.i("joinMain :::::::::::::");
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
-            for(int i=0; i<region.length; i++)
+            for(int i=0; i<region.length; i++) {
                 userMapper.setUserRegion(userId, region[i]);
+            }
 
             for(int i=0; i<work.length; i++){
                 userMapper.setUserWork(userId, work[i], career[i], "");
