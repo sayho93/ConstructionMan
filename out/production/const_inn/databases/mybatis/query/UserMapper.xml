@@ -166,7 +166,7 @@
     </select>
 
     <select id="findManMatch" resultType="DataMap">
-        SELECT userId, gugunId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
+        SELECT userId, gugunId, sidoId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
         FROM
         (
             SELECT userId, gugunId, sidoId
@@ -179,12 +179,12 @@
             )
         ) tmp
         WHERE
-          <if test="0 > gugunId">
-              sidoId = #{gugunId} * (-1)
-          </if>
-          <if test="gugunId > 0">
-              gugunId = #{gugunId}
-          </if>
+        (
+          (0 > gugunId AND (SELECT sidoID FROM tblZipGugun WHERE gugunID = #{gugunId}) = tmp.sidoId)
+          OR
+          (gugunId > 0 AND (gugunId = #{gugunId}))
+        )
+
           AND (SELECT pushFlag FROM tblUser U WHERE userId = U.id) = 1
         <if test="allType == 1">
             OR gugunId = 0
@@ -192,10 +192,10 @@
     </select>
 
     <select id="findGearMatch" resultType="DataMap">
-        SELECT userId, gugunId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
+        SELECT userId, gugunId, sidoId, (SELECT pushKey FROM tblUser U WHERE userId = U.id) pushKey
         FROM
         (
-          SELECT userId, gugunId
+          SELECT userId, gugunId, sidoId
           FROM tblUserRegion
           WHERE userId IN
           (
@@ -209,7 +209,13 @@
             )
         )
         ) tmp
-        WHERE gugunId = #{gugunId} AND (SELECT pushFlag FROM tblUser U WHERE userId = U.id) = 1
+        WHERE
+        (
+          (0 > gugunId AND (SELECT sidoID FROM tblZipGugun WHERE gugunID = #{gugunId}) = tmp.sidoId)
+          OR
+          (gugunId > 0 AND (gugunId = #{gugunId}))
+        )
+          AND (SELECT pushFlag FROM tblUser U WHERE userId = U.id) = 1
     </select>
 
     <update id="updatePushKey">
