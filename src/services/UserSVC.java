@@ -35,6 +35,26 @@ import java.util.*;
 
 public class UserSVC extends BaseService {
 
+    public static void main(String ... args){
+        String pattern = "yyyy-MM-dd HH:mm:ss.S";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        try {
+            Date date = format.parse("2018-06-01 14:32:47.0");
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-mm-dd");
+
+            String rawDate = fmt.format(date);
+            Log.i("rawDate", rawDate);
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY");
+            System.out.println("YEAR "+simpleDateFormat.format(date).toUpperCase());
+
+
+            System.out.println(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     public DataMap turnOnPush(int id){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -193,18 +213,19 @@ public class UserSVC extends BaseService {
 
             int allType = 0;
             final int lodging = map.getInt("lodging");
-            try{
-                final Date startDate = map.getDate("startDate");
-                final Date endDate = map.getDate("endDate");
-
-                final long diffTime = endDate.getTime() - startDate.getTime();
-                final long diffDays = diffTime / (1000 * 60 * 60 * 24);
-
-                if(diffDays >= 60 || lodging == 1) allType = 1;
-            }
-            catch(ParseException e){
-                e.printStackTrace();
-            }
+            if(lodging == 1) allType = 1;
+//            try{
+//                final Date startDate = map.getDate("startDate");
+//                final Date endDate = map.getDate("endDate");
+//
+//                final long diffTime = endDate.getTime() - startDate.getTime();
+//                final long diffDays = diffTime / (1000 * 60 * 60 * 24);
+//
+//                if(diffDays >= 60 || lodging == 1) allType = 1;
+//            }
+//            catch(ParseException e){
+//                e.printStackTrace();
+//            }
 
             searchMan(lastId, work, career, welderType, allType, gugunId);
         }
@@ -257,7 +278,7 @@ public class UserSVC extends BaseService {
             }
 
             if(searchBasicInfo.getInt("lodging") == 1)
-                message += "숙식제공/ ";
+                message += "숙소제공/ ";
 
             message += "공사기간 " + searchBasicInfo.getString("startDate") + "~" + searchBasicInfo.getString("endDate") + "/ ";
             message += "단가 " + searchBasicInfo.getInt("price");
@@ -471,15 +492,6 @@ public class UserSVC extends BaseService {
             int applyCnt = userMapper.getAppCountBySearchId(searchId);
 
             DataMap searchInfo = userMapper.getSearchBasicInfo(searchId);
-            SimpleDateFormat fmtOrigin = new SimpleDateFormat("yyyy-mm-dd hh:MM:ss");
-            SimpleDateFormat fmt = new SimpleDateFormat("yyyy년 mm월 dd일");
-            String rawDate = searchInfo.getString("regDate");
-            try {
-                Date regDt = fmtOrigin.parse(rawDate);
-                rawDate = fmt.format(regDt);
-            }catch (ParseException e){
-                e.printStackTrace();
-            }
 
             final int id = searchInfo.getInt("userId");
             final DataMap userInfo = userMapper.getUserById(id);
@@ -490,14 +502,14 @@ public class UserSVC extends BaseService {
                 List<String> pushKeyList = new ArrayList<>();
                 pushKeyList.add(userInfo.getString("pushKey"));
 
-                String message = "귀하가 " + rawDate + "에 요청하신 인력/장비에 대하여 " + applyCnt + "명이 지원하였습니다.";
+                String message = "귀하가 " + searchInfo.getString("formattedDate") + "에 요청하신 인력/장비에 대하여 " + applyCnt + "명이 지원하였습니다.";
 
                 final DataMap dataMap = new DataMap();
                 dataMap.put("title", "구인 정보 알림");
                 dataMap.put("body", "아래로 당겨 자세히 보기");
                 dataMap.put("notiClass", "");
                 dataMap.put("notiBox", "");
-                dataMap.put("notiGuide", String.format("%s\n\n%s", message, "포인트로 결제 후 지원명단을 확인하시겠습니까?"));
+                dataMap.put("notiGuide", String.format("%s\n\n%s", message, "결제 후 지원명단을 확인하시겠습니까?"));
                 dataMap.put("articleNumber", Integer.toString(searchId)); // 구인글 번호
                 dataMap.put("isRedirect", Boolean.toString(true)); // 알림글일 경우 true
                 PushManager.getInstance().sendOnlyData(pushKeyList, dataMap);
@@ -612,6 +624,47 @@ public class UserSVC extends BaseService {
         }
     }
 
+    public List<DataMap> getPaidList(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            Log.i("getPaidList entered");
+
+//            DataMap limits = userMapper.getAppLimit(id);
+//            int start = limits.getInt("start");
+//            int end = limits.getInt("end");
+//            Log.i("start :: end", start + "::::" + end);
+
+//            List<DataMap> paidList = userMapper.getPaidList(id, start, end);
+            List<DataMap> list = userMapper.getApplyCommentList(id);
+
+            for(DataMap item : list){
+                final int searchId = item.getInt("searchId");
+                DataMap limits = userMapper.getAppLimit(id);
+                if(limits == null) limits = new DataMap();
+                final int start = limits.getInt("start", 0);
+                final int end = limits.getInt("end", 0);
+                Log.i("start :: end", start + "::::" + end);
+
+                final Integer isPaid = userMapper.getPaymentStatus(id, searchId, start, end);
+                Log.i("isPaid", isPaid);
+                item.put("isPaid", isPaid == null ? 0 : isPaid);
+
+                Log.i(item.toString());
+            }
+            return list;
+        }
+
+    }
+
+    public void hidePaidItem(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.hidePaidItem(id);
+            sqlSession.commit();
+        }
+    }
+
     public void hideApplyHistory(int id){
         try(SqlSession sqlSession = super.getSession()){
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -662,7 +715,7 @@ public class UserSVC extends BaseService {
 //                    DataMapUtil.maskWithLength(map, "age");
                 }
 
-                List<DataMap> regionInfo = userMapper.getUserRegion(userId);
+                List<DataMap> regionInfo = userMapper.getUserRegionDesc(userId);
                 map.put("regionInfo", regionInfo);
 
                 if(type.equals("M")){
@@ -738,4 +791,11 @@ public class UserSVC extends BaseService {
         }
     }
 
+    public List<DataMap> getUserRegion(int id){
+        try(SqlSession sqlSession = super.getSession()){
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            return userMapper.getUserRegionDesc(id);
+        }
+    }
 }

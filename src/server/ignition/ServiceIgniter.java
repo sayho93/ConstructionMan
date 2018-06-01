@@ -238,6 +238,13 @@ public class ServiceIgniter extends BaseIgniter{
             else return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, map);
         }, "마이페이지 유저 장비/인력 정보 취득을 위한 API", "id[REST]");
 
+        super.get(service, "/web/user/region/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            List<DataMap> list = userSVC.getUserRegion(id);
+            if(list == null) return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
+            else return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS, list);
+        }, "유저 지역정보 취득 API", "id[REST]");
+
         super.get(service, "/web/user/update/pushKey/:id", (req, res) -> {
             final int id = Integer.parseInt(req.params(":id"));
             DataMap map = RestProcessor.makeProcessData(req.raw());
@@ -424,6 +431,18 @@ public class ServiceIgniter extends BaseIgniter{
             List<DataMap> applyList = userSVC.getApplyList(id);
             return Response.success(applyList);
         }, "유저가 지원한 리스트 조회를 위한 API", "id[REST]");
+
+        super.get(service, "/web/user/paid/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            List<DataMap> applyList = userSVC.getPaidList(id);
+            return Response.success(applyList);
+        }, "결제한 공고 정보 리스트 조회를 위한 API", "id[REST]");
+
+        super.post(service, "/web/user/paid/del/:id", (req, res) -> {
+            final int id = Integer.parseInt(req.params(":id"));
+            userSVC.hidePaidItem(id);
+            return Response.success(null);
+        });
 
         super.post(service, "/web/user/apply/del/:id", (req, res) -> {
             final int id = Integer.parseInt(req.params(":id"));

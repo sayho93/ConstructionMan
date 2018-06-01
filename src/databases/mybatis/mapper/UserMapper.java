@@ -44,6 +44,8 @@ public interface UserMapper {
 
     List<DataMap> getUserRegion(@Param("userId") int userId);
 
+    List<DataMap> getUserRegionDesc(@Param("userId") int userId);
+
     List<DataMap> getUserGear(@Param("userId") int userId);
 
     List<DataMap> getUserWork(@Param("userId") int userId);
@@ -86,6 +88,10 @@ public interface UserMapper {
 
     List<DataMap> getApplyList(@Param("id") int id);
 
+    List<DataMap> getApplyCommentList(@Param("id") int id);
+
+    List<DataMap> getPaidList(@Param("id") int id, @Param("start") int start, @Param("end") int end);
+
     Integer getPaymentStatus(@Param("searchUserId") int searchUserId, @Param("searchId") int searchId, @Param("start") int start, @Param("end") int end);
 
     void saveComment(@Param("searchId") int searchId, @Param("comment") String comment);
@@ -95,6 +101,8 @@ public interface UserMapper {
     Integer getAppCount(@Param("userId") int userId);
 
     List<DataMap> getApps(@Param("userId") int userId, @Param("start") int start, @Param("end") int end);
+
+    void hidePaidItem(@Param("id") int id);
 
     void hidePointHistory(@Param("id") int id);
 

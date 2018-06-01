@@ -151,6 +151,18 @@
         WHERE `userId` = #{userId}
     </select>
 
+    <select id="getUserRegionDesc" resultType="DataMap">
+        SELECT
+        *,
+        CASE
+        WHEN R.gugunId = 0 THEN "전국"
+        WHEN 0 > R.gugunId THEN (SELECT abbreviation FROM tblZipSido WHERE sidoID = R.gugunId * (-1))
+        ELSE (SELECT description FROM tblZipGugun G WHERE R.gugunId = G.gugunID)
+        END AS gugunTxt
+        FROM tblUserRegion R
+        WHERE `userId` = #{userId}
+    </select>
+
     <select id="getUserGear" resultType="DataMap">
         SELECT *
         FROM tblUserGear UG JOIN tblGearType GT ON UG.gearId = GT.id
@@ -228,7 +240,8 @@
         SELECT
           *,
           (SELECT description FROM tblZipGugun WHERE gugunID = S.gugunId) as gugunText,
-          (SELECT abbreviation FROM tblZipSido WHERE sidoID = S.sidoId) as sidoText
+          (SELECT abbreviation FROM tblZipSido WHERE sidoID = S.sidoId) as sidoText,
+          (SELECT DATE_FORMAT(regDate, "%Y년 %c월 %e일")) as formattedDate
         from tblSearch S WHERE id = #{searchId}
     </select>
 
@@ -339,6 +352,23 @@
         ORDER BY A.regDate DESC
     </select>
 
+    <select id="getApplyCommentList" resultType="DataMap">
+        SELECT *, S.userId as searchUserId
+        FROM tblApply A join tblSearch S on A.searchId = S.id
+        WHERE A.searchId IN (SELECT `id` FROM tblSearch WHERE `userId` = #{id}) AND S.hideFlag != 1
+        group by searchId
+        ORDER BY A.regDate DESC
+    </select>
+
+    <select id="getPaidList" resultType="DataMap">
+        SELECT *
+        FROM tblApply A join tblSearch S on A.searchId = S.id
+        WHERE A.searchId IN (SELECT `id` FROM tblSearch WHERE `userId` = #{id}) AND S.hideFlag != 1
+        group by searchId
+        ORDER BY A.regDate DESC
+        limit #{start}, #{end};
+    </select>
+
     <select id="getPaymentStatus" resultType="Integer">
         SELECT SUM(bl) > 0 AS ret
         FROM
@@ -381,6 +411,12 @@
         ORDER BY A.regDate ASC
     </select>
     <!--getApps의 LIMIT 제거, regDate ASC로 변경-->
+
+    <update id="hidePaidItem">
+        UPDATE tblSearch
+        SET `hideFlag` = 1
+        WHERE `id` = #{id}
+    </update>
 
     <update id="hidePointHistory">
         UPDATE tblPoint
