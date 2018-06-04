@@ -163,7 +163,7 @@ public class UserSVC extends BaseService {
             }
 
             for(int i=0; i<work.length; i++){
-                userMapper.setUserWork(userId, work[i], career[i], "");
+                userMapper.setUserWork(userId, work[i], career[i], welderType);
 //                if(work[i] == 16)
 //                    userMapper.setUserWork(userId, work[i], career[i], welderType);
 //                else
@@ -426,6 +426,8 @@ public class UserSVC extends BaseService {
             final int[] work = map.getStringToIntArr("work", ",");
             final int[] career = map.getStringToIntArr("career", ",");
             final String welderType = map.getString("welderType", "");
+
+            Log.i("welderType", welderType);
 
             try(SqlSession sqlSession = super.getSession()){
                 UserMapper userMapper = sqlSession.getMapper(UserMapper.class);

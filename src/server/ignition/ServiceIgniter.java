@@ -256,7 +256,7 @@ public class ServiceIgniter extends BaseIgniter{
             else return new Response(ResponseConst.CODE_FAILURE, ResponseConst.MSG_FAILURE);
         }, "유저 푸시키 업데이트를 위한 API", "id[REST]", "pushKey");
 
-        super.post(service, "web/user/update/info/:id", (req, res) -> {
+        super.post(service, "/web/user/update/info/:id", (req, res) -> {
             final int id = Integer.parseInt(req.params(":id"));
             DataMap map = RestProcessor.makeProcessData(req.raw());
 
