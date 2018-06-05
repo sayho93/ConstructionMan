@@ -504,7 +504,7 @@ public class UserSVC extends BaseService {
                 List<String> pushKeyList = new ArrayList<>();
                 pushKeyList.add(userInfo.getString("pushKey"));
 
-                String message = "귀하가 " + searchInfo.getString("formattedDate") + "에 요청하신 인력/장비에 대하여 " + applyCnt + "명이 지원하였습니다.";
+                String message = "귀하가 " + searchInfo.getString("formattedDate") + "에 요청하신 인력/장비에 대하여 " + applyCnt + "명이 지원하였습니다. 신청한 목록은 구인리스트에서 확인가능합니다.";
 
                 final DataMap dataMap = new DataMap();
                 dataMap.put("title", "구인 정보 알림");
