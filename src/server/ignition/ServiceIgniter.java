@@ -164,8 +164,10 @@ public class ServiceIgniter extends BaseIgniter{
             final String phone = req.params(":phone");
 
             boolean isValid = SMSAuth.getInstance().isValid(phone, map.getString("code"), 3);
-            SMSAuth.getInstance().removeAuth(phone);
-            if(isValid) return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
+            if(isValid){
+                SMSAuth.getInstance().removeAuth(phone);
+                return new Response(ResponseConst.CODE_SUCCESS, ResponseConst.MSG_SUCCESS);
+            }
             else return new Response(ResponseConst.CODE_UNAUTHORIZED, ResponseConst.MSG_UNAUTHORIZED);
         }, "SMS 코드 인증을 위한 API", "phone[REST]", "code");
 
